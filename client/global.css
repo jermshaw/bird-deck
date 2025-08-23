@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 125 20% 97%;
+    --foreground: 140 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 140 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 140 20% 15%;
+
+    --primary: 200 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 120 30% 85%;
+    --secondary-foreground: 140 20% 15%;
+
+    --muted: 125 15% 92%;
+    --muted-foreground: 140 15% 45%;
+
+    --accent: 45 90% 65%;
+    --accent-foreground: 140 20% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 125 20% 85%;
+    --input: 125 20% 85%;
+    --ring: 200 85% 55%;
+
+    --radius: 1rem;
+
+    /* Bird rarity colors */
+    --common: 120 30% 65%;
+    --rare: 260 70% 70%;
+    --legendary: 45 100% 65%;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 140 25% 8%;
+    --foreground: 125 15% 92%;
+
+    --card: 140 20% 12%;
+    --card-foreground: 125 15% 92%;
+
+    --popover: 140 20% 12%;
+    --popover-foreground: 125 15% 92%;
+
+    --primary: 200 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 15% 20%;
+    --secondary-foreground: 125 15% 92%;
+
+    --muted: 140 15% 18%;
+    --muted-foreground: 125 10% 65%;
+
+    --accent: 45 90% 65%;
+    --accent-foreground: 140 25% 8%;
+
+    --destructive: 0 62.8% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 140 15% 20%;
+    --input: 140 15% 20%;
+    --ring: 200 85% 55%;
+
+    /* Bird rarity colors for dark theme */
+    --common: 120 25% 50%;
+    --rare: 260 60% 65%;
+    --legendary: 45 95% 60%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* 3D Card Tilt Effects */
+  .card-tilt {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+  }
+
+  .card-tilt-layer {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* Enhanced sheen effect */
+  .card-sheen {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Mobile-friendly touch interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .card-tilt {
+      /* Slightly reduce intensity on touch devices */
+      transition: transform 0.2s ease-out;
+    }
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .card-tilt,
+    .card-tilt-layer {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-sheen {
+      opacity: 0 !important;
+    }
+  }
+
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* Enhanced glow effect */
+  .card-glow {
+    box-shadow:
+      0 20px 40px -13px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease-out;
+  }
+
+  .card-glow:hover {
+    box-shadow:
+      0 30px 60px -13px rgba(0, 0, 0, 0.25),
+      0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(255, 255, 255, 0.05);
+  }
+}
