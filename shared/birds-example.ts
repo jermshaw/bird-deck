@@ -1,0 +1,50 @@
+export type BirdRarity = 'common' | 'rare' | 'legendary';
+export type BirdHabitat = 'forest' | 'wetland' | 'grassland' | 'mountain' | 'desert' | 'arctic' | 'ocean' | 'urban';
+export type BirdSize = 'tiny' | 'small' | 'medium' | 'large' | 'enormous';
+
+export interface Bird {
+  id: string;
+  name: string;
+  ability: string;
+  rarity: BirdRarity;
+  description: string;
+  funFact: string;
+  habitat: BirdHabitat;
+  size: BirdSize;
+  imageUrl: string;
+  additionalImages?: string[];
+}
+
+export const birds: Bird[] = [
+  {
+    id: '1',
+    name: 'Northern Cardinal',
+    ability: 'Brilliant Flash',
+    rarity: 'common',
+    description: 'A vibrant red songbird that brightens winter landscapes with its striking plumage.',
+    funFact: 'Cardinals mate for life and often stay together year-round!',
+    habitat: 'forest',
+    size: 'small',
+    imageUrl: '/images/birds/cardinal-main.jpg',  // Your local image
+    additionalImages: [
+      '/images/birds/cardinal-male.jpg',
+      '/images/birds/cardinal-female.jpg'
+    ]
+  },
+  {
+    id: '2',
+    name: 'Great Horned Owl',
+    ability: 'Silent Stalker',
+    rarity: 'rare',
+    description: 'A powerful nocturnal hunter with distinctive ear tufts and piercing yellow eyes.',
+    funFact: 'Their talons exert pressure of 300 pounds per square inch - stronger than a large dog bite!',
+    habitat: 'forest',
+    size: 'large',
+    imageUrl: '/images/birds/great-horned-owl-main.jpg',
+    additionalImages: [
+      '/images/birds/great-horned-owl-hunting.jpg',
+      '/images/birds/great-horned-owl-nest.jpg'
+    ]
+  }
+  // Add more of your birds here...
+];
