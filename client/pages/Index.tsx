@@ -40,12 +40,12 @@ function LocationPackContent() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 px-6 py-8 max-w-md mx-auto lg:max-w-lg">
+      <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12">
           <h1 className="text-white text-3xl lg:text-4xl font-black uppercase tracking-wider leading-tight mb-2">
-            United States
+            San Francisco
           </h1>
           <p className="text-white/70 text-lg lg:text-xl font-medium">
             The West
@@ -54,10 +54,10 @@ function LocationPackContent() {
 
         {/* Statistics Section */}
         <div className="mb-8 lg:mb-12">
-          <div className="bg-black/15 rounded-xl p-4 backdrop-blur-sm">
-            <div className="flex justify-between items-center">
+          <div className="bg-black/30 rounded-xl p-4 backdrop-blur-2xl">
+            <div className="flex items-center">
               {/* Birds Collected */}
-              <div className="text-center">
+              <div className="flex-1 text-center">
                 <div className="text-white">
                   <span className="text-2xl lg:text-3xl font-bold">{collectedWesternBirds.length}</span>
                   <span className="text-lg lg:text-xl font-bold text-white/50">/{westernBirds.length}</span>
@@ -68,10 +68,10 @@ function LocationPackContent() {
               </div>
 
               {/* Divider */}
-              <div className="w-px h-8 bg-white/20"></div>
+              <div className="w-px h-8 bg-white/20 mx-4"></div>
 
               {/* Achievements */}
-              <div className="text-center">
+              <div className="flex-1 text-center">
                 <div className="text-white">
                   <span className="text-2xl lg:text-3xl font-bold">5</span>
                   <span className="text-lg lg:text-xl font-bold text-white/50">/30</span>
@@ -85,7 +85,7 @@ function LocationPackContent() {
         </div>
 
         {/* Bird Cards Grid */}
-        <div className="grid grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {locationBirds.map((bird) => (
             <LocationBirdCard 
               key={bird.id} 

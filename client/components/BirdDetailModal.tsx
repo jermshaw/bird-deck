@@ -89,6 +89,14 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             }}
           />
 
+          {/* Background Overlay for Text Legibility */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundColor: 'rgba(238, 238, 238, 0.5)'
+            }}
+          />
+
           {/* Content Container */}
           <div className="relative z-10 flex flex-col w-full max-w-sm mx-auto px-6 py-16 sm:py-20">
             
