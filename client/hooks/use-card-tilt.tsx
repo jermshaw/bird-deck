@@ -65,14 +65,17 @@ export function useCardTilt({
     const sheenX = 50 + deltaX * 50;
     const sheenY = 50 + deltaY * 50;
 
-    setTilt({
+    const newTilt = {
       rotateX,
       rotateY,
       scale: scale,
       sheenX: Math.max(0, Math.min(100, sheenX)),
       sheenY: Math.max(0, Math.min(100, sheenY)),
       sheenOpacity: glare ? maxGlare : 0
-    });
+    };
+
+    console.log('Setting tilt:', newTilt);
+    setTilt(newTilt);
   };
 
   // Calculate tilt from device orientation
