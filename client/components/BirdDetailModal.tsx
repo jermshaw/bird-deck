@@ -73,15 +73,15 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
   return (
     <Dialog open={open && bird !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-none max-h-none w-full h-full p-0 bg-transparent border-none overflow-y-auto">
+      <DialogContent className="max-w-none max-h-none w-full h-full p-0 bg-transparent border-none overflow-hidden">
         <DialogTitle className="sr-only">
           {bird?.name || 'Bird'} - Bird Details
         </DialogTitle>
         {bird && (
-        <div className="min-h-screen w-full relative font-rubik">
+        <div className="min-h-screen w-full relative font-rubik overflow-y-auto">
           {/* Blurred Background - Fixed */}
           <div
-            className="fixed inset-0 bg-cover bg-center"
+            className="fixed inset-0 bg-cover bg-center z-0"
             style={{
               backgroundImage: `url(${bird.imageUrl})`,
               filter: 'blur(150px)',
@@ -91,7 +91,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
           {/* Background Overlay for Text Legibility - Fixed */}
           <div
-            className="fixed inset-0"
+            className="fixed inset-0 z-0"
             style={{
               backgroundColor: 'rgba(238, 238, 238, 0.5)'
             }}
