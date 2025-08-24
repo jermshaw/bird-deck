@@ -45,7 +45,7 @@ function LocationPackContent() {
         {/* Header Section */}
         <div className="mb-8 lg:mb-12">
           <h1 className="text-white text-3xl lg:text-4xl font-black uppercase tracking-wider leading-tight mb-2">
-            United States
+            San Francisco
           </h1>
           <p className="text-white/70 text-lg lg:text-xl font-medium">
             The West
