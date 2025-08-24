@@ -147,8 +147,11 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             {/* Main Bird Card */}
             <div
               ref={elementRef}
-              className="bg-white rounded-[31px] p-2 mb-20 card-tilt card-glow gpu-accelerated cursor-pointer"
-              style={{ transform }}
+              className="bg-white rounded-[31px] p-2 mb-20 card-tilt card-glow gpu-accelerated"
+              style={{
+                transform,
+                transition: 'transform 0.1s ease-out'
+              }}
             >
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
                 {/* Sheen Overlay */}
