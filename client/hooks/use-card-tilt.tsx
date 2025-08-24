@@ -109,15 +109,18 @@ export function useCardTilt({
     // Mouse event handlers
     const handleMouseMove = (e: MouseEvent) => {
       if (isHovered) {
+        console.log('Updating tilt from mouse:', e.clientX, e.clientY);
         updateTiltFromMouse(e.clientX, e.clientY);
       }
     };
 
     const handleMouseEnter = () => {
+      console.log('Mouse entered tilt element');
       setIsHovered(true);
     };
 
     const handleMouseLeave = () => {
+      console.log('Mouse left tilt element');
       setIsHovered(false);
       resetTilt();
     };
