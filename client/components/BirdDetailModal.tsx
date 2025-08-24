@@ -16,10 +16,10 @@ interface BirdDetailModalProps {
 export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalProps) {
   const { isInCollection, addToCollection, removeFromCollection } = useCollection();
   const { elementRef, transform, sheenStyle, tilt } = useCardTilt({
-    maxTilt: 15,
-    scale: 1.02,
+    maxTilt: 25,
+    scale: 1.05,
     glare: true,
-    maxGlare: 0.4
+    maxGlare: 0.6
   });
 
   const [showOrientationPrompt, setShowOrientationPrompt] = useState(false);
