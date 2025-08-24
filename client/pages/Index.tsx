@@ -40,7 +40,7 @@ function LocationPackContent() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 px-6 py-8 max-w-md mx-auto lg:max-w-lg">
+      <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12">
