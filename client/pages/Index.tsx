@@ -85,7 +85,7 @@ function LocationPackContent() {
         </div>
 
         {/* Bird Cards Grid */}
-        <div className="grid grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {locationBirds.map((bird) => (
             <LocationBirdCard 
               key={bird.id} 
