@@ -79,9 +79,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
         </DialogTitle>
         {bird && (
         <div className="min-h-screen w-full relative font-rubik">
-          {/* Blurred Background */}
+          {/* Blurred Background - Fixed */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="fixed inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${bird.imageUrl})`,
               filter: 'blur(150px)',
@@ -89,9 +89,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             }}
           />
 
-          {/* Background Overlay for Text Legibility */}
+          {/* Background Overlay for Text Legibility - Fixed */}
           <div
-            className="absolute inset-0"
+            className="fixed inset-0"
             style={{
               backgroundColor: 'rgba(238, 238, 238, 0.5)'
             }}
