@@ -54,7 +54,7 @@ function LocationPackContent() {
 
         {/* Statistics Section */}
         <div className="mb-8 lg:mb-12">
-          <div className="bg-black/15 rounded-xl p-4 backdrop-blur-sm">
+          <div className="bg-black/30 rounded-xl p-4 backdrop-blur-2xl">
             <div className="flex items-center">
               {/* Birds Collected */}
               <div className="flex-1 text-center">
