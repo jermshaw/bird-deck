@@ -99,11 +99,11 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
           {/* Content Container */}
           <div className="relative z-10 flex flex-col w-full max-w-sm mx-auto px-6 py-16 sm:py-20">
-            
-            {/* Close Button */}
+
+            {/* Close Button - positioned above the card */}
             <button
               onClick={() => onOpenChange(false)}
-              className="absolute top-16 right-6 sm:top-20 sm:right-8 w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center hover:bg-white/80 transition-colors z-20"
+              className="self-end mb-4 w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center hover:bg-white/80 transition-colors z-20"
             >
               <X className="w-5 h-5 text-gray-800" />
             </button>
