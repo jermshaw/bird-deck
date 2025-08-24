@@ -147,11 +147,16 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             {/* Main Bird Card */}
             <div
               ref={elementRef}
-              className="bg-white rounded-[31px] p-2 mb-20 card-tilt card-glow gpu-accelerated"
+              className="bg-white rounded-[31px] p-2 mb-20 card-glow gpu-accelerated"
               style={{
                 transform,
-                transition: 'transform 0.1s ease-out'
+                transformStyle: 'preserve-3d',
+                transition: 'transform 0.1s ease-out',
+                willChange: 'transform'
               }}
+              onMouseEnter={() => console.log('Card hover started')}
+              onMouseLeave={() => console.log('Card hover ended')}
+              onMouseMove={(e) => console.log('Mouse moving over card', { x: e.clientX, y: e.clientY })}
             >
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
                 {/* Sheen Overlay */}
