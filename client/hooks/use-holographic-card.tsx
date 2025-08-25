@@ -106,6 +106,8 @@ export function useHolographicCard({
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (!isMobile) return;
     setIsActive(true);
+    // Prevent default to avoid interference with orientation tracking
+    e.preventDefault();
   }, [isMobile]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
@@ -134,10 +136,14 @@ export function useHolographicCard({
 
   const handleTouchEnd = useCallback(() => {
     if (!isMobile) return;
-    setIsActive(false);
-    setTransform(`perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`);
-    setGlareStyle({ opacity: 0 });
-    setShineStyle({ opacity: 0 });
+    // Don't immediately reset on touch end to allow orientation to continue working
+    // Only reset if no orientation events are being received
+    setTimeout(() => {
+      setIsActive(false);
+      setTransform(`perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`);
+      setGlareStyle({ opacity: 0 });
+      setShineStyle({ opacity: 0 });
+    }, 100);
   }, [isMobile]);
 
   // Device orientation for mobile
@@ -147,20 +153,23 @@ export function useHolographicCard({
     const handleOrientation = (event: DeviceOrientationEvent) => {
       if (event.beta === null || event.gamma === null) return;
 
-      // Normalize orientation values
+      // Normalize orientation values with increased sensitivity
       // Beta: front-to-back tilt (-180 to 180)
       // Gamma: left-to-right tilt (-90 to 90)
-      const beta = Math.max(-45, Math.min(45, event.beta)) / 45;
-      const gamma = Math.max(-45, Math.min(45, event.gamma)) / 45;
+      const beta = Math.max(-60, Math.min(60, event.beta)) / 60;
+      const gamma = Math.max(-60, Math.min(60, event.gamma)) / 60;
 
-      const rotateX = beta * maxTilt * 0.5; // Reduce intensity for orientation
-      const rotateY = gamma * maxTilt * 0.5;
+      // Increased intensity for better visual effect
+      const rotateX = beta * maxTilt * 1.2; // Increased from 0.5 to 1.2
+      const rotateY = gamma * maxTilt * 1.2;
 
-      // Calculate pointer position based on orientation
-      const pointerX = 50 + gamma * 30; // Slight offset based on tilt
-      const pointerY = 50 + beta * 30;
+      // Enhanced pointer position calculation for better glare tracking
+      const pointerX = 50 + gamma * 40; // Increased from 30 to 40
+      const pointerY = 50 + beta * 40;
 
-      updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+      // Always show effects when orientation changes
+      setIsActive(true);
+      updateCardEffects(rotateX, rotateY, Math.max(0, Math.min(100, pointerX)), Math.max(0, Math.min(100, pointerY)));
     };
 
     const requestPermissionAndListen = async () => {
@@ -170,7 +179,7 @@ export function useHolographicCard({
           // @ts-ignore - TypeScript doesn't know about requestPermission
           const permission = await DeviceOrientationEvent.requestPermission();
           if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation);
+            window.addEventListener('deviceorientation', handleOrientation, { passive: true });
           }
         } catch (error) {
           // Permission denied or error, but don't show modal
@@ -178,17 +187,22 @@ export function useHolographicCard({
         }
       } else if (typeof DeviceOrientationEvent !== 'undefined') {
         // For other browsers that don't require permission
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('deviceorientation', handleOrientation, { passive: true });
       }
     };
 
-    // Only request permission when user actually interacts with a card
+    // Request orientation permission on first touch interaction
     const handleFirstTouch = () => {
       requestPermissionAndListen();
-      document.removeEventListener('touchstart', handleFirstTouch);
+      // Set active state to enable effects immediately
+      setIsActive(true);
+      // Reset active state after a delay if no orientation changes
+      setTimeout(() => {
+        if (!isActive) setIsActive(false);
+      }, 2000);
     };
 
-    document.addEventListener('touchstart', handleFirstTouch, { once: true });
+    document.addEventListener('touchstart', handleFirstTouch, { once: true, passive: true });
 
     return () => {
       window.removeEventListener('deviceorientation', handleOrientation);
