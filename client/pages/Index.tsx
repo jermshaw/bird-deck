@@ -111,9 +111,20 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
   isCollected: boolean;
   onClick: () => void;
 }) {
+  const { cardProps, isHovered } = use3DCardHover({
+    maxTilt: 12,
+    scale: 1.05,
+    speed: 300
+  });
+
   return (
-    <div 
-      className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
+    <div
+      {...cardProps}
+      className={`bg-white rounded-2xl overflow-hidden cursor-pointer ${
+        isHovered
+          ? 'shadow-2xl shadow-black/20'
+          : 'shadow-lg shadow-black/10'
+      } transition-shadow duration-300`}
       onClick={onClick}
     >
       {/* Card Content */}
