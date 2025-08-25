@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
+import { use3DCardHover } from '@/hooks/use-3d-card-hover';
 
 // Main page content component that uses collection context
 function LocationPackContent() {
