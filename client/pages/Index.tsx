@@ -144,7 +144,7 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
       {/* Card Content */}
       <div className="relative p-1 z-0">
         {/* Bird Image */}
-        <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-white">
+        <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-black">
           <img 
             src={bird.imageUrl} 
             alt={bird.name}
