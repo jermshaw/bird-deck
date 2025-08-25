@@ -229,6 +229,7 @@ export function useHolographicCard({
     document.addEventListener('touchstart', handleFirstTouch, { once: true, passive: true });
 
     return () => {
+      if (orientationTimeout) clearTimeout(orientationTimeout);
       window.removeEventListener('deviceorientation', handleOrientation);
       document.removeEventListener('touchstart', handleFirstTouch);
     };
