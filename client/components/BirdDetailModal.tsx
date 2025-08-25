@@ -114,7 +114,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <img
                     src={bird.imageUrl}
                     alt={bird.name}
-                    className="w-full h-full object-cover border-2 border-solid overflow-hidden"
+                    className="w-full h-full object-cover border-2 border-gray-800 overflow-hidden"
                   />
                   
                   {/* Rarity Badge */}
