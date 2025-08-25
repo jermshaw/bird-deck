@@ -147,19 +147,17 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               }`}
             >
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
-                {/* Sheen Overlay */}
+                {/* Subtle sheen overlay */}
                 <div
-                  className="absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10"
-                  style={sheenStyle}
-                />
-                {/* Bird Image with Parallax */}
-                <div
-                  className="aspect-[35/52] relative card-tilt-layer"
+                  className={`absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10 ${
+                    isHovered ? 'opacity-20' : 'opacity-0'
+                  }`}
                   style={{
-                    transform: `translateX(${tilt.rotateY * 0.3}px) translateY(${tilt.rotateX * 0.2}px)`,
-                    transition: 'transform 0.3s ease-out'
+                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)'
                   }}
-                >
+                />
+                {/* Bird Image */}
+                <div className="aspect-[35/52] relative">
                   <img 
                     src={bird.imageUrl} 
                     alt={bird.name}
