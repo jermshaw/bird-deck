@@ -72,19 +72,19 @@ export function useHolographicCard({
 
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
-    
+
     // Calculate the center of the card
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    
+
     // Calculate the mouse position relative to the center
     const mouseX = e.clientX;
     const mouseY = e.clientY;
-    
+
     // Calculate rotation values
     const rotateX = ((mouseY - centerY) / (rect.height / 2)) * -maxTilt;
     const rotateY = ((mouseX - centerX) / (rect.width / 2)) * maxTilt;
-    
+
     // Calculate mouse position as percentage for glare effect
     const pointerX = ((mouseX - rect.left) / rect.width) * 100;
     const pointerY = ((mouseY - rect.top) / rect.height) * 100;
@@ -107,133 +107,27 @@ export function useHolographicCard({
     }
   }, [isMobile]);
 
-  // Mobile touch interactions
+  // Mobile touch interactions - DISABLED to remove 3D tilt effect on mobile
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isMobile) return;
-    setIsActive(true);
-    // Prevent default to avoid interference with orientation tracking
-    e.preventDefault();
-  }, [isMobile]);
+    // 3D tilt effects disabled on mobile
+    return;
+  }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    if (!cardRef.current || !isMobile) return;
-
-    const touch = e.touches[0];
-    if (!touch) return;
-
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    
-    // Calculate the center of the card
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    // Calculate rotation values based on touch position
-    const rotateX = ((touch.clientY - centerY) / (rect.height / 2)) * -maxTilt;
-    const rotateY = ((touch.clientX - centerX) / (rect.width / 2)) * maxTilt;
-    
-    // Calculate touch position as percentage for glare effect
-    const pointerX = ((touch.clientX - rect.left) / rect.width) * 100;
-    const pointerY = ((touch.clientY - rect.top) / rect.height) * 100;
-
-    updateCardEffects(rotateX, rotateY, pointerX, pointerY, false);
-  }, [maxTilt, updateCardEffects, isMobile]);
+    // 3D tilt effects disabled on mobile
+    return;
+  }, []);
 
   const handleTouchEnd = useCallback(() => {
-    if (!isMobile) return;
-    // Don't immediately reset on touch end to allow orientation to continue working
-    // Only reset if no orientation events are being received
-    setTimeout(() => {
-      setIsActive(false);
-      setTransform(`perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`);
-      setGlareStyle({ opacity: 0 });
-      setShineStyle({ opacity: 0 });
-    }, 100);
-  }, [isMobile]);
+    // 3D tilt effects disabled on mobile
+    return;
+  }, []);
 
-  // Device orientation for mobile
+  // Device orientation for mobile - DISABLED to remove 3D tilt effect on mobile
   useEffect(() => {
-    if (!isMobile) return;
-
-    let orientationTimeout: NodeJS.Timeout | null = null;
-    let lastOrientationTime = 0;
-    const orientationThrottleDelay = 16; // ~60fps
-
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      if (event.beta === null || event.gamma === null) return;
-
-      const now = performance.now();
-      if (now - lastOrientationTime < orientationThrottleDelay) {
-        // Clear any pending timeout and set a new one
-        if (orientationTimeout) clearTimeout(orientationTimeout);
-        orientationTimeout = setTimeout(() => processOrientation(event), orientationThrottleDelay);
-        return;
-      }
-
-      lastOrientationTime = now;
-      processOrientation(event);
-    };
-
-    const processOrientation = (event: DeviceOrientationEvent) => {
-      if (event.beta === null || event.gamma === null) return;
-
-      // Normalize orientation values with increased sensitivity
-      // Beta: front-to-back tilt (-180 to 180)
-      // Gamma: left-to-right tilt (-90 to 90)
-      const beta = Math.max(-60, Math.min(60, event.beta)) / 60;
-      const gamma = Math.max(-60, Math.min(60, event.gamma)) / 60;
-
-      // Increased intensity for better visual effect
-      const rotateX = beta * maxTilt * 1.2; // Increased from 0.5 to 1.2
-      const rotateY = gamma * maxTilt * 1.2;
-
-      // Enhanced pointer position calculation for better glare tracking
-      const pointerX = 50 + gamma * 40; // Increased from 30 to 40
-      const pointerY = 50 + beta * 40;
-
-      // Always show effects when orientation changes
-      setIsActive(true);
-      updateCardEffects(rotateX, rotateY, Math.max(0, Math.min(100, pointerX)), Math.max(0, Math.min(100, pointerY)), true);
-    };
-
-    const requestPermissionAndListen = async () => {
-      // Try to request permission for iOS 13+ devices
-      if (typeof DeviceOrientationEvent !== 'undefined' && 'requestPermission' in DeviceOrientationEvent) {
-        try {
-          // @ts-ignore - TypeScript doesn't know about requestPermission
-          const permission = await DeviceOrientationEvent.requestPermission();
-          if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation, { passive: true });
-          }
-        } catch (error) {
-          // Permission denied or error, but don't show modal
-          // Silently fall back to touch-only interactions
-        }
-      } else if (typeof DeviceOrientationEvent !== 'undefined') {
-        // For other browsers that don't require permission
-        window.addEventListener('deviceorientation', handleOrientation, { passive: true });
-      }
-    };
-
-    // Request orientation permission on first touch interaction
-    const handleFirstTouch = () => {
-      requestPermissionAndListen();
-      // Set active state to enable effects immediately
-      setIsActive(true);
-      // Reset active state after a delay if no orientation changes
-      setTimeout(() => {
-        if (!isActive) setIsActive(false);
-      }, 2000);
-    };
-
-    document.addEventListener('touchstart', handleFirstTouch, { once: true, passive: true });
-
-    return () => {
-      if (orientationTimeout) clearTimeout(orientationTimeout);
-      window.removeEventListener('deviceorientation', handleOrientation);
-      document.removeEventListener('touchstart', handleFirstTouch);
-    };
-  }, [isMobile, maxTilt, updateCardEffects]);
+    // 3D tilt effects disabled on mobile - no orientation listeners
+    return;
+  }, []);
 
   const cardProps = {
     ref: cardRef,
