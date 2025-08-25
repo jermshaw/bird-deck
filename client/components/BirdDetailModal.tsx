@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Bird, sizeIcons } from '@shared/birds';
 import { useCollection } from '@/hooks/use-collection';
 import { useCardTilt } from '@/hooks/use-card-tilt';
+import { use3DCardHover } from '@/hooks/use-3d-card-hover';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
