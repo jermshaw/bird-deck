@@ -231,7 +231,15 @@ export function useHolographicCard({
       filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
       // Prevent text selection and scrolling on mobile
       userSelect: 'none' as const,
-      touchAction: 'none' as const
+      touchAction: 'manipulation' as const,
+      // Performance optimizations
+      backfaceVisibility: 'hidden' as const,
+      perspective: '1000px',
+      // Reduce animations for users who prefer reduced motion
+      '@media (prefers-reduced-motion: reduce)': {
+        transform: 'none',
+        transition: 'none'
+      }
     }
   };
 
@@ -239,7 +247,10 @@ export function useHolographicCard({
     style: {
       ...glareStyle,
       transition: `opacity ${speed}ms ease-out`,
-      pointerEvents: 'none' as const
+      pointerEvents: 'none' as const,
+      // Performance optimizations
+      willChange: 'opacity, background',
+      backfaceVisibility: 'hidden' as const
     }
   };
 
@@ -247,7 +258,10 @@ export function useHolographicCard({
     style: {
       ...shineStyle,
       transition: `opacity ${speed}ms ease-out`,
-      pointerEvents: 'none' as const
+      pointerEvents: 'none' as const,
+      // Performance optimizations
+      willChange: 'opacity, background',
+      backfaceVisibility: 'hidden' as const
     }
   };
 
