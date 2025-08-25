@@ -177,6 +177,17 @@
     perspective: 1000;
   }
 
+  /* 3D Card Hover Effects */
+  .card-3d-hover {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform;
+  }
+
+  .card-3d-hover:hover {
+    transform-style: preserve-3d;
+  }
+
   /* Enhanced glow effect */
   .card-glow {
     box-shadow:
