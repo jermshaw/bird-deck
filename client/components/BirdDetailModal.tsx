@@ -121,7 +121,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
                   {/* Name Box - positioned at bottom of image */}
                   <div className="absolute bottom-0 left-0 right-0">
-                    <div className="bg-white/70 backdrop-blur-sm border border-black mx-[-1px] mb-1">
+                    <div className="bg-white/70 backdrop-blur-sm border border-black mx-[-1px]">
                       <div className="px-4 py-2 text-center flex flex-col justify-center items-center ml-0.5">
                         <h3 className="text-[#2C2C2C] font-rubik-one text-sm font-normal uppercase leading-tight">
                           {bird.name}
