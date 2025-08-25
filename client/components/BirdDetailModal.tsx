@@ -111,10 +111,10 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                 />
                 {/* Bird Image */}
                 <div className="aspect-[35/52] relative">
-                  <img 
-                    src={bird.imageUrl} 
+                  <img
+                    src={bird.imageUrl}
                     alt={bird.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover border-2 border-solid overflow-hidden"
                   />
                   
                   {/* Rarity Badge */}
