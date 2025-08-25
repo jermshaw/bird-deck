@@ -174,7 +174,7 @@ export function useHolographicCard({
 
       // Always show effects when orientation changes
       setIsActive(true);
-      updateCardEffects(rotateX, rotateY, Math.max(0, Math.min(100, pointerX)), Math.max(0, Math.min(100, pointerY)));
+      updateCardEffects(rotateX, rotateY, Math.max(0, Math.min(100, pointerX)), Math.max(0, Math.min(100, pointerY)), true);
     };
 
     const requestPermissionAndListen = async () => {
