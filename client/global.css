@@ -188,6 +188,41 @@
     transform-style: preserve-3d;
   }
 
+  /* Enhanced glow effects inspired by CodePen */
+  .card-3d-glow {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .card-3d-glow:hover {
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  /* Card inner glow on hover */
+  .card-inner-glow {
+    position: relative;
+  }
+
+  .card-inner-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .card-inner-glow:hover::before {
+    opacity: 1;
+  }
+
   /* Enhanced glow effect */
   .card-glow {
     box-shadow:
