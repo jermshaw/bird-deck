@@ -111,20 +111,22 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
   isCollected: boolean;
   onClick: () => void;
 }) {
-  const { cardProps, isHovered } = use3DCardHover({
-    maxTilt: 12,
-    scale: 1.05,
-    speed: 300
+  const { cardProps, glareProps, shineProps, isHovered } = useHolographicCard({
+    maxTilt: 15,
+    scale: 1.06,
+    speed: 200,
+    glareIntensity: 0.5,
+    shineIntensity: 0.7
   });
 
   return (
     <div
       {...cardProps}
-      className={`bg-white rounded-2xl overflow-hidden cursor-pointer ${
+      className={`bg-white rounded-2xl overflow-hidden cursor-pointer relative ${
         isHovered
-          ? 'shadow-2xl shadow-black/20'
+          ? 'shadow-2xl shadow-black/30'
           : 'shadow-lg shadow-black/10'
-      } transition-shadow duration-300`}
+      } transition-shadow duration-200`}
       onClick={onClick}
     >
       {/* Card Content */}
