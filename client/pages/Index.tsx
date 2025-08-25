@@ -17,11 +17,8 @@ function LocationPackContent() {
     setModalOpen(true);
   };
 
-  // Get birds from western regions (filtering by urban, mountain, desert habitats as "west")
-  const westernBirds = birds.filter(bird => 
-    bird.habitat === 'urban' || bird.habitat === 'mountain' || bird.habitat === 'desert'
-  );
-  const collectedWesternBirds = westernBirds.filter(bird => isInCollection(bird.id));
+  // Get collected birds from the displayed location birds
+  const collectedLocationBirds = locationBirds.filter(bird => isInCollection(bird.id));
 
   return (
     <div className="min-h-screen relative font-rubik">
