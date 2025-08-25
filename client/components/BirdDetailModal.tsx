@@ -174,15 +174,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                     </span>
                   </div>
 
-                  {/* Name Box Overlay with Parallax */}
+                  {/* Name Box Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 h-28">
-                    <div
-                      className="absolute bottom-6 left-0 right-0 mx-[-2px] card-tilt-layer"
-                      style={{
-                        transform: `translateX(${tilt.rotateY * 0.5}px) translateY(${tilt.rotateX * 0.4}px)`,
-                        transition: 'transform 0.3s ease-out'
-                      }}
-                    >
+                    <div className="absolute bottom-6 left-0 right-0 mx-[-2px]">
                       <div className="bg-white/70 backdrop-blur-[17px] border-2 border-gray-800 h-[90px] relative">
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                           <h2 className="text-2xl font-normal uppercase text-gray-800 leading-tight mb-1 font-rubik-one">
