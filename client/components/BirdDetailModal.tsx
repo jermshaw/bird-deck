@@ -96,7 +96,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
               {/* Holographic Shine Effect */}
               <div
-                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                className="absolute inset-0 rounded-[30px] pointer-events-none z-20"
                 {...shineProps}
               />
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
