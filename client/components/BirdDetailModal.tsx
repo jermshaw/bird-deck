@@ -81,12 +81,14 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
             {/* Main Bird Card */}
             <div
-              {...cardProps}
-              className={`bg-white rounded-[31px] p-2 mb-20 gpu-accelerated transition-shadow duration-150 relative ${
-                isHovered
-                  ? 'shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_30px_rgba(255,255,255,0.15),inset_0_2px_0_rgba(255,255,255,0.7)]'
-                  : 'shadow-lg'
-              }`}
+              ref={cardProps.ref}
+              style={{
+                ...cardProps.style,
+                // Reset to static state
+                transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
+                filter: 'none'
+              }}
+              className="bg-white rounded-[31px] p-2 mb-20 gpu-accelerated transition-shadow duration-150 relative shadow-lg pointer-events-none"
             >
               {/* Holographic Glare Effect */}
               <div
