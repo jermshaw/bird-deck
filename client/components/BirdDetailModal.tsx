@@ -99,7 +99,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                 className="absolute inset-0 rounded-[30px] pointer-events-none z-20"
                 {...shineProps}
               />
-              <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
+              <div className="relative rounded-[27px] border-2 border-gray-800 overflow-hidden">
                 {/* Subtle sheen overlay */}
                 <div
                   className={`absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10 ${
@@ -114,7 +114,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <img
                     src={bird.imageUrl}
                     alt={bird.name}
-                    className="w-full h-full object-cover border-2 border-gray-800 overflow-hidden"
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Rarity Badge */}
@@ -129,7 +129,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
                   {/* Name Box Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 h-28">
-                    <div className="absolute bottom-6 left-0 right-0 mx-[-2px]">
+                    <div className="absolute bottom-0 left-0 right-0 mx-[-2px]">
                       <div className="bg-white/70 backdrop-blur-[17px] border-2 border-gray-800 h-[90px] relative">
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
                           <h2 className="text-xl font-light uppercase text-gray-800 leading-tight mb-1 font-rubik-one">
