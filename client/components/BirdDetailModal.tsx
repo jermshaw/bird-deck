@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Bird, sizeIcons } from '@shared/birds';
 import { useCollection } from '@/hooks/use-collection';
 import { useHolographicCard } from '@/hooks/use-holographic-card';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Plus, Check, X, Smartphone } from 'lucide-react';
+import { Plus, Check, X } from 'lucide-react';
 
 interface BirdDetailModalProps {
   bird: Bird | null;
@@ -23,37 +23,13 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
     shineIntensity: 0.8
   });
 
-  const [showOrientationPrompt, setShowOrientationPrompt] = useState(false);
-  const [orientationPermissionGranted, setOrientationPermissionGranted] = useState(false);
 
   const isCollected = bird ? isInCollection(bird.id) : false;
 
   // Simulate seen count - in real app this would come from data
   const seenCount = Math.floor(Math.random() * 20) + 1;
 
-  // Check if we need to show orientation permission prompt
-  useEffect(() => {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const hasOrientationAPI = typeof DeviceOrientationEvent !== 'undefined';
 
-    if (isIOS && hasOrientationAPI && 'requestPermission' in DeviceOrientationEvent && open) {
-      setShowOrientationPrompt(true);
-    }
-  }, [open]);
-
-  const requestOrientationPermission = async () => {
-    try {
-      // @ts-ignore - TypeScript doesn't know about requestPermission
-      const permission = await DeviceOrientationEvent.requestPermission();
-      if (permission === 'granted') {
-        setOrientationPermissionGranted(true);
-        setShowOrientationPrompt(false);
-      }
-    } catch (error) {
-      console.warn('Device orientation permission denied:', error);
-      setShowOrientationPrompt(false);
-    }
-  };
 
   const handleCollectionToggle = () => {
     if (!bird) return;
@@ -102,41 +78,6 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
           <div className="relative z-10 flex flex-col w-full max-w-sm mx-auto px-6 py-16 sm:py-20">
 
 
-            {/* Orientation Permission Prompt */}
-            {showOrientationPrompt && (
-              <div className="absolute top-32 left-6 right-6 sm:top-36 sm:left-8 sm:right-8 z-20">
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg border border-gray-200 p-4 shadow-lg">
-                  <div className="flex items-start gap-3">
-                    <Smartphone className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-sm text-gray-800 mb-1">
-                        Enable Device Tilt
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-3">
-                        Allow device motion to tilt the card when you move your phone
-                      </p>
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          onClick={requestOrientationPermission}
-                          className="text-xs px-3 py-1.5 h-auto"
-                        >
-                          Enable
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setShowOrientationPrompt(false)}
-                          className="text-xs px-3 py-1.5 h-auto"
-                        >
-                          Skip
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Main Bird Card */}
             <div
