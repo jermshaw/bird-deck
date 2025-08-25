@@ -26,10 +26,6 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
   const isCollected = bird ? isInCollection(bird.id) : false;
 
-  // Simulate seen count - in real app this would come from data
-  const seenCount = Math.floor(Math.random() * 20) + 1;
-
-
 
   const handleCollectionToggle = () => {
     if (!bird) return;
@@ -140,12 +136,6 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               </div>
             </div>
 
-            {/* Seen Count */}
-            <div className="mb-6 -mt-16">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-800">
-                Seen {seenCount} times
-              </span>
-            </div>
 
             {/* Content Sections */}
             <div className="space-y-10">
