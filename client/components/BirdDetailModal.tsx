@@ -99,46 +99,40 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                 className="absolute inset-0 rounded-2xl pointer-events-none z-10"
                 {...shineProps}
               />
-              <div className="relative rounded-[27px] border-2 border-gray-800 overflow-hidden">
-                {/* Subtle sheen overlay */}
-                <div
-                  className={`absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10 ${
-                    isHovered ? 'opacity-20' : 'opacity-0'
-                  }`}
-                  style={{
-                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)'
-                  }}
-                />
+              {/* Card Content */}
+              <div className="relative p-1 z-0">
                 {/* Bird Image */}
-                <div className="aspect-[35/52] relative">
+                <div className="relative aspect-[35/52] rounded-xl overflow-hidden border border-black">
                   <img
                     src={bird.imageUrl}
                     alt={bird.name}
                     className="w-full h-full object-cover"
                   />
-                  
+
                   {/* Rarity Badge */}
-                  <div className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-full border-2 border-gray-800 px-3 py-1 flex items-center gap-2">
-                    <svg className="w-3 h-3 fill-gray-800" viewBox="0 0 12 11">
-                      <path d="M10.7939 0.100586C11.2926 -0.0475992 11.7913 0.264859 11.6553 0.643555C11.5419 1.02219 11.3608 1.4996 11.0889 2.02637C10.5675 3.06366 8.69602 4.28219 7.22266 4.5127H9.45703C9.07169 4.95725 8.61802 5.41859 8.09668 5.84668C7.48473 6.34058 6.87269 6.81791 6.26074 7.22949L4.88281 7.54297L5.42188 7.77246C3.56317 8.94148 2.54294 9.07385 1.79492 8.79395C3.15495 6.99926 3.76219 6.18316 6.10254 4.99316C3.98679 6.0128 2.86091 6.93203 1.43359 8.61035C1.53939 8.68316 1.64564 8.7303 1.77246 8.77637C1.13778 9.58315 0.820725 10.1108 0.775391 10.1602C0.707361 10.2589 0.548078 10.3082 0.412109 10.2588C0.276339 10.2093 0.231066 10.0938 0.276367 9.99512V9.97852C0.321857 9.92883 0.659696 9.45411 1.40234 8.60352C1.3899 8.5972 1.37671 8.58912 1.36426 8.58008C0.253786 7.872 1.04797 5.92852 4.37988 3.21191L4.88281 3.97266C5.1548 3.26479 5.49058 2.89946 6.10254 2.32324C6.71441 1.76358 7.46196 1.28601 8.3457 0.923828C8.36833 0.923828 8.39143 0.907282 8.41406 0.907227C8.43659 1.65878 8.62415 1.92863 8.62695 1.93262L9.81934 0.396484C10.1819 0.281275 10.4994 0.182891 10.7939 0.100586Z" />
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-[#F3F3F3] border border-[#2C2C2C] rounded-full flex items-center justify-center">
+                    <svg
+                      width="12"
+                      height="10"
+                      viewBox="0 0 8 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-3 h-2.5 fill-[#2C2C2C] transform rotate-[-23.972deg]"
+                    >
+                      <path d="M6.80255 0.39989C7.2046 0.0565747 7.79657 0.141577 7.82664 0.549448C7.87776 0.948024 7.90655 1.46684 7.87151 2.06849C7.81534 3.24752 6.58006 5.15219 5.30671 5.97482L7.38227 5.05195C7.20793 5.62405 6.9769 6.23934 6.66944 6.85232C6.30497 7.5639 5.934 8.26036 5.53553 8.89549L4.38439 9.75574L4.9811 9.74692C3.73732 11.6006 2.84391 12.1447 2.03342 12.1936C2.55555 9.96461 2.78201 8.95583 4.46463 6.88361C2.91991 8.70524 2.25359 10.0244 1.62073 12.1741C1.74943 12.1982 1.86808 12.1976 2.00526 12.188C1.74894 13.1996 1.67207 13.8202 1.65036 13.8848C1.62797 14.0046 1.50066 14.1164 1.35393 14.1267C1.20719 14.137 1.11769 14.0477 1.119 13.9372L1.11225 13.9221C1.13426 13.8556 1.25174 13.2748 1.5899 12.1792C1.57575 12.1786 1.56048 12.1757 1.54518 12.1724C0.220929 11.9735 0.155025 9.84108 2.12819 5.94103L2.91001 6.43985C2.87025 5.66976 3.03111 5.19109 3.36163 4.40293C3.69894 3.63018 4.1965 2.87754 4.86803 2.17597C4.88904 2.16658 4.90361 2.14198 4.92464 2.13263C5.25854 2.82686 5.54558 2.99795 5.54558 2.99795L6.01943 1.07834C6.30873 0.821472 6.56282 0.598078 6.80255 0.39989Z" fill="#2C2C2C"/>
                     </svg>
-                    <span className="text-xs font-bold uppercase tracking-wider text-gray-800">
-                      {bird.rarity}
-                    </span>
                   </div>
 
-                  {/* Name Box Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-28">
-                    <div className="absolute bottom-0 left-0 right-0 mx-[-2px]">
-                      <div className="bg-white/70 backdrop-blur-[17px] border-2 border-gray-800 h-[90px] relative">
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                          <h2 className="text-xl font-light uppercase text-gray-800 leading-tight mb-1 font-rubik-one">
-                            {bird.name}
-                          </h2>
-                          <p className="text-lg italic text-gray-800 font-normal">
-                            {bird.ability}
-                          </p>
-                        </div>
+                  {/* Name Box - positioned at bottom of image */}
+                  <div className="absolute bottom-0 left-0 right-0">
+                    <div className="bg-white/70 backdrop-blur-sm border border-black mx-[-1px] mb-1">
+                      <div className="px-4 py-2 text-center flex flex-col justify-center items-center ml-0.5">
+                        <h3 className="text-[#2C2C2C] font-rubik-one text-sm font-normal uppercase leading-tight">
+                          {bird.name}
+                        </h3>
+                        <p className="text-[#2C2C2C]/50 font-rubik text-xs italic mt-1">
+                          {bird.ability}
+                        </p>
                       </div>
                     </div>
                   </div>
