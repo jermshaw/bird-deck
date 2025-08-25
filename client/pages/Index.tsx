@@ -175,6 +175,18 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
             </div>
           )}
         </div>
+
+        {/* Name Box - moved to bottom of card */}
+        <div className="bg-white border border-black mx-[-1px] mb-1">
+          <div className="px-4 py-2 text-center flex flex-col justify-center items-center ml-0.5">
+            <h3 className="text-[#2C2C2C] font-rubik-one text-sm font-normal uppercase leading-tight">
+              {bird.name}
+            </h3>
+            <p className="text-[#2C2C2C]/50 font-rubik text-xs italic mt-1">
+              {bird.ability}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
