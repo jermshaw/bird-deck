@@ -164,14 +164,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                     className="w-full h-full object-cover"
                   />
                   
-                  {/* Rarity Badge with Enhanced Parallax */}
-                  <div
-                    className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-full border-2 border-gray-800 px-3 py-1 flex items-center gap-2 card-tilt-layer"
-                    style={{
-                      transform: `translateX(${tilt.rotateY * -0.8}px) translateY(${tilt.rotateX * -0.6}px)`,
-                      transition: 'transform 0.3s ease-out'
-                    }}
-                  >
+                  {/* Rarity Badge */}
+                  <div className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-full border-2 border-gray-800 px-3 py-1 flex items-center gap-2">
                     <svg className="w-3 h-3 fill-gray-800" viewBox="0 0 12 11">
                       <path d="M10.7939 0.100586C11.2926 -0.0475992 11.7913 0.264859 11.6553 0.643555C11.5419 1.02219 11.3608 1.4996 11.0889 2.02637C10.5675 3.06366 8.69602 4.28219 7.22266 4.5127H9.45703C9.07169 4.95725 8.61802 5.41859 8.09668 5.84668C7.48473 6.34058 6.87269 6.81791 6.26074 7.22949L4.88281 7.54297L5.42188 7.77246C3.56317 8.94148 2.54294 9.07385 1.79492 8.79395C3.15495 6.99926 3.76219 6.18316 6.10254 4.99316C3.98679 6.0128 2.86091 6.93203 1.43359 8.61035C1.53939 8.68316 1.64564 8.7303 1.77246 8.77637C1.13778 9.58315 0.820725 10.1108 0.775391 10.1602C0.707361 10.2589 0.548078 10.3082 0.412109 10.2588C0.276339 10.2093 0.231066 10.0938 0.276367 9.99512V9.97852C0.321857 9.92883 0.659696 9.45411 1.40234 8.60352C1.3899 8.5972 1.37671 8.58912 1.36426 8.58008C0.253786 7.872 1.04797 5.92852 4.37988 3.21191L4.88281 3.97266C5.1548 3.26479 5.49058 2.89946 6.10254 2.32324C6.71441 1.76358 7.46196 1.28601 8.3457 0.923828C8.36833 0.923828 8.39143 0.907282 8.41406 0.907227C8.43659 1.65878 8.62415 1.92863 8.62695 1.93262L9.81934 0.396484C10.1819 0.281275 10.4994 0.182891 10.7939 0.100586Z" />
                     </svg>
