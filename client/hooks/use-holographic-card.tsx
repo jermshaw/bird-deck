@@ -32,29 +32,34 @@ export function useHolographicCard({
   }, []);
 
   // Update card effects based on rotation values
-  const updateCardEffects = useCallback((rotateX: number, rotateY: number, pointerX: number = 50, pointerY: number = 50) => {
+  const updateCardEffects = useCallback((rotateX: number, rotateY: number, pointerX: number = 50, pointerY: number = 50, isOrientation: boolean = false) => {
     // Apply 3D transform
     const transformValue = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${isHovered || isActive ? scale : 1})`;
     setTransform(transformValue);
     
+    // Enhanced glare intensity for mobile orientation
+    const effectiveGlareIntensity = isOrientation ? glareIntensity * 1.3 : glareIntensity;
+    const effectiveShineIntensity = isOrientation ? shineIntensity * 1.2 : shineIntensity;
+
     // Update glare position (radial gradient following pointer/tilt)
     setGlareStyle({
-      background: `radial-gradient(circle at ${pointerX}% ${pointerY}%, 
-        rgba(255, 255, 255, ${glareIntensity}) 0%, 
-        rgba(255, 255, 255, ${glareIntensity * 0.3}) 25%, 
-        transparent 50%)`,
+      background: `radial-gradient(circle at ${pointerX}% ${pointerY}%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity}) 0%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity * 0.4}) 30%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity * 0.1}) 60%,
+        transparent 80%)`,
       mixBlendMode: 'overlay' as const,
       opacity: (isHovered || isActive) ? 1 : 0
     });
-    
-    // Update shine effect (dynamic gradient based on rotation)
-    const shineAngle = Math.atan2(rotateX, rotateY) * (180 / Math.PI) + 45;
+
+    // Enhanced shine effect with more dramatic angles for orientation
+    const shineAngle = Math.atan2(rotateX, rotateY) * (180 / Math.PI) + (isOrientation ? 90 : 45);
     setShineStyle({
-      background: `linear-gradient(${shineAngle}deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.1}) 25%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.3}) 50%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.1}) 75%, 
+      background: `linear-gradient(${shineAngle}deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.15}) 20%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.4}) 50%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.15}) 80%,
         rgba(255, 255, 255, 0) 100%)`,
       mixBlendMode: 'soft-light' as const,
       opacity: (isHovered || isActive) ? 1 : 0
@@ -83,8 +88,8 @@ export function useHolographicCard({
     // Calculate mouse position as percentage for glare effect
     const pointerX = ((mouseX - rect.left) / rect.width) * 100;
     const pointerY = ((mouseY - rect.top) / rect.height) * 100;
-    
-    updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+
+    updateCardEffects(rotateX, rotateY, pointerX, pointerY, false);
   }, [maxTilt, updateCardEffects, isMobile]);
 
   const handleMouseEnter = useCallback(() => {
@@ -130,8 +135,8 @@ export function useHolographicCard({
     // Calculate touch position as percentage for glare effect
     const pointerX = ((touch.clientX - rect.left) / rect.width) * 100;
     const pointerY = ((touch.clientY - rect.top) / rect.height) * 100;
-    
-    updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+
+    updateCardEffects(rotateX, rotateY, pointerX, pointerY, false);
   }, [maxTilt, updateCardEffects, isMobile]);
 
   const handleTouchEnd = useCallback(() => {
