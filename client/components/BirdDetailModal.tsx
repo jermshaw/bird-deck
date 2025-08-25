@@ -15,10 +15,12 @@ interface BirdDetailModalProps {
 
 export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalProps) {
   const { isInCollection, addToCollection, removeFromCollection } = useCollection();
-  const { cardProps, isHovered } = use3DCardHover({
-    maxTilt: 15,
-    scale: 1.08,
-    speed: 200
+  const { cardProps, glareProps, shineProps, isHovered } = useHolographicCard({
+    maxTilt: 18,
+    scale: 1.1,
+    speed: 150,
+    glareIntensity: 0.6,
+    shineIntensity: 0.8
   });
 
   const [showOrientationPrompt, setShowOrientationPrompt] = useState(false);
