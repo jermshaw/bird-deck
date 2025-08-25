@@ -32,29 +32,34 @@ export function useHolographicCard({
   }, []);
 
   // Update card effects based on rotation values
-  const updateCardEffects = useCallback((rotateX: number, rotateY: number, pointerX: number = 50, pointerY: number = 50) => {
+  const updateCardEffects = useCallback((rotateX: number, rotateY: number, pointerX: number = 50, pointerY: number = 50, isOrientation: boolean = false) => {
     // Apply 3D transform
     const transformValue = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${isHovered || isActive ? scale : 1})`;
     setTransform(transformValue);
     
+    // Enhanced glare intensity for mobile orientation
+    const effectiveGlareIntensity = isOrientation ? glareIntensity * 1.3 : glareIntensity;
+    const effectiveShineIntensity = isOrientation ? shineIntensity * 1.2 : shineIntensity;
+
     // Update glare position (radial gradient following pointer/tilt)
     setGlareStyle({
-      background: `radial-gradient(circle at ${pointerX}% ${pointerY}%, 
-        rgba(255, 255, 255, ${glareIntensity}) 0%, 
-        rgba(255, 255, 255, ${glareIntensity * 0.3}) 25%, 
-        transparent 50%)`,
+      background: `radial-gradient(circle at ${pointerX}% ${pointerY}%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity}) 0%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity * 0.4}) 30%,
+        rgba(255, 255, 255, ${effectiveGlareIntensity * 0.1}) 60%,
+        transparent 80%)`,
       mixBlendMode: 'overlay' as const,
       opacity: (isHovered || isActive) ? 1 : 0
     });
-    
-    // Update shine effect (dynamic gradient based on rotation)
-    const shineAngle = Math.atan2(rotateX, rotateY) * (180 / Math.PI) + 45;
+
+    // Enhanced shine effect with more dramatic angles for orientation
+    const shineAngle = Math.atan2(rotateX, rotateY) * (180 / Math.PI) + (isOrientation ? 90 : 45);
     setShineStyle({
-      background: `linear-gradient(${shineAngle}deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.1}) 25%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.3}) 50%, 
-        rgba(255, 255, 255, ${shineIntensity * 0.1}) 75%, 
+      background: `linear-gradient(${shineAngle}deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.15}) 20%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.4}) 50%,
+        rgba(255, 255, 255, ${effectiveShineIntensity * 0.15}) 80%,
         rgba(255, 255, 255, 0) 100%)`,
       mixBlendMode: 'soft-light' as const,
       opacity: (isHovered || isActive) ? 1 : 0
@@ -83,8 +88,8 @@ export function useHolographicCard({
     // Calculate mouse position as percentage for glare effect
     const pointerX = ((mouseX - rect.left) / rect.width) * 100;
     const pointerY = ((mouseY - rect.top) / rect.height) * 100;
-    
-    updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+
+    updateCardEffects(rotateX, rotateY, pointerX, pointerY, false);
   }, [maxTilt, updateCardEffects, isMobile]);
 
   const handleMouseEnter = useCallback(() => {
@@ -106,6 +111,8 @@ export function useHolographicCard({
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     if (!isMobile) return;
     setIsActive(true);
+    // Prevent default to avoid interference with orientation tracking
+    e.preventDefault();
   }, [isMobile]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
@@ -128,39 +135,65 @@ export function useHolographicCard({
     // Calculate touch position as percentage for glare effect
     const pointerX = ((touch.clientX - rect.left) / rect.width) * 100;
     const pointerY = ((touch.clientY - rect.top) / rect.height) * 100;
-    
-    updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+
+    updateCardEffects(rotateX, rotateY, pointerX, pointerY, false);
   }, [maxTilt, updateCardEffects, isMobile]);
 
   const handleTouchEnd = useCallback(() => {
     if (!isMobile) return;
-    setIsActive(false);
-    setTransform(`perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`);
-    setGlareStyle({ opacity: 0 });
-    setShineStyle({ opacity: 0 });
+    // Don't immediately reset on touch end to allow orientation to continue working
+    // Only reset if no orientation events are being received
+    setTimeout(() => {
+      setIsActive(false);
+      setTransform(`perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`);
+      setGlareStyle({ opacity: 0 });
+      setShineStyle({ opacity: 0 });
+    }, 100);
   }, [isMobile]);
 
   // Device orientation for mobile
   useEffect(() => {
     if (!isMobile) return;
 
+    let orientationTimeout: NodeJS.Timeout | null = null;
+    let lastOrientationTime = 0;
+    const orientationThrottleDelay = 16; // ~60fps
+
     const handleOrientation = (event: DeviceOrientationEvent) => {
       if (event.beta === null || event.gamma === null) return;
 
-      // Normalize orientation values
+      const now = performance.now();
+      if (now - lastOrientationTime < orientationThrottleDelay) {
+        // Clear any pending timeout and set a new one
+        if (orientationTimeout) clearTimeout(orientationTimeout);
+        orientationTimeout = setTimeout(() => processOrientation(event), orientationThrottleDelay);
+        return;
+      }
+
+      lastOrientationTime = now;
+      processOrientation(event);
+    };
+
+    const processOrientation = (event: DeviceOrientationEvent) => {
+      if (event.beta === null || event.gamma === null) return;
+
+      // Normalize orientation values with increased sensitivity
       // Beta: front-to-back tilt (-180 to 180)
       // Gamma: left-to-right tilt (-90 to 90)
-      const beta = Math.max(-45, Math.min(45, event.beta)) / 45;
-      const gamma = Math.max(-45, Math.min(45, event.gamma)) / 45;
+      const beta = Math.max(-60, Math.min(60, event.beta)) / 60;
+      const gamma = Math.max(-60, Math.min(60, event.gamma)) / 60;
 
-      const rotateX = beta * maxTilt * 0.5; // Reduce intensity for orientation
-      const rotateY = gamma * maxTilt * 0.5;
+      // Increased intensity for better visual effect
+      const rotateX = beta * maxTilt * 1.2; // Increased from 0.5 to 1.2
+      const rotateY = gamma * maxTilt * 1.2;
 
-      // Calculate pointer position based on orientation
-      const pointerX = 50 + gamma * 30; // Slight offset based on tilt
-      const pointerY = 50 + beta * 30;
+      // Enhanced pointer position calculation for better glare tracking
+      const pointerX = 50 + gamma * 40; // Increased from 30 to 40
+      const pointerY = 50 + beta * 40;
 
-      updateCardEffects(rotateX, rotateY, pointerX, pointerY);
+      // Always show effects when orientation changes
+      setIsActive(true);
+      updateCardEffects(rotateX, rotateY, Math.max(0, Math.min(100, pointerX)), Math.max(0, Math.min(100, pointerY)), true);
     };
 
     const requestPermissionAndListen = async () => {
@@ -170,7 +203,7 @@ export function useHolographicCard({
           // @ts-ignore - TypeScript doesn't know about requestPermission
           const permission = await DeviceOrientationEvent.requestPermission();
           if (permission === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation);
+            window.addEventListener('deviceorientation', handleOrientation, { passive: true });
           }
         } catch (error) {
           // Permission denied or error, but don't show modal
@@ -178,19 +211,25 @@ export function useHolographicCard({
         }
       } else if (typeof DeviceOrientationEvent !== 'undefined') {
         // For other browsers that don't require permission
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('deviceorientation', handleOrientation, { passive: true });
       }
     };
 
-    // Only request permission when user actually interacts with a card
+    // Request orientation permission on first touch interaction
     const handleFirstTouch = () => {
       requestPermissionAndListen();
-      document.removeEventListener('touchstart', handleFirstTouch);
+      // Set active state to enable effects immediately
+      setIsActive(true);
+      // Reset active state after a delay if no orientation changes
+      setTimeout(() => {
+        if (!isActive) setIsActive(false);
+      }, 2000);
     };
 
-    document.addEventListener('touchstart', handleFirstTouch, { once: true });
+    document.addEventListener('touchstart', handleFirstTouch, { once: true, passive: true });
 
     return () => {
+      if (orientationTimeout) clearTimeout(orientationTimeout);
       window.removeEventListener('deviceorientation', handleOrientation);
       document.removeEventListener('touchstart', handleFirstTouch);
     };
@@ -212,7 +251,15 @@ export function useHolographicCard({
       filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
       // Prevent text selection and scrolling on mobile
       userSelect: 'none' as const,
-      touchAction: 'none' as const
+      touchAction: 'manipulation' as const,
+      // Performance optimizations
+      backfaceVisibility: 'hidden' as const,
+      perspective: '1000px',
+      // Reduce animations for users who prefer reduced motion
+      '@media (prefers-reduced-motion: reduce)': {
+        transform: 'none',
+        transition: 'none'
+      }
     }
   };
 
@@ -220,7 +267,10 @@ export function useHolographicCard({
     style: {
       ...glareStyle,
       transition: `opacity ${speed}ms ease-out`,
-      pointerEvents: 'none' as const
+      pointerEvents: 'none' as const,
+      // Performance optimizations
+      willChange: 'opacity, background',
+      backfaceVisibility: 'hidden' as const
     }
   };
 
@@ -228,7 +278,10 @@ export function useHolographicCard({
     style: {
       ...shineStyle,
       transition: `opacity ${speed}ms ease-out`,
-      pointerEvents: 'none' as const
+      pointerEvents: 'none' as const,
+      // Performance optimizations
+      willChange: 'opacity, background',
+      backfaceVisibility: 'hidden' as const
     }
   };
 
