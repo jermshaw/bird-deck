@@ -155,7 +155,26 @@ export function useHolographicCard({
   useEffect(() => {
     if (!isMobile) return;
 
+    let orientationTimeout: NodeJS.Timeout | null = null;
+    let lastOrientationTime = 0;
+    const orientationThrottleDelay = 16; // ~60fps
+
     const handleOrientation = (event: DeviceOrientationEvent) => {
+      if (event.beta === null || event.gamma === null) return;
+
+      const now = performance.now();
+      if (now - lastOrientationTime < orientationThrottleDelay) {
+        // Clear any pending timeout and set a new one
+        if (orientationTimeout) clearTimeout(orientationTimeout);
+        orientationTimeout = setTimeout(() => processOrientation(event), orientationThrottleDelay);
+        return;
+      }
+
+      lastOrientationTime = now;
+      processOrientation(event);
+    };
+
+    const processOrientation = (event: DeviceOrientationEvent) => {
       if (event.beta === null || event.gamma === null) return;
 
       // Normalize orientation values with increased sensitivity
