@@ -16,11 +16,10 @@ interface BirdDetailModalProps {
 
 export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalProps) {
   const { isInCollection, addToCollection, removeFromCollection } = useCollection();
-  const { elementRef, transform, sheenStyle, tilt } = useCardTilt({
-    maxTilt: 35,
-    scale: 1.1,
-    glare: true,
-    maxGlare: 0.8
+  const { cardProps, isHovered } = use3DCardHover({
+    maxTilt: 15,
+    scale: 1.08,
+    speed: 200
   });
 
   const [showOrientationPrompt, setShowOrientationPrompt] = useState(false);
