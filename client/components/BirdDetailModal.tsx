@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Bird, sizeIcons } from '@shared/birds';
 import { useCollection } from '@/hooks/use-collection';
-import { useCardTilt } from '@/hooks/use-card-tilt';
+import { useHolographicCard } from '@/hooks/use-holographic-card';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -15,11 +15,12 @@ interface BirdDetailModalProps {
 
 export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalProps) {
   const { isInCollection, addToCollection, removeFromCollection } = useCollection();
-  const { elementRef, transform, sheenStyle, tilt } = useCardTilt({
-    maxTilt: 15,
-    scale: 1.02,
-    glare: true,
-    maxGlare: 0.4
+  const { cardProps, glareProps, shineProps, isHovered } = useHolographicCard({
+    maxTilt: 18,
+    scale: 1.1,
+    speed: 150,
+    glareIntensity: 0.6,
+    shineIntensity: 0.8
   });
 
   const [showOrientationPrompt, setShowOrientationPrompt] = useState(false);
@@ -73,15 +74,15 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
   return (
     <Dialog open={open && bird !== null} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-none max-h-none w-full h-full p-0 bg-transparent border-none overflow-y-auto">
+      <DialogContent className="max-w-none max-h-none w-full h-full p-0 bg-transparent border-none overflow-hidden">
         <DialogTitle className="sr-only">
           {bird?.name || 'Bird'} - Bird Details
         </DialogTitle>
         {bird && (
-        <div className="min-h-screen w-full relative font-rubik">
-          {/* Blurred Background */}
+        <div className="min-h-screen w-full relative font-rubik overflow-y-auto">
+          {/* Blurred Background - Fixed */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="fixed inset-0 bg-cover bg-center z-0"
             style={{
               backgroundImage: `url(${bird.imageUrl})`,
               filter: 'blur(150px)',
@@ -89,9 +90,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             }}
           />
 
-          {/* Background Overlay for Text Legibility */}
+          {/* Background Overlay for Text Legibility - Fixed */}
           <div
-            className="absolute inset-0"
+            className="fixed inset-0 z-0"
             style={{
               backgroundColor: 'rgba(238, 238, 238, 0.5)'
             }}
@@ -99,14 +100,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
           {/* Content Container */}
           <div className="relative z-10 flex flex-col w-full max-w-sm mx-auto px-6 py-16 sm:py-20">
-            
-            {/* Close Button */}
-            <button
-              onClick={() => onOpenChange(false)}
-              className="absolute top-16 right-6 sm:top-20 sm:right-8 w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center hover:bg-white/80 transition-colors z-20"
-            >
-              <X className="w-5 h-5 text-gray-800" />
-            </button>
+
 
             {/* Orientation Permission Prompt */}
             {showOrientationPrompt && (
@@ -146,38 +140,44 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
             {/* Main Bird Card */}
             <div
-              ref={elementRef}
-              className="bg-white rounded-[31px] p-2 mb-20 card-tilt card-glow gpu-accelerated cursor-pointer"
-              style={{ transform }}
+              {...cardProps}
+              className={`bg-white rounded-[31px] p-2 mb-20 gpu-accelerated transition-shadow duration-150 relative ${
+                isHovered
+                  ? 'shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_30px_rgba(255,255,255,0.15),inset_0_2px_0_rgba(255,255,255,0.7)]'
+                  : 'shadow-lg'
+              }`}
             >
+              {/* Holographic Glare Effect */}
+              <div
+                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                {...glareProps}
+              />
+
+              {/* Holographic Shine Effect */}
+              <div
+                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                {...shineProps}
+              />
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
-                {/* Sheen Overlay */}
+                {/* Subtle sheen overlay */}
                 <div
-                  className="absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10"
-                  style={sheenStyle}
-                />
-                {/* Bird Image with Parallax */}
-                <div
-                  className="aspect-[35/52] relative card-tilt-layer"
+                  className={`absolute inset-0 rounded-[27px] pointer-events-none transition-opacity duration-300 z-10 ${
+                    isHovered ? 'opacity-20' : 'opacity-0'
+                  }`}
                   style={{
-                    transform: `translateX(${tilt.rotateY * 0.3}px) translateY(${tilt.rotateX * 0.2}px)`,
-                    transition: 'transform 0.3s ease-out'
+                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%)'
                   }}
-                >
+                />
+                {/* Bird Image */}
+                <div className="aspect-[35/52] relative">
                   <img 
                     src={bird.imageUrl} 
                     alt={bird.name}
                     className="w-full h-full object-cover"
                   />
                   
-                  {/* Rarity Badge with Enhanced Parallax */}
-                  <div
-                    className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-full border-2 border-gray-800 px-3 py-1 flex items-center gap-2 card-tilt-layer"
-                    style={{
-                      transform: `translateX(${tilt.rotateY * -0.8}px) translateY(${tilt.rotateX * -0.6}px)`,
-                      transition: 'transform 0.3s ease-out'
-                    }}
-                  >
+                  {/* Rarity Badge */}
+                  <div className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-full border-2 border-gray-800 px-3 py-1 flex items-center gap-2">
                     <svg className="w-3 h-3 fill-gray-800" viewBox="0 0 12 11">
                       <path d="M10.7939 0.100586C11.2926 -0.0475992 11.7913 0.264859 11.6553 0.643555C11.5419 1.02219 11.3608 1.4996 11.0889 2.02637C10.5675 3.06366 8.69602 4.28219 7.22266 4.5127H9.45703C9.07169 4.95725 8.61802 5.41859 8.09668 5.84668C7.48473 6.34058 6.87269 6.81791 6.26074 7.22949L4.88281 7.54297L5.42188 7.77246C3.56317 8.94148 2.54294 9.07385 1.79492 8.79395C3.15495 6.99926 3.76219 6.18316 6.10254 4.99316C3.98679 6.0128 2.86091 6.93203 1.43359 8.61035C1.53939 8.68316 1.64564 8.7303 1.77246 8.77637C1.13778 9.58315 0.820725 10.1108 0.775391 10.1602C0.707361 10.2589 0.548078 10.3082 0.412109 10.2588C0.276339 10.2093 0.231066 10.0938 0.276367 9.99512V9.97852C0.321857 9.92883 0.659696 9.45411 1.40234 8.60352C1.3899 8.5972 1.37671 8.58912 1.36426 8.58008C0.253786 7.872 1.04797 5.92852 4.37988 3.21191L4.88281 3.97266C5.1548 3.26479 5.49058 2.89946 6.10254 2.32324C6.71441 1.76358 7.46196 1.28601 8.3457 0.923828C8.36833 0.923828 8.39143 0.907282 8.41406 0.907227C8.43659 1.65878 8.62415 1.92863 8.62695 1.93262L9.81934 0.396484C10.1819 0.281275 10.4994 0.182891 10.7939 0.100586Z" />
                     </svg>
@@ -186,15 +186,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                     </span>
                   </div>
 
-                  {/* Name Box Overlay with Parallax */}
+                  {/* Name Box Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 h-28">
-                    <div
-                      className="absolute bottom-6 left-0 right-0 mx-[-2px] card-tilt-layer"
-                      style={{
-                        transform: `translateX(${tilt.rotateY * 0.5}px) translateY(${tilt.rotateX * 0.4}px)`,
-                        transition: 'transform 0.3s ease-out'
-                      }}
-                    >
+                    <div className="absolute bottom-6 left-0 right-0 mx-[-2px]">
                       <div className="bg-white/70 backdrop-blur-[17px] border-2 border-gray-800 h-[90px] relative">
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                           <h2 className="text-2xl font-normal uppercase text-gray-800 leading-tight mb-1 font-rubik-one">

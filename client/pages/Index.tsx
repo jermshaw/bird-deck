@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
+import { useHolographicCard } from '@/hooks/use-holographic-card';
 
 // Main page content component that uses collection context
 function LocationPackContent() {
@@ -17,11 +18,8 @@ function LocationPackContent() {
     setModalOpen(true);
   };
 
-  // Get birds from western regions (filtering by urban, mountain, desert habitats as "west")
-  const westernBirds = birds.filter(bird => 
-    bird.habitat === 'urban' || bird.habitat === 'mountain' || bird.habitat === 'desert'
-  );
-  const collectedWesternBirds = westernBirds.filter(bird => isInCollection(bird.id));
+  // Get collected birds from the displayed location birds
+  const collectedLocationBirds = locationBirds.filter(bird => isInCollection(bird.id));
 
   return (
     <div className="min-h-screen relative font-rubik">
@@ -59,8 +57,8 @@ function LocationPackContent() {
               {/* Birds Collected */}
               <div className="flex-1 text-center">
                 <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">{collectedWesternBirds.length}</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/{westernBirds.length}</span>
+                  <span className="text-2xl lg:text-3xl font-bold">{collectedLocationBirds.length}</span>
+                  <span className="text-lg lg:text-xl font-bold text-white/50">/{locationBirds.length}</span>
                 </div>
                 <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
                   Birds Collected
@@ -113,13 +111,38 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
   isCollected: boolean;
   onClick: () => void;
 }) {
+  const { cardProps, glareProps, shineProps, isHovered } = useHolographicCard({
+    maxTilt: 15,
+    scale: 1.06,
+    speed: 200,
+    glareIntensity: 0.5,
+    shineIntensity: 0.7
+  });
+
   return (
-    <div 
-      className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
+    <div
+      {...cardProps}
+      className={`bg-white rounded-2xl overflow-hidden cursor-pointer relative ${
+        isHovered
+          ? 'shadow-2xl shadow-black/30'
+          : 'shadow-lg shadow-black/10'
+      } transition-shadow duration-200`}
       onClick={onClick}
     >
+      {/* Holographic Glare Effect */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+        {...glareProps}
+      />
+
+      {/* Holographic Shine Effect */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+        {...shineProps}
+      />
+
       {/* Card Content */}
-      <div className="relative p-1">
+      <div className="relative p-1 z-0">
         {/* Bird Image */}
         <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-white">
           <img 
