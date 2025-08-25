@@ -90,7 +90,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             >
               {/* Holographic Glare Effect */}
               <div
-                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                className="absolute inset-0 rounded-[30px] pointer-events-none z-20"
                 {...glareProps}
               />
 
