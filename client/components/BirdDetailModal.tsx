@@ -131,8 +131,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <div className="absolute bottom-0 left-0 right-0 h-28">
                     <div className="absolute bottom-6 left-0 right-0 mx-[-2px]">
                       <div className="bg-white/70 backdrop-blur-[17px] border-2 border-gray-800 h-[90px] relative">
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                          <h2 className="text-2xl font-normal uppercase text-gray-800 leading-tight mb-1 font-rubik-one">
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                          <h2 className="text-xl font-light uppercase text-gray-800 leading-tight mb-1 font-rubik-one">
                             {bird.name}
                           </h2>
                           <p className="text-lg italic text-gray-800 font-normal">
