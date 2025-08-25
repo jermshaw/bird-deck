@@ -129,8 +129,20 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
       } transition-shadow duration-200`}
       onClick={onClick}
     >
+      {/* Holographic Glare Effect */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+        {...glareProps}
+      />
+
+      {/* Holographic Shine Effect */}
+      <div
+        className="absolute inset-0 rounded-2xl pointer-events-none z-10"
+        {...shineProps}
+      />
+
       {/* Card Content */}
-      <div className="relative p-1">
+      <div className="relative p-1 z-0">
         {/* Bird Image */}
         <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-white">
           <img 
