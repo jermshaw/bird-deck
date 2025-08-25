@@ -141,12 +141,23 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             {/* Main Bird Card */}
             <div
               {...cardProps}
-              className={`bg-white rounded-[31px] p-2 mb-20 gpu-accelerated transition-shadow duration-300 ${
+              className={`bg-white rounded-[31px] p-2 mb-20 gpu-accelerated transition-shadow duration-150 relative ${
                 isHovered
-                  ? 'shadow-[0_20px_50px_rgba(0,0,0,0.3),0_0_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.6)]'
+                  ? 'shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_30px_rgba(255,255,255,0.15),inset_0_2px_0_rgba(255,255,255,0.7)]'
                   : 'shadow-lg'
               }`}
             >
+              {/* Holographic Glare Effect */}
+              <div
+                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                {...glareProps}
+              />
+
+              {/* Holographic Shine Effect */}
+              <div
+                className="absolute inset-0 rounded-[31px] pointer-events-none z-20"
+                {...shineProps}
+              />
               <div className="relative rounded-[27px] border-2 border-white overflow-hidden">
                 {/* Subtle sheen overlay */}
                 <div
