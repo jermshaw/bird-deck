@@ -9,19 +9,52 @@ function LocationPackContent() {
   const { collectionStats, isInCollection } = useCollection();
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isDayTime, setIsDayTime] = useState(true);
+  const [timeOfDay, setTimeOfDay] = useState('morning');
 
-  // Function to determine if it's day time (6am-6pm)
-  const checkTimeOfDay = () => {
+  // Function to determine current time period
+  const getTimeOfDay = () => {
     const now = new Date();
     const currentHour = now.getHours();
-    return currentHour >= 6 && currentHour < 18; // 6am to 5:59pm
+
+    if (currentHour >= 5 && currentHour < 8) {
+      return 'early-morning'; // 5 AM – 8 AM
+    } else if (currentHour >= 8 && currentHour < 11) {
+      return 'morning'; // 8 AM – 11 AM
+    } else if (currentHour >= 11 && currentHour < 14) {
+      return 'noon'; // 11 AM – 2 PM
+    } else if (currentHour >= 14 && currentHour < 17) {
+      return 'afternoon'; // 2 PM – 5 PM
+    } else if (currentHour >= 17 && currentHour < 20) {
+      return 'evening'; // 5 PM – 8 PM
+    } else {
+      return 'night'; // 8 PM – 5 AM
+    }
+  };
+
+  // Function to get background gradient for each time period
+  const getBackgroundGradient = (period: string) => {
+    switch (period) {
+      case 'early-morning':
+        return 'linear-gradient(180deg, #FDF2F8 0%, #FED7AA 100%)'; // pale pink → light orange
+      case 'morning':
+        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // bright yellow → soft sky blue
+      case 'noon':
+        return 'linear-gradient(180deg, #0EA5E9 0%, #38BDF8 100%)'; // vibrant sky blue
+      case 'afternoon':
+        return 'linear-gradient(180deg, #FBBF24 0%, #FB923C 100%)'; // golden yellow → soft orange
+      case 'evening':
+        return 'linear-gradient(180deg, #EA580C 0%, #7C3AED 100%)'; // deep orange → purple
+      case 'night':
+        return 'linear-gradient(180deg, #1E293B 0%, #000000 100%)'; // dark navy → black
+      default:
+        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // fallback to morning
+    }
   };
 
   // Update background based on time of day
   useEffect(() => {
     const updateTimeOfDay = () => {
-      setIsDayTime(checkTimeOfDay());
+      setTimeOfDay(getTimeOfDay());
     };
 
     // Set initial state
@@ -50,9 +83,7 @@ function LocationPackContent() {
       <div
         className="absolute inset-0 transition-all duration-1000 ease-in-out"
         style={{
-          background: isDayTime
-            ? 'linear-gradient(180deg, #699886 52.38%, #F0F0F0 99.77%)' // Day: light teal to light gray
-            : 'linear-gradient(180deg, #4C1D95 52.38%, #1E1B4B 99.77%)' // Night: dark purple to darker purple
+          background: getBackgroundGradient(timeOfDay)
         }}
       >
       </div>
