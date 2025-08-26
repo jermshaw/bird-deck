@@ -4,6 +4,7 @@ import { useCollection } from '@/hooks/use-collection';
 import { useHolographicCard } from '@/hooks/use-holographic-card';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { BirdPhotoCarousel } from '@/components/BirdPhotoCarousel';
 import { cn } from '@/lib/utils';
 import { Plus, Check, X } from 'lucide-react';
 
