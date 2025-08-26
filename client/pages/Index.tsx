@@ -383,10 +383,12 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
       <div className="relative p-1 z-0">
         {/* Bird Image */}
         <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-black">
-          <img 
-            src={bird.imageUrl} 
+          <img
+            src={bird.imageUrl}
             alt={bird.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-all duration-300 ${
+              !isCollected ? 'grayscale' : ''
+            }`}
           />
           
           {/* Rarity Badge */}
