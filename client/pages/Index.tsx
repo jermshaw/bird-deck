@@ -10,6 +10,7 @@ function LocationPackContent() {
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [timeOfDay, setTimeOfDay] = useState('morning');
+  const [userLocation, setUserLocation] = useState('San Francisco, The West');
 
   // Function to determine current time period
   const getTimeOfDay = () => {
@@ -85,7 +86,52 @@ function LocationPackContent() {
     }
   };
 
-  // Update background based on time of day
+  // Function to get user's location
+  const getUserLocation = async () => {
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    try {
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          timeout: 10000,
+          enableHighAccuracy: true,
+          maximumAge: 300000 // 5 minutes
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+
+      // Use OpenStreetMap Nominatim API for reverse geocoding (free, no API key needed)
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const city = data.address?.city || data.address?.town || data.address?.village || data.address?.hamlet;
+        const state = data.address?.state || data.address?.province || data.address?.region;
+        const country = data.address?.country;
+
+        if (city && state) {
+          setUserLocation(`${city}, ${state}`);
+        } else if (city && country) {
+          setUserLocation(`${city}, ${country}`);
+        } else if (state && country) {
+          setUserLocation(`${state}, ${country}`);
+        } else {
+          setUserLocation('Your Location');
+        }
+      }
+    } catch (error) {
+      console.log('Error getting location:', error);
+      // Keep default location if geolocation fails
+    }
+  };
+
+  // Update background based on time of day and get user location
   useEffect(() => {
     const updateTimeOfDay = () => {
       setTimeOfDay(getTimeOfDay());
@@ -93,6 +139,7 @@ function LocationPackContent() {
 
     // Set initial state
     updateTimeOfDay();
+    getUserLocation();
 
     // Update every minute
     const interval = setInterval(updateTimeOfDay, 60000);
@@ -132,7 +179,7 @@ function LocationPackContent() {
             {getDynamicGreeting(timeOfDay)}
           </h1>
           <p className="text-white/70 text-lg lg:text-xl font-medium">
-            San Francisco, The West
+            {userLocation}
           </p>
         </div>
 
