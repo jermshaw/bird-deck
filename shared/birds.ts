@@ -151,6 +151,38 @@ export const birds: Bird[] = [
     imageUrl: "/images/birds/peregrine-falcon/main.png",
     additionalImages: [],
     colors: ["#6b7280", "#f8fafc", "#374151"]
+  },
+  {
+    id: "11",
+    name: "Northern Cardinal",
+    ability: "Brilliant Flash",
+    rarity: "common",
+    description: "A vibrant red songbird that brightens winter landscapes with its striking plumage.",
+    funFact: "Cardinals mate for life and often stay together year-round!",
+    habitat: "forest",
+    size: "small",
+    imageUrl: "/images/birds/northern-cardinal/main.png",
+    additionalImages: [
+      "/images/birds/northern-cardinal/male.png",
+      "/images/birds/northern-cardinal/female.png"
+    ],
+    colors: ["#dc2626", "#fbbf24", "#1f2937"]
+  },
+  {
+    id: "12",
+    name: "Great Horned Owl",
+    ability: "Silent Stalker",
+    rarity: "rare",
+    description: "A powerful nocturnal hunter with distinctive ear tufts and piercing yellow eyes.",
+    funFact: "Their talons exert pressure of 300 pounds per square inch - stronger than a large dog bite!",
+    habitat: "forest",
+    size: "large",
+    imageUrl: "/images/birds/great-horned-owl/main.png",
+    additionalImages: [
+      "/images/birds/great-horned-owl/hunting.png",
+      "/images/birds/great-horned-owl/nest.png"
+    ],
+    colors: ["#a16207", "#f59e0b", "#1f2937"]
   }
 ];
 
