@@ -171,10 +171,12 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <div className="flex justify-between gap-4">
                     {bird.additionalImages.slice(0, 2).map((imageUrl, index) => (
                       <div key={index} className="w-[48%] aspect-square rounded-xl overflow-hidden relative">
-                        <img 
-                          src={imageUrl} 
+                        <img
+                          src={imageUrl}
                           alt={`${bird.name} - ${index === 0 ? 'Male' : 'Female'}`}
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full object-cover transition-all duration-300 ${
+                            !isCollected ? 'grayscale' : ''
+                          }`}
                         />
                         {/* Gradient Overlay */}
                         <div 
