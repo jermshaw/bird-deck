@@ -250,6 +250,43 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               {/* Add bottom padding to prevent content being hidden behind sticky button */}
               <div className="pb-32"></div>
             </div>
+
+            {/* Sticky Collection Button */}
+            <div className="fixed bottom-0 left-0 right-0 z-20 p-6" style={{ marginBottom: '30px' }}>
+              <div className="max-w-sm mx-auto">
+                {isCollected ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-green-600 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2">
+                      <Check className="h-5 w-5" />
+                      <span className="font-semibold">Already in your collection!</span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={handleCollectionToggle}
+                      className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80"
+                    >
+                      Remove from Collection
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="text-center bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2">
+                      <p className="text-gray-500 text-sm">
+                        Have you spotted this bird? Add it to your collection!
+                      </p>
+                    </div>
+                    <Button
+                      onClick={handleCollectionToggle}
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
+                      size="lg"
+                    >
+                      <Plus className="h-5 w-5 mr-2" />
+                      Add to Collection
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
         )}
