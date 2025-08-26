@@ -57,14 +57,6 @@ function LocationPackContent() {
       >
       </div>
 
-      {/* Decorative illustration */}
-      <div className="absolute top-0 right-0 w-60 h-80 lg:w-80 lg:h-96 overflow-hidden pointer-events-none">
-        <img 
-          src="https://api.builder.io/api/v1/image/assets/TEMP/55ea6c5e3b5a6de969e6a09982fc7faaefd4d165?width=480" 
-          alt="Decorative birds illustration"
-          className="w-full h-full object-cover object-left"
-        />
-      </div>
 
       {/* Content Container */}
       <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
