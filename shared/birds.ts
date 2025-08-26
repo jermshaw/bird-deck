@@ -13,6 +13,7 @@ export interface Bird {
   size: BirdSize;
   imageUrl: string;
   additionalImages: string[];
+  colors: string[]; // Main colors of the bird for confetti and theming
 }
 
 export const birds: Bird[] = [
