@@ -149,11 +149,31 @@
     border-radius: inherit;
   }
 
-  /* Mobile-friendly touch interactions */
+  /* Mobile-friendly touch interactions - disable all hover effects */
   @media (hover: none) and (pointer: coarse) {
     .card-tilt {
-      /* Slightly reduce intensity on touch devices */
-      transition: transform 0.2s ease-out;
+      /* Disable all transforms on touch devices */
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-3d-hover {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-3d-hover:hover {
+      transform: none !important;
+    }
+
+    .card-3d-glow:hover {
+      box-shadow: none;
+    }
+
+    .card-glow:hover {
+      box-shadow:
+        0 20px 40px -13px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
     }
   }
 
