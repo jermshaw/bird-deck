@@ -142,36 +142,11 @@ export function useHolographicCard({
     return;
   }, []);
 
-  // Device orientation for mobile
+  // Device orientation for mobile - disabled to remove hover effects
   useEffect(() => {
-    if (!isMobile || orientationPermission !== 'granted') return;
-
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      if (!isActive) return;
-
-      // Get orientation values
-      const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
-
-      if (beta !== null && gamma !== null) {
-        // Convert orientation to rotation values (similar to mouse movement)
-        // Clamp values to reasonable ranges
-        const rotateX = Math.max(-maxTilt, Math.min(maxTilt, (beta - 45) * 0.5)); // Subtract 45 to make natural holding position neutral
-        const rotateY = Math.max(-maxTilt, Math.min(maxTilt, gamma * 0.8));
-
-        // Convert rotation to pointer position for glare effect
-        const pointerX = 50 + (rotateY / maxTilt) * 25; // Center ± 25%
-        const pointerY = 50 + (rotateX / maxTilt) * 25; // Center ± 25%
-
-        updateCardEffects(rotateX, rotateY, pointerX, pointerY, true);
-      }
-    };
-
-    window.addEventListener('deviceorientation', handleOrientation, { passive: true });
-
-    return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-    };
-  }, [isMobile, orientationPermission, isActive, maxTilt, updateCardEffects]);
+    // Disabled - no orientation-based effects on mobile
+    return;
+  }, []);
 
   const cardProps = {
     ref: cardRef,
