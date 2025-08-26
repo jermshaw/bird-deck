@@ -60,10 +60,7 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
                   <img
                     src={imageUrl}
                     alt={`${birdName} - Photo ${index + 1}`}
-                    className={cn(
-                      "w-full h-full object-cover transition-all duration-300",
-                      !isCollected && "grayscale"
-                    )}
+                    className="w-full h-full object-cover transition-all duration-300"
                   />
                 </div>
               </CarouselItem>
