@@ -22,6 +22,7 @@ export function useHolographicCard({
   const [glareStyle, setGlareStyle] = useState({});
   const [shineStyle, setShineStyle] = useState({});
   const [isMobile, setIsMobile] = useState(false);
+  const [orientationPermission, setOrientationPermission] = useState<'granted' | 'denied' | 'pending'>('pending');
 
   // Check if device is mobile
   useEffect(() => {
@@ -107,27 +108,76 @@ export function useHolographicCard({
     }
   }, [isMobile]);
 
-  // Mobile touch interactions - DISABLED to remove 3D tilt effect on mobile
-  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    // 3D tilt effects disabled on mobile
-    return;
+  // Request device orientation permission (iOS 13+)
+  const requestOrientationPermission = useCallback(async () => {
+    if (typeof DeviceOrientationEvent !== 'undefined' && 'requestPermission' in DeviceOrientationEvent) {
+      try {
+        const permission = await (DeviceOrientationEvent as any).requestPermission();
+        setOrientationPermission(permission);
+        return permission === 'granted';
+      } catch (error) {
+        console.warn('DeviceOrientationEvent permission request failed:', error);
+        setOrientationPermission('denied');
+        return false;
+      }
+    }
+    // If no permission required (Android), assume granted
+    setOrientationPermission('granted');
+    return true;
   }, []);
 
+  // Mobile touch interactions - trigger permission request
+  const handleTouchStart = useCallback(async (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isMobile) return;
+
+    setIsActive(true);
+
+    // Request orientation permission on first touch (iOS)
+    if (orientationPermission === 'pending') {
+      await requestOrientationPermission();
+    }
+  }, [isMobile, orientationPermission, requestOrientationPermission]);
+
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    // 3D tilt effects disabled on mobile
-    return;
+    // Prevent scrolling when interacting with cards
+    e.preventDefault();
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    // 3D tilt effects disabled on mobile
-    return;
-  }, []);
+    if (!isMobile) return;
+    setIsActive(false);
+  }, [isMobile]);
 
-  // Device orientation for mobile - DISABLED to remove 3D tilt effect on mobile
+  // Device orientation for mobile
   useEffect(() => {
-    // 3D tilt effects disabled on mobile - no orientation listeners
-    return;
-  }, []);
+    if (!isMobile || orientationPermission !== 'granted') return;
+
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      if (!isActive) return;
+
+      // Get orientation values
+      const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
+
+      if (beta !== null && gamma !== null) {
+        // Convert orientation to rotation values (similar to mouse movement)
+        // Clamp values to reasonable ranges
+        const rotateX = Math.max(-maxTilt, Math.min(maxTilt, (beta - 45) * 0.5)); // Subtract 45 to make natural holding position neutral
+        const rotateY = Math.max(-maxTilt, Math.min(maxTilt, gamma * 0.8));
+
+        // Convert rotation to pointer position for glare effect
+        const pointerX = 50 + (rotateY / maxTilt) * 25; // Center ± 25%
+        const pointerY = 50 + (rotateX / maxTilt) * 25; // Center ± 25%
+
+        updateCardEffects(rotateX, rotateY, pointerX, pointerY, true);
+      }
+    };
+
+    window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+
+    return () => {
+      window.removeEventListener('deviceorientation', handleOrientation);
+    };
+  }, [isMobile, orientationPermission, isActive, maxTilt, updateCardEffects]);
 
   const cardProps = {
     ref: cardRef,
@@ -143,9 +193,9 @@ export function useHolographicCard({
       transition: (isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`,
       willChange: 'transform',
       filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
-      // Prevent text selection and scrolling on mobile
+      // Prevent text selection and allow smooth orientation effects on mobile
       userSelect: 'none' as const,
-      touchAction: 'manipulation' as const,
+      touchAction: isMobile ? 'none' : 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
       perspective: '1000px',

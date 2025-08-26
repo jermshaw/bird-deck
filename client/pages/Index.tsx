@@ -195,8 +195,8 @@ function LocationPackContent() {
     return () => clearInterval(interval);
   }, []);
 
-  // Get first 6 birds for the location pack
-  const locationBirds = birds.slice(0, 6);
+  // Show all birds
+  const locationBirds = birds;
 
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
@@ -228,13 +228,13 @@ function LocationPackContent() {
         >
           <defs>
             <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="100" />
+              <feGaussianBlur stdDeviation="60" />
             </filter>
             <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="80" />
+              <feGaussianBlur stdDeviation="50" />
             </filter>
             <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="120" />
+              <feGaussianBlur stdDeviation="70" />
             </filter>
           </defs>
 
@@ -245,7 +245,7 @@ function LocationPackContent() {
             r="35%"
             fill={getCircleColors(timeOfDay).circle1}
             filter="url(#blur1)"
-            opacity="0.6"
+            opacity="0.85"
             className="transition-all duration-1000 ease-in-out"
           />
 
@@ -256,7 +256,7 @@ function LocationPackContent() {
             r="28%"
             fill={getCircleColors(timeOfDay).circle2}
             filter="url(#blur2)"
-            opacity="0.5"
+            opacity="0.75"
             className="transition-all duration-1000 ease-in-out"
           />
 
@@ -267,7 +267,7 @@ function LocationPackContent() {
             r="22%"
             fill={getCircleColors(timeOfDay).circle3}
             filter="url(#blur3)"
-            opacity="0.7"
+            opacity="0.9"
             className="transition-all duration-1000 ease-in-out"
           />
         </svg>
@@ -309,8 +309,8 @@ function LocationPackContent() {
               {/* Achievements */}
               <div className="flex-1 text-center">
                 <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">5</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/30</span>
+                  <span className="text-2xl lg:text-3xl font-bold">0</span>
+                  <span className="text-lg lg:text-xl font-bold text-white/50">/10</span>
                 </div>
                 <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
                   Achievements
@@ -323,9 +323,9 @@ function LocationPackContent() {
         {/* Bird Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {locationBirds.map((bird) => (
-            <LocationBirdCard 
-              key={bird.id} 
-              bird={bird} 
+            <LocationBirdCard
+              key={bird.id}
+              bird={bird}
               isCollected={isInCollection(bird.id)}
               onClick={() => handleBirdClick(bird)}
             />
