@@ -228,13 +228,13 @@ function LocationPackContent() {
         >
           <defs>
             <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="100" />
+              <feGaussianBlur stdDeviation="60" />
             </filter>
             <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="80" />
+              <feGaussianBlur stdDeviation="50" />
             </filter>
             <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="120" />
+              <feGaussianBlur stdDeviation="70" />
             </filter>
           </defs>
 
