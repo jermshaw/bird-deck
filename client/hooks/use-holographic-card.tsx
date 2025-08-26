@@ -150,24 +150,26 @@ export function useHolographicCard({
 
   const cardProps = {
     ref: cardRef,
-    onMouseMove: handleMouseMove,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onTouchStart: handleTouchStart,
-    onTouchMove: handleTouchMove,
-    onTouchEnd: handleTouchEnd,
+    // Only enable mouse interactions on non-mobile devices
+    ...(isMobile ? {} : {
+      onMouseMove: handleMouseMove,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+    }),
+    // Remove touch handlers to eliminate mobile hover effects
     style: {
-      transform,
-      transformStyle: 'preserve-3d' as const,
-      transition: (isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`,
-      willChange: 'transform',
-      filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
-      // Prevent text selection and allow smooth orientation effects on mobile
-      userSelect: 'none' as const,
-      touchAction: isMobile ? 'none' : 'manipulation',
+      // No transform effects on mobile
+      transform: isMobile ? 'none' : transform,
+      transformStyle: isMobile ? 'flat' as const : 'preserve-3d' as const,
+      transition: isMobile ? 'none' : ((isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`),
+      willChange: isMobile ? 'auto' : 'transform',
+      filter: isMobile ? 'none' : ((isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none'),
+      // Allow normal touch interactions on mobile
+      userSelect: isMobile ? 'auto' as const : 'none' as const,
+      touchAction: 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
-      perspective: '1000px',
+      perspective: isMobile ? 'none' : '1000px',
       // Reduce animations for users who prefer reduced motion
       '@media (prefers-reduced-motion: reduce)': {
         transform: 'none',
