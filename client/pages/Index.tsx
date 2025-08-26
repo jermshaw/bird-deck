@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
@@ -9,6 +9,29 @@ function LocationPackContent() {
   const { collectionStats, isInCollection } = useCollection();
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isDayTime, setIsDayTime] = useState(true);
+
+  // Function to determine if it's day time (6am-6pm)
+  const checkTimeOfDay = () => {
+    const now = new Date();
+    const currentHour = now.getHours();
+    return currentHour >= 6 && currentHour < 18; // 6am to 5:59pm
+  };
+
+  // Update background based on time of day
+  useEffect(() => {
+    const updateTimeOfDay = () => {
+      setIsDayTime(checkTimeOfDay());
+    };
+
+    // Set initial state
+    updateTimeOfDay();
+
+    // Update every minute
+    const interval = setInterval(updateTimeOfDay, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Get first 6 birds for the location pack
   const locationBirds = birds.slice(0, 6);
@@ -23,9 +46,15 @@ function LocationPackContent() {
 
   return (
     <div className="min-h-screen relative font-rubik">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#699886] via-[#699886] to-[#F0F0F0] bg-[#F0F0F0]" 
-           style={{ background: 'linear-gradient(180deg, #699886 52.38%, #F0F0F0 99.77%)' }}>
+      {/* Dynamic Background with gradient */}
+      <div
+        className="absolute inset-0 transition-all duration-1000 ease-in-out"
+        style={{
+          background: isDayTime
+            ? 'linear-gradient(180deg, #699886 52.38%, #F0F0F0 99.77%)' // Day: light teal to light gray
+            : 'linear-gradient(180deg, #4C1D95 52.38%, #1E1B4B 99.77%)' // Night: dark purple to darker purple
+        }}
+      >
       </div>
 
       {/* Decorative illustration */}
