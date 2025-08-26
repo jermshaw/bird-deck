@@ -277,13 +277,15 @@ function LocationPackContent() {
       <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12">
-          <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
-            {getDynamicGreeting(timeOfDay)}
-          </h1>
-          <p className="text-white/70 text-lg lg:text-xl font-medium">
-            {userLocation}
-          </p>
+        <div className="mb-8 lg:mb-12 mt-[300px]">
+          <div className="w-full lg:w-1/3">
+            <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
+              {getDynamicGreeting(timeOfDay)}
+            </h1>
+            <p className="text-white/70 text-lg lg:text-xl font-medium">
+              {userLocation}
+            </p>
+          </div>
         </div>
 
         {/* Statistics Section */}
