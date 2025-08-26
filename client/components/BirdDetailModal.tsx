@@ -102,7 +102,9 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <img
                     src={bird.imageUrl}
                     alt={bird.name}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover transition-all duration-300 ${
+                      !isCollected ? 'grayscale' : ''
+                    }`}
                   />
 
                   {/* Rarity Badge */}
