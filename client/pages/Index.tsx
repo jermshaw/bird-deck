@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
@@ -9,6 +9,191 @@ function LocationPackContent() {
   const { collectionStats, isInCollection } = useCollection();
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [timeOfDay, setTimeOfDay] = useState('morning');
+  const [userLocation, setUserLocation] = useState('San Francisco, The West');
+
+  // Function to determine current time period
+  const getTimeOfDay = () => {
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    if (currentHour >= 5 && currentHour < 8) {
+      return 'early-morning'; // 5 AM – 8 AM
+    } else if (currentHour >= 8 && currentHour < 11) {
+      return 'morning'; // 8 AM – 11 AM
+    } else if (currentHour >= 11 && currentHour < 14) {
+      return 'noon'; // 11 AM – 2 PM
+    } else if (currentHour >= 14 && currentHour < 17) {
+      return 'afternoon'; // 2 PM – 5 PM
+    } else if (currentHour >= 17 && currentHour < 20) {
+      return 'evening'; // 5 PM – 8 PM
+    } else {
+      return 'night'; // 8 PM – 5 AM
+    }
+  };
+
+  // Function to get dynamic greeting based on time period
+  const getDynamicGreeting = (period: string) => {
+    const greetings = {
+      'early-morning': [
+        "Good dawn! The Ruby-Crowned Kinglets are singing just for you.",
+        "Rise and shine! A new day of bird spotting awaits."
+      ],
+      'morning': [
+        "Chirp, chirp! Let's see what birds are up and about today.",
+        "Morning calls: time to fill your wings with adventure!"
+      ],
+      'noon': [
+        "The sun is high, and so are the Peregrine Falcons!",
+        "Time to stretch your wings and explore the skies."
+      ],
+      'afternoon': [
+        "Golden hour for golden finches.",
+        "The woods are whispering – hear the songbirds?"
+      ],
+      'evening': [
+        "Dusk is settling. The night herons are on patrol.",
+        "Evening calls: rest or spot a Steller's Jay before nightfall."
+      ],
+      'night': [
+        "Good night, little night owl. Sweet dreams of feathered friends.",
+        "The forest is quiet… perfect time to dream of tomorrow's sightings."
+      ]
+    };
+
+    const periodGreetings = greetings[period as keyof typeof greetings] || greetings.morning;
+    // Randomly select one of the two greetings for variety
+    return periodGreetings[Math.floor(Math.random() * periodGreetings.length)];
+  };
+
+  // Function to get dynamic circles colors based on time period
+  const getCircleColors = (period: string) => {
+    switch (period) {
+      case 'early-morning':
+        return {
+          circle1: '#FFB6C1', // Light pink
+          circle2: '#FFD700', // Gold
+          circle3: '#FFA07A'  // Light salmon
+        };
+      case 'morning':
+        return {
+          circle1: '#87CEEB', // Sky blue
+          circle2: '#F0E68C', // Khaki
+          circle3: '#98FB98'  // Pale green
+        };
+      case 'noon':
+        return {
+          circle1: '#00BFFF', // Deep sky blue
+          circle2: '#87CEFA', // Light sky blue
+          circle3: '#B0E0E6'  // Powder blue
+        };
+      case 'afternoon':
+        return {
+          circle1: '#FFD700', // Gold
+          circle2: '#FF8C00', // Dark orange
+          circle3: '#FFA500'  // Orange
+        };
+      case 'evening':
+        return {
+          circle1: '#FF6347', // Tomato
+          circle2: '#DA70D6', // Orchid
+          circle3: '#8A2BE2'  // Blue violet
+        };
+      case 'night':
+        return {
+          circle1: '#2F4F4F', // Dark slate gray
+          circle2: '#483D8B', // Dark slate blue
+          circle3: '#191970'  // Midnight blue
+        };
+      default:
+        return {
+          circle1: '#87CEEB',
+          circle2: '#F0E68C',
+          circle3: '#98FB98'
+        };
+    }
+  };
+
+  // Function to get background gradient for each time period
+  const getBackgroundGradient = (period: string) => {
+    switch (period) {
+      case 'early-morning':
+        return 'linear-gradient(180deg, #FDF2F8 0%, #FED7AA 100%)'; // pale pink → light orange
+      case 'morning':
+        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // bright yellow → soft sky blue
+      case 'noon':
+        return 'linear-gradient(180deg, #0EA5E9 0%, #38BDF8 100%)'; // vibrant sky blue
+      case 'afternoon':
+        return 'linear-gradient(180deg, #FBBF24 0%, #FB923C 100%)'; // golden yellow → soft orange
+      case 'evening':
+        return 'linear-gradient(180deg, #EA580C 0%, #7C3AED 100%)'; // deep orange → purple
+      case 'night':
+        return 'linear-gradient(180deg, #1E293B 0%, #000000 100%)'; // dark navy → black
+      default:
+        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // fallback to morning
+    }
+  };
+
+  // Function to get user's location
+  const getUserLocation = async () => {
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    try {
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          timeout: 10000,
+          enableHighAccuracy: true,
+          maximumAge: 300000 // 5 minutes
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+
+      // Use OpenStreetMap Nominatim API for reverse geocoding (free, no API key needed)
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        const city = data.address?.city || data.address?.town || data.address?.village || data.address?.hamlet;
+        const state = data.address?.state || data.address?.province || data.address?.region;
+        const country = data.address?.country;
+
+        if (city && state) {
+          setUserLocation(`${city}, ${state}`);
+        } else if (city && country) {
+          setUserLocation(`${city}, ${country}`);
+        } else if (state && country) {
+          setUserLocation(`${state}, ${country}`);
+        } else {
+          setUserLocation('Your Location');
+        }
+      }
+    } catch (error) {
+      console.log('Error getting location:', error);
+      // Keep default location if geolocation fails
+    }
+  };
+
+  // Update background based on time of day and get user location
+  useEffect(() => {
+    const updateTimeOfDay = () => {
+      setTimeOfDay(getTimeOfDay());
+    };
+
+    // Set initial state
+    updateTimeOfDay();
+    getUserLocation();
+
+    // Update every minute
+    const interval = setInterval(updateTimeOfDay, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Get first 6 birds for the location pack
   const locationBirds = birds.slice(0, 6);
@@ -23,31 +208,84 @@ function LocationPackContent() {
 
   return (
     <div className="min-h-screen relative font-rubik">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#699886] via-[#699886] to-[#F0F0F0] bg-[#F0F0F0]" 
-           style={{ background: 'linear-gradient(180deg, #699886 52.38%, #F0F0F0 99.77%)' }}>
+      {/* Dynamic Background with gradient */}
+      <div
+        className="absolute inset-0 transition-all duration-1000 ease-in-out"
+        style={{
+          background: getBackgroundGradient(timeOfDay)
+        }}
+      >
       </div>
 
-      {/* Decorative illustration */}
-      <div className="absolute top-0 right-0 w-60 h-80 lg:w-80 lg:h-96 overflow-hidden pointer-events-none">
-        <img 
-          src="https://api.builder.io/api/v1/image/assets/TEMP/55ea6c5e3b5a6de969e6a09982fc7faaefd4d165?width=480" 
-          alt="Decorative birds illustration"
-          className="w-full h-full object-cover object-left"
-        />
+      {/* Dynamic Background Circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg
+          className="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out"
+          viewBox="0 0 393 887"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <defs>
+            <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="100" />
+            </filter>
+            <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="80" />
+            </filter>
+            <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="120" />
+            </filter>
+          </defs>
+
+          {/* Large pink/primary circle */}
+          <circle
+            cx="12%"
+            cy="46%"
+            r="35%"
+            fill={getCircleColors(timeOfDay).circle1}
+            filter="url(#blur1)"
+            opacity="0.6"
+            className="transition-all duration-1000 ease-in-out"
+          />
+
+          {/* Medium cyan/secondary circle */}
+          <circle
+            cx="78%"
+            cy="8%"
+            r="28%"
+            fill={getCircleColors(timeOfDay).circle2}
+            filter="url(#blur2)"
+            opacity="0.5"
+            className="transition-all duration-1000 ease-in-out"
+          />
+
+          {/* Small yellow/accent circle */}
+          <circle
+            cx="22%"
+            cy="3%"
+            r="22%"
+            fill={getCircleColors(timeOfDay).circle3}
+            filter="url(#blur3)"
+            opacity="0.7"
+            className="transition-all duration-1000 ease-in-out"
+          />
+        </svg>
       </div>
 
       {/* Content Container */}
       <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12">
-          <h1 className="text-white text-3xl lg:text-4xl font-black uppercase tracking-wider leading-tight mb-2">
-            San Francisco
-          </h1>
-          <p className="text-white/70 text-lg lg:text-xl font-medium">
-            The West
-          </p>
+        <div className="mb-8 lg:mb-12 mt-[100px]">
+          <div className="w-full lg:w-1/3">
+            <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
+              {getDynamicGreeting(timeOfDay)}
+            </h1>
+            <p className="text-white/70 text-lg lg:text-xl font-medium">
+              {userLocation}
+            </p>
+          </div>
         </div>
 
         {/* Statistics Section */}
@@ -144,11 +382,13 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
       {/* Card Content */}
       <div className="relative p-1 z-0">
         {/* Bird Image */}
-        <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-white">
-          <img 
-            src={bird.imageUrl} 
+        <div className="relative aspect-[154/253] rounded-xl overflow-hidden border border-black">
+          <img
+            src={bird.imageUrl}
             alt={bird.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-all duration-300 ${
+              !isCollected ? 'grayscale' : ''
+            }`}
           />
           
           {/* Rarity Badge */}
@@ -165,19 +405,6 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
             </svg>
           </div>
 
-          {/* Name Box */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <div className="bg-white border border-black mx-[-1px] mb-1">
-              <div className="px-4 py-2 text-center">
-                <h3 className="text-[#2C2C2C] font-rubik-one text-sm font-normal uppercase leading-tight">
-                  {bird.name}
-                </h3>
-                <p className="text-[#2C2C2C]/50 font-rubik text-xs italic mt-1">
-                  {bird.ability}
-                </p>
-              </div>
-            </div>
-          </div>
 
           {/* Collection indicator */}
           {isCollected && (
@@ -187,7 +414,22 @@ function LocationBirdCard({ bird, isCollected, onClick }: {
               </svg>
             </div>
           )}
+
+          {/* Name Box - positioned at bottom of image */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <div className="bg-white/70 border-t border-black mx-[-1px] mb-[-2px]" style={{ backdropFilter: 'blur(12px)', borderBottomLeftRadius: '15px', borderBottomRightRadius: '12px', borderTopWidth: '1.5px' }}>
+              <div className="px-4 py-2 text-center flex flex-col justify-center items-center ml-0.5">
+                <h3 className="text-[#2C2C2C] font-rubik font-bold text-sm uppercase leading-tight">
+                  {bird.name}
+                </h3>
+                <p className="text-[#2C2C2C]/50 font-rubik text-xs italic mt-1">
+                  {bird.ability}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   );
