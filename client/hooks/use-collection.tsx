@@ -55,19 +55,12 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
     const wasAlreadyCollected = collectedBirdIds.has(birdId);
 
     if (!wasAlreadyCollected) {
-      // Get the bird data to customize confetti based on rarity
+      // Get the bird data to customize confetti based on bird colors
       const bird = birds.find(b => b.id === birdId);
       const rarity = bird?.rarity || 'common';
 
-      // Define colors based on rarity
-      const rarityColors = {
-        common: ['#22c55e', '#16a34a', '#15803d'],
-        rare: ['#8b5cf6', '#7c3aed', '#6d28d9'],
-        legendary: ['#f59e0b', '#d97706', '#b45309', '#ffd700']
-      };
-
-      // Create multiple confetti bursts for celebration
-      const colors = rarityColors[rarity as keyof typeof rarityColors];
+      // Use the bird's specific colors for confetti
+      const colors = bird?.colors || ['#22c55e', '#16a34a', '#15803d'];
 
       // First burst from left
       confetti({
