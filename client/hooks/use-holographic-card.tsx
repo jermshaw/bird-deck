@@ -126,79 +126,50 @@ export function useHolographicCard({
     return true;
   }, []);
 
-  // Mobile touch interactions - trigger permission request
+  // Mobile touch interactions - disabled to remove hover effects on mobile
   const handleTouchStart = useCallback(async (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isMobile) return;
-
-    setIsActive(true);
-
-    // Request orientation permission on first touch (iOS)
-    if (orientationPermission === 'pending') {
-      await requestOrientationPermission();
-    }
-  }, [isMobile, orientationPermission, requestOrientationPermission]);
+    // Disabled - no hover effects on mobile
+    return;
+  }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    // Prevent scrolling when interacting with cards
-    e.preventDefault();
+    // No special handling - allow normal scrolling
+    return;
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    if (!isMobile) return;
-    setIsActive(false);
-  }, [isMobile]);
+    // Disabled - no hover effects on mobile
+    return;
+  }, []);
 
-  // Device orientation for mobile
+  // Device orientation for mobile - disabled to remove hover effects
   useEffect(() => {
-    if (!isMobile || orientationPermission !== 'granted') return;
-
-    const handleOrientation = (event: DeviceOrientationEvent) => {
-      if (!isActive) return;
-
-      // Get orientation values
-      const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
-
-      if (beta !== null && gamma !== null) {
-        // Convert orientation to rotation values (similar to mouse movement)
-        // Clamp values to reasonable ranges
-        const rotateX = Math.max(-maxTilt, Math.min(maxTilt, (beta - 45) * 0.5)); // Subtract 45 to make natural holding position neutral
-        const rotateY = Math.max(-maxTilt, Math.min(maxTilt, gamma * 0.8));
-
-        // Convert rotation to pointer position for glare effect
-        const pointerX = 50 + (rotateY / maxTilt) * 25; // Center ± 25%
-        const pointerY = 50 + (rotateX / maxTilt) * 25; // Center ± 25%
-
-        updateCardEffects(rotateX, rotateY, pointerX, pointerY, true);
-      }
-    };
-
-    window.addEventListener('deviceorientation', handleOrientation, { passive: true });
-
-    return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-    };
-  }, [isMobile, orientationPermission, isActive, maxTilt, updateCardEffects]);
+    // Disabled - no orientation-based effects on mobile
+    return;
+  }, []);
 
   const cardProps = {
     ref: cardRef,
-    onMouseMove: handleMouseMove,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onTouchStart: handleTouchStart,
-    onTouchMove: handleTouchMove,
-    onTouchEnd: handleTouchEnd,
+    // Only enable mouse interactions on non-mobile devices
+    ...(isMobile ? {} : {
+      onMouseMove: handleMouseMove,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+    }),
+    // Remove touch handlers to eliminate mobile hover effects
     style: {
-      transform,
-      transformStyle: 'preserve-3d' as const,
-      transition: (isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`,
-      willChange: 'transform',
-      filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
-      // Prevent text selection and allow smooth orientation effects on mobile
-      userSelect: 'none' as const,
-      touchAction: isMobile ? 'none' : 'manipulation',
+      // No transform effects on mobile
+      transform: isMobile ? 'none' : transform,
+      transformStyle: isMobile ? 'flat' as const : 'preserve-3d' as const,
+      transition: isMobile ? 'none' : ((isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`),
+      willChange: isMobile ? 'auto' : 'transform',
+      filter: isMobile ? 'none' : ((isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none'),
+      // Allow normal touch interactions on mobile
+      userSelect: isMobile ? 'auto' as const : 'none' as const,
+      touchAction: 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
-      perspective: '1000px',
+      perspective: isMobile ? 'none' : '1000px',
       // Reduce animations for users who prefer reduced motion
       '@media (prefers-reduced-motion: reduce)': {
         transform: 'none',
@@ -209,22 +180,24 @@ export function useHolographicCard({
 
   const glareProps = {
     style: {
-      ...glareStyle,
-      transition: `opacity ${speed}ms ease-out`,
+      // Disable glare effects on mobile
+      ...(isMobile ? { opacity: 0 } : glareStyle),
+      transition: isMobile ? 'none' : `opacity ${speed}ms ease-out`,
       pointerEvents: 'none' as const,
       // Performance optimizations
-      willChange: 'opacity, background',
+      willChange: isMobile ? 'auto' : 'opacity, background',
       backfaceVisibility: 'hidden' as const
     }
   };
 
   const shineProps = {
     style: {
-      ...shineStyle,
-      transition: `opacity ${speed}ms ease-out`,
+      // Disable shine effects on mobile
+      ...(isMobile ? { opacity: 0 } : shineStyle),
+      transition: isMobile ? 'none' : `opacity ${speed}ms ease-out`,
       pointerEvents: 'none' as const,
       // Performance optimizations
-      willChange: 'opacity, background',
+      willChange: isMobile ? 'auto' : 'opacity, background',
       backfaceVisibility: 'hidden' as const
     }
   };

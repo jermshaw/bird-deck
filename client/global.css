@@ -112,6 +112,17 @@
 
   body {
     @apply bg-background text-foreground;
+    /* Prevent white overscroll on mobile */
+    overscroll-behavior: none;
+    /* Ensure body background matches in case of overscroll */
+    background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
+  }
+
+  html {
+    /* Prevent white overscroll on mobile */
+    overscroll-behavior: none;
+    /* Ensure html background matches in case of overscroll */
+    background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
   }
 }
 
@@ -149,11 +160,31 @@
     border-radius: inherit;
   }
 
-  /* Mobile-friendly touch interactions */
+  /* Mobile-friendly touch interactions - disable all hover effects */
   @media (hover: none) and (pointer: coarse) {
     .card-tilt {
-      /* Slightly reduce intensity on touch devices */
-      transition: transform 0.2s ease-out;
+      /* Disable all transforms on touch devices */
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-3d-hover {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    .card-3d-hover:hover {
+      transform: none !important;
+    }
+
+    .card-3d-glow:hover {
+      box-shadow: none;
+    }
+
+    .card-glow:hover {
+      box-shadow:
+        0 20px 40px -13px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -198,6 +229,26 @@
       0 20px 50px rgba(0, 0, 0, 0.3),
       0 0 20px rgba(255, 255, 255, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  /* Disable holographic effects on mobile */
+  @media (hover: none) and (pointer: coarse) {
+    .holographic-card {
+      background: none !important;
+      animation: none !important;
+    }
+
+    .holo-overlay {
+      opacity: 0 !important;
+    }
+
+    .card-depth::before {
+      opacity: 0 !important;
+    }
+
+    .card-sheen {
+      opacity: 0 !important;
+    }
   }
 
   /* Pokemon-inspired holographic effects */
@@ -278,5 +329,23 @@
       0 30px 60px -13px rgba(0, 0, 0, 0.25),
       0 0 20px rgba(255, 255, 255, 0.1),
       0 0 40px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Mobile overscroll handling */
+  @media (max-width: 768px) {
+    html, body {
+      /* Prevent rubber band scrolling on iOS */
+      overscroll-behavior-y: none;
+      /* Ensure full height coverage */
+      min-height: 100vh;
+      /* Prevent horizontal overscroll */
+      overscroll-behavior-x: none;
+    }
+
+    /* Ensure main container covers overscroll areas on mobile */
+    .min-h-screen {
+      min-height: 200vh;
+      position: relative;
+    }
   }
 }

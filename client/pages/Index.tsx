@@ -208,17 +208,20 @@ function LocationPackContent() {
 
   return (
     <div className="min-h-screen relative font-rubik">
-      {/* Dynamic Background with gradient */}
+      {/* Dynamic Background with gradient - extended for mobile overscroll */}
       <div
-        className="absolute inset-0 transition-all duration-1000 ease-in-out"
+        className="fixed inset-0 transition-all duration-1000 ease-in-out"
         style={{
-          background: getBackgroundGradient(timeOfDay)
+          background: getBackgroundGradient(timeOfDay),
+          top: '-50vh',
+          bottom: '-50vh',
+          height: '200vh'
         }}
       >
       </div>
 
-      {/* Dynamic Background Circles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Dynamic Background Circles - extended for mobile overscroll */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ top: '-50vh', bottom: '-50vh', height: '200vh' }}>
         <svg
           className="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out"
           viewBox="0 0 393 887"
