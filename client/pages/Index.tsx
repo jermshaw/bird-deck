@@ -245,7 +245,7 @@ function LocationPackContent() {
             r="35%"
             fill={getCircleColors(timeOfDay).circle1}
             filter="url(#blur1)"
-            opacity="0.6"
+            opacity="0.85"
             className="transition-all duration-1000 ease-in-out"
           />
 
@@ -256,7 +256,7 @@ function LocationPackContent() {
             r="28%"
             fill={getCircleColors(timeOfDay).circle2}
             filter="url(#blur2)"
-            opacity="0.5"
+            opacity="0.75"
             className="transition-all duration-1000 ease-in-out"
           />
 
@@ -267,7 +267,7 @@ function LocationPackContent() {
             r="22%"
             fill={getCircleColors(timeOfDay).circle3}
             filter="url(#blur3)"
-            opacity="0.7"
+            opacity="0.9"
             className="transition-all duration-1000 ease-in-out"
           />
         </svg>
