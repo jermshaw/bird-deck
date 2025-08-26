@@ -309,8 +309,8 @@ function LocationPackContent() {
               {/* Achievements */}
               <div className="flex-1 text-center">
                 <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">5</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/30</span>
+                  <span className="text-2xl lg:text-3xl font-bold">0</span>
+                  <span className="text-lg lg:text-xl font-bold text-white/50">/10</span>
                 </div>
                 <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
                   Achievements
