@@ -269,21 +269,14 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                     </Button>
                   </div>
                 ) : (
-                  <div className="space-y-2">
-                    <div className="text-center bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2">
-                      <p className="text-gray-500 text-sm">
-                        Have you spotted this bird? Add it to your collection!
-                      </p>
-                    </div>
-                    <Button
-                      onClick={handleCollectionToggle}
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
-                      size="lg"
-                    >
-                      <Plus className="h-5 w-5 mr-2" />
-                      Add to Collection
-                    </Button>
-                  </div>
+                  <Button
+                    onClick={handleCollectionToggle}
+                    className="w-full bg-white hover:bg-gray-100 text-black shadow-lg"
+                    size="lg"
+                  >
+                    <Plus className="h-5 w-5 mr-2" />
+                    Add to Collection
+                  </Button>
                 )}
               </div>
             </div>
