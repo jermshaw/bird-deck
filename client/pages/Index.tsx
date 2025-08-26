@@ -299,7 +299,7 @@ function LocationPackContent() {
                   <span className="text-lg lg:text-xl font-bold text-white/50">/{locationBirds.length}</span>
                 </div>
                 <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
-                  Birds Collected
+                  Birds Spotted
                 </div>
               </div>
 
