@@ -101,7 +101,7 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
         });
       }, 200);
 
-      // Extra golden shower for legendary birds
+      // Extra shower for legendary birds with their colors
       if (rarity === 'legendary') {
         setTimeout(() => {
           confetti({
@@ -109,7 +109,7 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
             angle: 90,
             spread: 45,
             origin: { x: 0.5, y: 0 },
-            colors: ['#ffd700', '#ffed4a', '#fff59d'],
+            colors: [...colors, '#ffd700', '#ffed4a'], // Mix bird colors with gold
             startVelocity: 25,
             gravity: 0.4,
             drift: 0,
