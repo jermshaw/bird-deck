@@ -180,22 +180,24 @@ export function useHolographicCard({
 
   const glareProps = {
     style: {
-      ...glareStyle,
-      transition: `opacity ${speed}ms ease-out`,
+      // Disable glare effects on mobile
+      ...(isMobile ? { opacity: 0 } : glareStyle),
+      transition: isMobile ? 'none' : `opacity ${speed}ms ease-out`,
       pointerEvents: 'none' as const,
       // Performance optimizations
-      willChange: 'opacity, background',
+      willChange: isMobile ? 'auto' : 'opacity, background',
       backfaceVisibility: 'hidden' as const
     }
   };
 
   const shineProps = {
     style: {
-      ...shineStyle,
-      transition: `opacity ${speed}ms ease-out`,
+      // Disable shine effects on mobile
+      ...(isMobile ? { opacity: 0 } : shineStyle),
+      transition: isMobile ? 'none' : `opacity ${speed}ms ease-out`,
       pointerEvents: 'none' as const,
       // Performance optimizations
-      willChange: 'opacity, background',
+      willChange: isMobile ? 'auto' : 'opacity, background',
       backfaceVisibility: 'hidden' as const
     }
   };
