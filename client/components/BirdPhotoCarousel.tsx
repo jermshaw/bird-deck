@@ -25,6 +25,14 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
     setSelectedImageIndex(null);
   };
 
+  const formatImageCaption = (imageUrl: string): string => {
+    // Extract filename from URL and remove extension
+    const filename = imageUrl.split('/').pop()?.replace(/\.[^/.]+$/, '') || '';
+
+    // Capitalize first letter and return
+    return filename.charAt(0).toUpperCase() + filename.slice(1);
+  };
+
   const goToPrevious = () => {
     if (selectedImageIndex !== null && selectedImageIndex > 0) {
       setSelectedImageIndex(selectedImageIndex - 1);
