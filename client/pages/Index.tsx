@@ -195,8 +195,8 @@ function LocationPackContent() {
     return () => clearInterval(interval);
   }, []);
 
-  // Get first 6 birds for the location pack
-  const locationBirds = birds.slice(0, 6);
+  // Show all birds
+  const locationBirds = birds;
 
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
