@@ -126,27 +126,21 @@ export function useHolographicCard({
     return true;
   }, []);
 
-  // Mobile touch interactions - trigger permission request
+  // Mobile touch interactions - disabled to remove hover effects on mobile
   const handleTouchStart = useCallback(async (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isMobile) return;
-
-    setIsActive(true);
-
-    // Request orientation permission on first touch (iOS)
-    if (orientationPermission === 'pending') {
-      await requestOrientationPermission();
-    }
-  }, [isMobile, orientationPermission, requestOrientationPermission]);
+    // Disabled - no hover effects on mobile
+    return;
+  }, []);
 
   const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    // Prevent scrolling when interacting with cards
-    e.preventDefault();
+    // No special handling - allow normal scrolling
+    return;
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    if (!isMobile) return;
-    setIsActive(false);
-  }, [isMobile]);
+    // Disabled - no hover effects on mobile
+    return;
+  }, []);
 
   // Device orientation for mobile
   useEffect(() => {
