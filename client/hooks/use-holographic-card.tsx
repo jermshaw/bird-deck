@@ -22,6 +22,7 @@ export function useHolographicCard({
   const [glareStyle, setGlareStyle] = useState({});
   const [shineStyle, setShineStyle] = useState({});
   const [isMobile, setIsMobile] = useState(false);
+  const [orientationPermission, setOrientationPermission] = useState<'granted' | 'denied' | 'pending'>('pending');
 
   // Check if device is mobile
   useEffect(() => {
