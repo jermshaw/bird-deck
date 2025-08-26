@@ -13,6 +13,7 @@ export interface Bird {
   size: BirdSize;
   imageUrl: string;
   additionalImages: string[];
+  colors: string[]; // Main colors of the bird for confetti and theming
 }
 
 export const birds: Bird[] = [
@@ -26,7 +27,8 @@ export const birds: Bird[] = [
     habitat: "forest",
     size: "tiny",
     imageUrl: "/images/birds/ruby-crowned-kinglet/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#dc2626", "#65a30d", "#fbbf24"]
   },
   {
     id: "2",
@@ -38,7 +40,8 @@ export const birds: Bird[] = [
     habitat: "oak woodland",
     size: "medium",
     imageUrl: "/images/birds/western-blue-jay/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#2563eb", "#f8fafc", "#1e40af"]
   },
   {
     id: "3",
@@ -50,7 +53,8 @@ export const birds: Bird[] = [
     habitat: "gardens",
     size: "tiny",
     imageUrl: "/images/birds/annas-hummingbird/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#16a34a", "#ec4899", "#f59e0b"]
   },
   {
     id: "4",
@@ -62,7 +66,8 @@ export const birds: Bird[] = [
     habitat: "forest",
     size: "tiny",
     imageUrl: "/images/birds/pacific-wren/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#a16207", "#d97706", "#92400e"]
   },
   {
     id: "5",
@@ -74,7 +79,8 @@ export const birds: Bird[] = [
     habitat: "urban",
     size: "medium",
     imageUrl: "/images/birds/california-towhee/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#a16207", "#6b7280", "#d97706"]
   },
   {
     id: "6",
@@ -86,7 +92,8 @@ export const birds: Bird[] = [
     habitat: "mountain",
     size: "medium",
     imageUrl: "/images/birds/stellers-jay/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#1e40af", "#1f2937", "#2563eb"]
   },
   {
     id: "7",
@@ -103,7 +110,8 @@ export const birds: Bird[] = [
       "/images/birds/rock-pigeon/female.png",
       "/images/birds/rock-pigeon/juvenile.png",
       "/images/birds/rock-pigeon/extra.png"
-    ]
+    ],
+    colors: ["#6b7280", "#7c3aed", "#475569"]
   },
   {
     id: "8",
@@ -115,7 +123,8 @@ export const birds: Bird[] = [
     habitat: "wetland",
     size: "large",
     imageUrl: "/images/birds/great-blue-heron/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#1e40af", "#6b7280", "#f1f5f9"]
   },
   {
     id: "9",
@@ -127,7 +136,8 @@ export const birds: Bird[] = [
     habitat: "wetland",
     size: "medium",
     imageUrl: "/images/birds/night-heron/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#1f2937", "#6b7280", "#f8fafc"]
   },
   {
     id: "10",
@@ -139,7 +149,8 @@ export const birds: Bird[] = [
     habitat: "mountain",
     size: "medium",
     imageUrl: "/images/birds/peregrine-falcon/main.png",
-    additionalImages: []
+    additionalImages: [],
+    colors: ["#6b7280", "#f8fafc", "#374151"]
   }
 ];
 

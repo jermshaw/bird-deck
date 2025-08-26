@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Bird, birds } from '@shared/birds';
+import confetti from 'canvas-confetti';
 
 interface CollectionContextType {
   collectedBirdIds: Set<string>;
@@ -50,6 +51,75 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
   }, [collectedBirdIds]);
 
   const addToCollection = (birdId: string) => {
+    // Check if bird is already collected to avoid duplicate confetti
+    const wasAlreadyCollected = collectedBirdIds.has(birdId);
+
+    if (!wasAlreadyCollected) {
+      // Get the bird data to customize confetti based on bird colors
+      const bird = birds.find(b => b.id === birdId);
+      const rarity = bird?.rarity || 'common';
+
+      // Use the bird's specific colors for confetti
+      const colors = bird?.colors || ['#22c55e', '#16a34a', '#15803d'];
+
+      // First burst from left
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0.2, y: 0.7 },
+        colors: colors,
+        startVelocity: 45,
+        gravity: 0.8,
+        drift: 1
+      });
+
+      // Second burst from right
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 0.8, y: 0.7 },
+        colors: colors,
+        startVelocity: 45,
+        gravity: 0.8,
+        drift: -1
+      });
+
+      // Center celebration burst
+      setTimeout(() => {
+        confetti({
+          particleCount: rarity === 'legendary' ? 150 : rarity === 'rare' ? 100 : 75,
+          angle: 90,
+          spread: 360,
+          origin: { x: 0.5, y: 0.6 },
+          colors: colors,
+          startVelocity: 30,
+          gravity: 0.5,
+          drift: 0,
+          scalar: rarity === 'legendary' ? 1.2 : 1
+        });
+      }, 200);
+
+      // Extra shower for legendary birds with their colors
+      if (rarity === 'legendary') {
+        setTimeout(() => {
+          confetti({
+            particleCount: 100,
+            angle: 90,
+            spread: 45,
+            origin: { x: 0.5, y: 0 },
+            colors: [...colors, '#ffd700', '#ffed4a'], // Mix bird colors with gold
+            startVelocity: 25,
+            gravity: 0.4,
+            drift: 0,
+            shapes: ['circle', 'square'],
+            scalar: 0.8
+          });
+        }, 400);
+      }
+    }
+
     setCollectedBirdIds(prev => new Set([...prev, birdId]));
   };
 
