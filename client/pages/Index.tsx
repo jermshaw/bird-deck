@@ -320,12 +320,21 @@ function LocationPackContent() {
           </div>
         </div>
 
+        {/* Mobile Interaction Hint */}
+        <div className="mb-4 lg:hidden">
+          <div className="bg-black/20 rounded-lg p-3 backdrop-blur-xl">
+            <p className="text-white/80 text-sm text-center font-medium">
+              🔄 Tap and tilt your device to see the holographic effects
+            </p>
+          </div>
+        </div>
+
         {/* Bird Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {locationBirds.map((bird) => (
-            <LocationBirdCard 
-              key={bird.id} 
-              bird={bird} 
+            <LocationBirdCard
+              key={bird.id}
+              bird={bird}
               isCollected={isInCollection(bird.id)}
               onClick={() => handleBirdClick(bird)}
             />
