@@ -89,10 +89,7 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
                 <img
                   src={currentImage}
                   alt={`${birdName} - Photo ${selectedImageIndex! + 1}`}
-                  className={cn(
-                    "max-w-full max-h-full object-contain rounded-lg",
-                    !isCollected && "grayscale"
-                  )}
+                  className="max-w-full max-h-full object-contain rounded-lg"
                 />
               </div>
 
