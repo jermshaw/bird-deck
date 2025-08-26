@@ -105,11 +105,24 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
             <div className="relative w-full h-full flex items-center justify-center">
               {/* Main Image */}
               <div className="relative max-w-full max-h-full p-4">
-                <img
-                  src={currentImage}
-                  alt={`${birdName} - Photo ${selectedImageIndex! + 1}`}
-                  className="max-w-full max-h-full object-contain rounded-lg"
-                />
+                <div className="relative rounded-lg overflow-hidden">
+                  <img
+                    src={currentImage}
+                    alt={`${birdName} - Photo ${selectedImageIndex! + 1}`}
+                    className="max-w-full max-h-full object-contain rounded-lg"
+                  />
+                  {/* Gradient Overlay for full-screen */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-20"
+                    style={{ background: 'linear-gradient(196deg, rgba(0, 0, 0, 0.00) 41.39%, #000 107.79%)' }}
+                  />
+                  {/* Caption for full-screen */}
+                  <div className="absolute bottom-6 left-6">
+                    <span className="text-xl italic font-medium text-white/80 font-work-sans">
+                      {formatImageCaption(currentImage)}
+                    </span>
+                  </div>
+                </div>
               </div>
 
               {/* Navigation Arrows */}
