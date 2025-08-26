@@ -164,37 +164,18 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               </div>
 
               {/* Photos Section */}
-              <div className="space-y-5">
-                <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
-                  Photos
-                </h3>
-                {bird.additionalImages && bird.additionalImages.length >= 2 && (
-                  <div className="flex justify-between gap-4">
-                    {bird.additionalImages.slice(0, 2).map((imageUrl, index) => (
-                      <div key={index} className="w-[48%] aspect-square rounded-xl overflow-hidden relative">
-                        <img
-                          src={imageUrl}
-                          alt={`${bird.name} - ${index === 0 ? 'Male' : 'Female'}`}
-                          className={`w-full h-full object-cover transition-all duration-300 ${
-                            !isCollected ? 'grayscale' : ''
-                          }`}
-                        />
-                        {/* Gradient Overlay */}
-                        <div 
-                          className="absolute bottom-0 left-0 right-0 h-16"
-                          style={{ background: 'linear-gradient(196deg, rgba(0, 0, 0, 0.00) 41.39%, #000 107.79%)' }}
-                        />
-                        {/* Label */}
-                        <div className="absolute bottom-4 left-4">
-                          <span className="text-base italic font-medium text-white/80 font-work-sans">
-                            {index === 0 ? 'Male' : 'Female'}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {bird.additionalImages && bird.additionalImages.length > 0 && (
+                <div className="space-y-5">
+                  <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
+                    Photos
+                  </h3>
+                  <BirdPhotoCarousel
+                    images={bird.additionalImages}
+                    birdName={bird.name}
+                    isCollected={isCollected}
+                  />
+                </div>
+              )}
 
               {/* Size Section */}
               <div className="space-y-7">
