@@ -55,13 +55,76 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
     const wasAlreadyCollected = collectedBirdIds.has(birdId);
 
     if (!wasAlreadyCollected) {
-      // Trigger confetti effect for new collection
+      // Get the bird data to customize confetti based on rarity
+      const bird = birds.find(b => b.id === birdId);
+      const rarity = bird?.rarity || 'common';
+
+      // Define colors based on rarity
+      const rarityColors = {
+        common: ['#22c55e', '#16a34a', '#15803d'],
+        rare: ['#8b5cf6', '#7c3aed', '#6d28d9'],
+        legendary: ['#f59e0b', '#d97706', '#b45309', '#ffd700']
+      };
+
+      // Create multiple confetti bursts for celebration
+      const colors = rarityColors[rarity as keyof typeof rarityColors];
+
+      // First burst from left
       confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#FFD700', '#FFA500', '#FF6347', '#32CD32', '#87CEEB']
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0.2, y: 0.7 },
+        colors: colors,
+        startVelocity: 45,
+        gravity: 0.8,
+        drift: 1
       });
+
+      // Second burst from right
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 0.8, y: 0.7 },
+        colors: colors,
+        startVelocity: 45,
+        gravity: 0.8,
+        drift: -1
+      });
+
+      // Center celebration burst
+      setTimeout(() => {
+        confetti({
+          particleCount: rarity === 'legendary' ? 150 : rarity === 'rare' ? 100 : 75,
+          angle: 90,
+          spread: 360,
+          origin: { x: 0.5, y: 0.6 },
+          colors: colors,
+          startVelocity: 30,
+          gravity: 0.5,
+          drift: 0,
+          scalar: rarity === 'legendary' ? 1.2 : 1
+        });
+      }, 200);
+
+      // Extra golden shower for legendary birds
+      if (rarity === 'legendary') {
+        setTimeout(() => {
+          confetti({
+            particleCount: 100,
+            angle: 90,
+            spread: 45,
+            origin: { x: 0.5, y: 0 },
+            colors: ['#ffd700', '#ffed4a', '#fff59d'],
+            startVelocity: 25,
+            gravity: 0.4,
+            drift: 0,
+            shapes: ['circle', 'square'],
+            scalar: 0.8
+          });
+        }, 400);
+      }
     }
 
     setCollectedBirdIds(prev => new Set([...prev, birdId]));
