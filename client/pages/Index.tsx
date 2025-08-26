@@ -66,6 +66,54 @@ function LocationPackContent() {
     return periodGreetings[Math.floor(Math.random() * periodGreetings.length)];
   };
 
+  // Function to get dynamic circles colors based on time period
+  const getCircleColors = (period: string) => {
+    switch (period) {
+      case 'early-morning':
+        return {
+          circle1: '#FFB6C1', // Light pink
+          circle2: '#FFD700', // Gold
+          circle3: '#FFA07A'  // Light salmon
+        };
+      case 'morning':
+        return {
+          circle1: '#87CEEB', // Sky blue
+          circle2: '#F0E68C', // Khaki
+          circle3: '#98FB98'  // Pale green
+        };
+      case 'noon':
+        return {
+          circle1: '#00BFFF', // Deep sky blue
+          circle2: '#87CEFA', // Light sky blue
+          circle3: '#B0E0E6'  // Powder blue
+        };
+      case 'afternoon':
+        return {
+          circle1: '#FFD700', // Gold
+          circle2: '#FF8C00', // Dark orange
+          circle3: '#FFA500'  // Orange
+        };
+      case 'evening':
+        return {
+          circle1: '#FF6347', // Tomato
+          circle2: '#DA70D6', // Orchid
+          circle3: '#8A2BE2'  // Blue violet
+        };
+      case 'night':
+        return {
+          circle1: '#2F4F4F', // Dark slate gray
+          circle2: '#483D8B', // Dark slate blue
+          circle3: '#191970'  // Midnight blue
+        };
+      default:
+        return {
+          circle1: '#87CEEB',
+          circle2: '#F0E68C',
+          circle3: '#98FB98'
+        };
+    }
+  };
+
   // Function to get background gradient for each time period
   const getBackgroundGradient = (period: string) => {
     switch (period) {
@@ -169,6 +217,61 @@ function LocationPackContent() {
       >
       </div>
 
+      {/* Dynamic Background Circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <svg
+          className="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out"
+          viewBox="0 0 393 887"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <defs>
+            <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="100" />
+            </filter>
+            <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="80" />
+            </filter>
+            <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="120" />
+            </filter>
+          </defs>
+
+          {/* Large pink/primary circle */}
+          <circle
+            cx="12%"
+            cy="46%"
+            r="35%"
+            fill={getCircleColors(timeOfDay).circle1}
+            filter="url(#blur1)"
+            opacity="0.6"
+            className="transition-all duration-1000 ease-in-out"
+          />
+
+          {/* Medium cyan/secondary circle */}
+          <circle
+            cx="78%"
+            cy="8%"
+            r="28%"
+            fill={getCircleColors(timeOfDay).circle2}
+            filter="url(#blur2)"
+            opacity="0.5"
+            className="transition-all duration-1000 ease-in-out"
+          />
+
+          {/* Small yellow/accent circle */}
+          <circle
+            cx="22%"
+            cy="3%"
+            r="22%"
+            fill={getCircleColors(timeOfDay).circle3}
+            filter="url(#blur3)"
+            opacity="0.7"
+            className="transition-all duration-1000 ease-in-out"
+          />
+        </svg>
+      </div>
 
       {/* Content Container */}
       <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
