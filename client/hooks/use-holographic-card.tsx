@@ -193,9 +193,9 @@ export function useHolographicCard({
       transition: (isHovered || isActive) ? 'none' : `transform ${speed}ms ease-out`,
       willChange: 'transform',
       filter: (isHovered || isActive) ? 'brightness(1.1) contrast(1.15) saturate(1.2)' : 'none',
-      // Prevent text selection and scrolling on mobile
+      // Prevent text selection and allow smooth orientation effects on mobile
       userSelect: 'none' as const,
-      touchAction: 'manipulation' as const,
+      touchAction: isMobile ? 'none' : 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
       perspective: '1000px',
