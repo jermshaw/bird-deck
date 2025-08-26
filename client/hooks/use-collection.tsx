@@ -51,6 +51,19 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
   }, [collectedBirdIds]);
 
   const addToCollection = (birdId: string) => {
+    // Check if bird is already collected to avoid duplicate confetti
+    const wasAlreadyCollected = collectedBirdIds.has(birdId);
+
+    if (!wasAlreadyCollected) {
+      // Trigger confetti effect for new collection
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#FFD700', '#FFA500', '#FF6347', '#32CD32', '#87CEEB']
+      });
+    }
+
     setCollectedBirdIds(prev => new Set([...prev, birdId]));
   };
 
