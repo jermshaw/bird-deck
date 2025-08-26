@@ -175,7 +175,7 @@ function LocationPackContent() {
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12">
-          <h1 className="text-white text-2xl lg:text-3xl font-bold leading-tight mb-2">
+          <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
             {getDynamicGreeting(timeOfDay)}
           </h1>
           <p className="text-white/70 text-lg lg:text-xl font-medium">
