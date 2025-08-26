@@ -31,6 +31,40 @@ function LocationPackContent() {
     }
   };
 
+  // Function to get dynamic greeting based on time period
+  const getDynamicGreeting = (period: string) => {
+    const greetings = {
+      'early-morning': [
+        "Good dawn! The Ruby-Crowned Kinglets are singing just for you.",
+        "Rise and shine! A new day of bird spotting awaits."
+      ],
+      'morning': [
+        "Chirp, chirp! Let's see what birds are up and about today.",
+        "Morning calls: time to fill your wings with adventure!"
+      ],
+      'noon': [
+        "The sun is high, and so are the Peregrine Falcons!",
+        "Time to stretch your wings and explore the skies."
+      ],
+      'afternoon': [
+        "Golden hour for golden finches.",
+        "The woods are whispering – hear the songbirds?"
+      ],
+      'evening': [
+        "Dusk is settling. The night herons are on patrol.",
+        "Evening calls: rest or spot a Steller's Jay before nightfall."
+      ],
+      'night': [
+        "Good night, little night owl. Sweet dreams of feathered friends.",
+        "The forest is quiet… perfect time to dream of tomorrow's sightings."
+      ]
+    };
+
+    const periodGreetings = greetings[period as keyof typeof greetings] || greetings.morning;
+    // Randomly select one of the two greetings for variety
+    return periodGreetings[Math.floor(Math.random() * periodGreetings.length)];
+  };
+
   // Function to get background gradient for each time period
   const getBackgroundGradient = (period: string) => {
     switch (period) {
@@ -94,11 +128,11 @@ function LocationPackContent() {
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12">
-          <h1 className="text-white text-3xl lg:text-4xl font-black uppercase tracking-wider leading-tight mb-2">
-            San Francisco
+          <h1 className="text-white text-2xl lg:text-3xl font-bold leading-tight mb-2">
+            {getDynamicGreeting(timeOfDay)}
           </h1>
           <p className="text-white/70 text-lg lg:text-xl font-medium">
-            The West
+            San Francisco, The West
           </p>
         </div>
 
