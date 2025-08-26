@@ -61,8 +61,8 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
           <CarouselContent className="-ml-2 md:-ml-4">
             {images.map((imageUrl, index) => (
               <CarouselItem key={index} className="pl-2 md:pl-4 basis-1/2 md:basis-1/3">
-                <div 
-                  className="aspect-square rounded-xl overflow-hidden bg-gray-100 cursor-pointer transition-transform duration-200 active:scale-95 hover:scale-105"
+                <div
+                  className="aspect-square rounded-xl overflow-hidden bg-gray-100 cursor-pointer transition-transform duration-200 active:scale-95 hover:scale-105 relative"
                   onClick={() => openImageModal(index)}
                 >
                   <img
@@ -70,6 +70,17 @@ export function BirdPhotoCarousel({ images, birdName, isCollected }: BirdPhotoCa
                     alt={`${birdName} - Photo ${index + 1}`}
                     className="w-full h-full object-cover transition-all duration-300"
                   />
+                  {/* Gradient Overlay */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-16"
+                    style={{ background: 'linear-gradient(196deg, rgba(0, 0, 0, 0.00) 41.39%, #000 107.79%)' }}
+                  />
+                  {/* Caption */}
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-base italic font-medium text-white/80 font-work-sans">
+                      {formatImageCaption(imageUrl)}
+                    </span>
+                  </div>
                 </div>
               </CarouselItem>
             ))}
