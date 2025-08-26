@@ -184,7 +184,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                 </h3>
                 
                 {/* Size Comparison Icons */}
-                <div className="flex items-end gap-9">
+                <div className="flex items-end justify-center gap-4 px-4">
                   {/* Tiny Bird */}
                   <div className="flex flex-col items-center">
                     <svg className={`w-6 h-5 ${bird.size === 'tiny' ? 'fill-gray-800' : 'fill-gray-400'}`} viewBox="0 0 26 20">
