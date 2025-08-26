@@ -237,19 +237,13 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             <div className="fixed bottom-0 left-0 right-0 z-20 p-6" style={{ marginBottom: '30px' }}>
               <div className="max-w-sm mx-auto">
                 {isCollected ? (
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-center gap-2 text-green-600 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2">
-                      <Check className="h-5 w-5" />
-                      <span className="font-semibold">Already in your collection!</span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      onClick={handleCollectionToggle}
-                      className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80"
-                    >
-                      Remove from Collection
-                    </Button>
-                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={handleCollectionToggle}
+                    className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80"
+                  >
+                    Remove from Collection
+                  </Button>
                 ) : (
                   <Button
                     onClick={handleCollectionToggle}
