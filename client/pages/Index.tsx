@@ -180,12 +180,12 @@ function LocationPackContent() {
               />
 
               {/* Bird Name */}
-              <h2 className="text-white/70 text-[14px] md:text-[15px] lg:text-[16px] font-medium italic font-rubik mb-4 lg:mb-6">
+              <h2 className="text-white/70 text-[14px] md:text-[15px] lg:text-[16px] font-medium italic font-rubik mb-3 sm:mb-4 lg:mb-6">
                 {birdOfTheDay.name}
               </h2>
 
               {/* Fun Fact */}
-              <p className="text-white text-[16px] md:text-[18px] lg:text-[20px] font-normal font-rubik text-center max-w-[280px] md:max-w-[320px] lg:max-w-[380px] leading-relaxed tracking-wide">
+              <p className="text-white text-[20px] md:text-[18px] lg:text-[20px] font-normal font-rubik text-center max-w-[320px] md:max-w-[320px] lg:max-w-[380px] leading-relaxed tracking-wide">
                 {birdOfTheDay.funFact}
               </p>
             </div>
@@ -207,10 +207,10 @@ function LocationPackContent() {
               {/* Birds Collected */}
               <div className="text-center">
                 <div className="mb-1">
-                  <span className="text-white font-bold font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
-                  <span className="text-white/50 font-bold font-rubik text-[20px]">/{locationBirds.length}</span>
+                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
+                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/{locationBirds.length}</span>
                 </div>
-                <div className="text-white text-[12px] font-bold uppercase tracking-[0.96px] font-rubik">
+                <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
                   Birds Collected
                 </div>
               </div>
@@ -221,10 +221,10 @@ function LocationPackContent() {
               {/* Achievements */}
               <div className="text-center">
                 <div className="mb-1">
-                  <span className="text-white font-bold font-rubik text-[31px] leading-none">5</span>
-                  <span className="text-white/50 font-bold font-rubik text-[20px]">/30</span>
+                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">5</span>
+                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/30</span>
                 </div>
-                <div className="text-white text-[12px] font-bold uppercase tracking-[0.96px] font-rubik">
+                <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
                   Achievements
                 </div>
               </div>
