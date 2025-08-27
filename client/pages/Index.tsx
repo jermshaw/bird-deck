@@ -236,12 +236,12 @@ function LocationPackContent() {
       <div className="relative z-10 px-6 py-8 max-w-md mx-auto md:max-w-lg lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12 mt-[230px] md:mt-[131px] lg:mt-[230px] flex flex-col justify-center items-center text-center">
+        <div className="mb-8 lg:mb-12 mt-[120px] md:mt-[131px] lg:mt-[230px] flex flex-col justify-center items-center text-center">
           {/* San Francisco Title */}
-          <h1 className="text-white text-5xl md:text-[45px] lg:text-6xl font-black font-rubik uppercase tracking-wide mb-4 md:mb-2 lg:mb-4">
+          <h1 className="text-white text-[30px] md:text-[45px] lg:text-6xl font-black font-rubik uppercase tracking-[3px] leading-[26px] mb-1 md:mb-2 lg:mb-4">
             San Francisco
           </h1>
-          <p className="text-white text-2xl lg:text-3xl font-medium font-rubik mb-20">
+          <p className="text-white text-[20px] lg:text-3xl font-medium font-rubik leading-9 mb-8 md:mb-20">
             California
           </p>
 
