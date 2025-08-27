@@ -201,7 +201,8 @@ function LocationPackContent() {
               <div className="text-center">
                 <div className="mb-1">
                   <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
-                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/{locationBirds.length}</span>
+                  <span className="text-white/50 font-bold font-rubik text-[20px]">/</span>
+                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">{locationBirds.length}</span>
                 </div>
                 <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
                   Birds Collected
