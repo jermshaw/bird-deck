@@ -235,7 +235,7 @@ function LocationPackContent() {
       <div className="relative z-10 px-6 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12 mt-[120px] text-center">
+        <div className="mb-8 lg:mb-12 mt-[140px] flex flex-col justify-center items-center text-center">
           {/* San Francisco Title */}
           <h1 className="text-white text-3xl lg:text-4xl font-black font-rubik uppercase tracking-wide mb-1">
             San Francisco
