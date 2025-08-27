@@ -23,12 +23,53 @@ function LocationPackContent() {
     return birds[randomIndex];
   };
 
-  // Function to create gradient from bird colors
+  // Function to lighten/darken colors for gradient variation
+  const adjustColorBrightness = (color: string, percent: number) => {
+    // Remove # if present
+    const hex = color.replace('#', '');
+
+    // Parse r, g, b values
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+
+    // Adjust brightness
+    const newR = Math.max(0, Math.min(255, Math.floor(r * (1 + percent))));
+    const newG = Math.max(0, Math.min(255, Math.floor(g * (1 + percent))));
+    const newB = Math.max(0, Math.min(255, Math.floor(b * (1 + percent))));
+
+    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+  };
+
+  // Function to create dynamic gradient from bird colors
   const createBirdGradient = (birdColors: string[]) => {
     if (birdColors.length >= 2) {
-      return `linear-gradient(135deg, ${birdColors[0]} 0%, ${birdColors[1]} 50%, ${birdColors[2] || birdColors[0]} 100%)`;
+      // Create lighter and darker variations
+      const lightColor1 = adjustColorBrightness(birdColors[0], 0.3);
+      const darkColor1 = adjustColorBrightness(birdColors[0], -0.2);
+      const lightColor2 = adjustColorBrightness(birdColors[1], 0.4);
+      const darkColor2 = adjustColorBrightness(birdColors[1], -0.1);
+
+      const color3 = birdColors[2] || birdColors[0];
+      const lightColor3 = adjustColorBrightness(color3, 0.5);
+
+      // Create a complex radial gradient with multiple color stops
+      return `
+        radial-gradient(ellipse 120% 80% at 20% 30%, ${lightColor1} 0%, transparent 50%),
+        radial-gradient(ellipse 80% 100% at 80% 20%, ${lightColor2} 0%, transparent 50%),
+        radial-gradient(ellipse 100% 60% at 50% 80%, ${lightColor3} 0%, transparent 50%),
+        linear-gradient(135deg, ${darkColor1} 0%, ${birdColors[1]} 30%, ${color3} 60%, ${darkColor2} 100%)
+      `;
     }
-    return `linear-gradient(135deg, ${birdColors[0]} 0%, ${birdColors[0]}80 100%)`;
+
+    // Single color fallback with variation
+    const lightColor = adjustColorBrightness(birdColors[0], 0.4);
+    const darkColor = adjustColorBrightness(birdColors[0], -0.3);
+
+    return `
+      radial-gradient(ellipse 100% 70% at 30% 20%, ${lightColor} 0%, transparent 60%),
+      linear-gradient(135deg, ${darkColor} 0%, ${birdColors[0]} 50%, ${lightColor} 100%)
+    `;
   };
 
   // Function to get user's location
