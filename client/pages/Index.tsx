@@ -240,7 +240,7 @@ function LocationPackContent() {
           <h1 className="text-white text-3xl lg:text-4xl font-black font-rubik uppercase tracking-wide mb-1">
             San Francisco
           </h1>
-          <p className="text-white text-xl lg:text-2xl font-medium font-rubik mb-8">
+          <p className="text-white text-xl lg:text-2xl font-medium font-rubik mb-20">
             California
           </p>
 
