@@ -244,15 +244,42 @@ function LocationPackContent() {
       <div className="relative z-10 px-6 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12 mt-[100px]">
-          <div className="w-full lg:w-1/3">
-            <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik leading-tight mb-2">
-              {randomBirdFact || getDynamicGreeting(timeOfDay)}
-            </h1>
-            <p className="text-white/70 text-lg lg:text-xl font-medium">
-              {userLocation}
-            </p>
+        <div className="mb-8 lg:mb-12 mt-[120px] text-center">
+          {/* San Francisco Title */}
+          <h1 className="text-white text-3xl lg:text-4xl font-black font-rubik uppercase tracking-wide mb-1">
+            San Francisco
+          </h1>
+          <p className="text-white text-xl lg:text-2xl font-medium font-rubik mb-8">
+            California
+          </p>
+
+          {/* Search Bar */}
+          <div className="max-w-sm mx-auto mb-6">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="fill-gray-600"
+                >
+                  <path d="M6.79458 1.63585e-05C5.72197 0.000503088 4.6647 0.254807 3.70919 0.74214C2.75368 1.22947 1.92705 1.936 1.29688 2.80398C0.666713 3.67195 0.250886 4.67673 0.0833919 5.73618C-0.0841026 6.79563 0.00148992 7.87968 0.333174 8.89972C0.664857 9.91976 1.23322 10.8468 1.99179 11.6052C2.75037 12.3635 3.67763 12.9315 4.69778 13.2629C5.71793 13.5942 6.80201 13.6794 7.8614 13.5116C8.9208 13.3437 9.92544 12.9276 10.7932 12.2971L14.1787 15.6826C14.3788 15.8827 14.6501 15.9951 14.9331 15.9951C15.2161 15.9951 15.4874 15.8827 15.6875 15.6826C15.8876 15.4825 16 15.2112 16 14.9282C16 14.6453 15.8876 14.3739 15.6875 14.1738L12.302 10.7883C13.0399 9.77403 13.4826 8.57524 13.5809 7.32481C13.6792 6.07437 13.4294 4.82113 12.8591 3.70399C12.2888 2.58684 11.4203 1.64943 10.3499 0.995654C9.27943 0.341875 8.04887 -0.00273598 6.79458 1.63585e-05ZM6.79458 11.4627C5.87191 11.4627 4.96997 11.1891 4.20281 10.6765C3.43564 10.1639 2.83771 9.43535 2.48462 8.58292C2.13153 7.73049 2.03915 6.7925 2.21915 5.88757C2.39916 4.98263 2.84346 4.1514 3.49588 3.49898C4.1483 2.84656 4.97953 2.40226 5.88447 2.22225C6.7894 2.04225 7.72739 2.13463 8.57982 2.48772C9.43225 2.84081 10.1608 3.43874 10.6734 4.20591C11.186 4.97307 11.4596 5.87501 11.4596 6.79768C11.4582 8.03449 10.9663 9.22025 10.0917 10.0948C9.21715 10.9694 8.03139 11.4613 6.79458 11.4627Z" fill="#3A3A3A"/>
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Bird search"
+                className="w-full py-4 pl-12 pr-6 text-lg font-rubik text-gray-700 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
           </div>
+
+          {/* Random Bird Fact - smaller text below search */}
+          <p className="text-white/80 text-sm lg:text-base font-rubik italic max-w-lg mx-auto">
+            {randomBirdFact || getDynamicGreeting(timeOfDay)}
+          </p>
         </div>
 
         {/* Statistics Section */}
