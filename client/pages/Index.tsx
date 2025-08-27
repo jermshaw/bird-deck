@@ -216,7 +216,7 @@ function LocationPackContent() {
               </div>
 
               {/* Divider */}
-              <div className="w-[44px] h-0 bg-white/10 border-t border-white/10"></div>
+              <div className="w-0 h-[44px] bg-white/10 border-l border-white/10"></div>
 
               {/* Achievements */}
               <div className="text-center">
