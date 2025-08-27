@@ -134,12 +134,6 @@ function LocationPackContent() {
     }
   };
 
-  // Function to get random bird fact
-  const getRandomBirdFact = () => {
-    const randomBird = birds[Math.floor(Math.random() * birds.length)];
-    return randomBird.funFact;
-  };
-
   // Function to get user's location
   const getUserLocation = async () => {
     if (!navigator.geolocation) {
