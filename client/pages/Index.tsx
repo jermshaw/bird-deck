@@ -12,6 +12,7 @@ function LocationPackContent() {
   const [timeOfDay, setTimeOfDay] = useState('morning');
   const [userLocation, setUserLocation] = useState('San Francisco, The West');
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
   // Function to determine current time period
   const getTimeOfDay = () => {
