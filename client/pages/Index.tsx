@@ -224,7 +224,7 @@ function LocationPackContent() {
       <div
         className="fixed inset-0"
         style={{
-          height: window.innerWidth < 768 ? '125vw' : '56.25vw', // 4:5 on mobile, 16:9 on tablet+
+          height: isMobile ? '125vw' : '56.25vw', // 4:5 on mobile, 16:9 on tablet+
           maxHeight: '100vh',
           overflow: 'hidden'
         }}
