@@ -186,15 +186,24 @@ function LocationPackContent() {
       setTimeOfDay(getTimeOfDay());
     };
 
+    const updateMobileDetection = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     // Set initial state
     updateTimeOfDay();
+    updateMobileDetection();
     getUserLocation();
 
     // Update every minute (for time of day only)
     const timeInterval = setInterval(updateTimeOfDay, 60000);
 
+    // Listen for window resize to update mobile detection
+    window.addEventListener('resize', updateMobileDetection);
+
     return () => {
       clearInterval(timeInterval);
+      window.removeEventListener('resize', updateMobileDetection);
     };
   }, []);
 
