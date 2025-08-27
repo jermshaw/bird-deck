@@ -23,54 +23,6 @@ function LocationPackContent() {
     return birds[randomIndex];
   };
 
-  // Function to lighten/darken colors for gradient variation
-  const adjustColorBrightness = (color: string, percent: number) => {
-    // Remove # if present
-    const hex = color.replace('#', '');
-
-    // Parse r, g, b values
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-
-    // Adjust brightness
-    const newR = Math.max(0, Math.min(255, Math.floor(r * (1 + percent))));
-    const newG = Math.max(0, Math.min(255, Math.floor(g * (1 + percent))));
-    const newB = Math.max(0, Math.min(255, Math.floor(b * (1 + percent))));
-
-    return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
-  };
-
-  // Function to create dynamic gradient from bird colors
-  const createBirdGradient = (birdColors: string[]) => {
-    if (birdColors.length >= 2) {
-      // Create lighter and darker variations
-      const lightColor1 = adjustColorBrightness(birdColors[0], 0.3);
-      const darkColor1 = adjustColorBrightness(birdColors[0], -0.2);
-      const lightColor2 = adjustColorBrightness(birdColors[1], 0.4);
-      const darkColor2 = adjustColorBrightness(birdColors[1], -0.1);
-
-      const color3 = birdColors[2] || birdColors[0];
-      const lightColor3 = adjustColorBrightness(color3, 0.5);
-
-      // Create a complex radial gradient with multiple color stops
-      return `
-        radial-gradient(ellipse 120% 80% at 20% 30%, ${lightColor1} 0%, transparent 50%),
-        radial-gradient(ellipse 80% 100% at 80% 20%, ${lightColor2} 0%, transparent 50%),
-        radial-gradient(ellipse 100% 60% at 50% 80%, ${lightColor3} 0%, transparent 50%),
-        linear-gradient(135deg, ${darkColor1} 0%, ${birdColors[1]} 30%, ${color3} 60%, ${darkColor2} 100%)
-      `;
-    }
-
-    // Single color fallback with variation
-    const lightColor = adjustColorBrightness(birdColors[0], 0.4);
-    const darkColor = adjustColorBrightness(birdColors[0], -0.3);
-
-    return `
-      radial-gradient(ellipse 100% 70% at 30% 20%, ${lightColor} 0%, transparent 60%),
-      linear-gradient(135deg, ${darkColor} 0%, ${birdColors[0]} 50%, ${lightColor} 100%)
-    `;
-  };
 
   // Function to get user's location
   const getUserLocation = async () => {
@@ -149,48 +101,32 @@ function LocationPackContent() {
   const collectedLocationBirds = locationBirds.filter(bird => isInCollection(bird.id));
 
   return (
-    <div className="min-h-screen relative font-rubik" style={{ background: birdOfTheDay ? createBirdGradient(birdOfTheDay.colors) : '#ECE9DF' }}>
-      {/* Dynamic Gradient Background Circles */}
+    <div className="min-h-screen relative font-rubik">
+      {/* Blurred Bird Background - Same as Modal */}
       {birdOfTheDay && (
-        <div className="fixed inset-0 overflow-hidden">
-          <svg
-            className="absolute -top-32 -left-32 w-full h-full"
-            viewBox="0 0 393 887"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="80"/>
-              </filter>
-              <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="120"/>
-              </filter>
-              <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="90"/>
-              </filter>
-              <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="110"/>
-              </filter>
-              <filter id="blur5" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="60"/>
-              </filter>
-            </defs>
+        <>
+          {/* Blurred Bird Image Background */}
+          <div
+            className="fixed inset-0 bg-cover bg-center z-0"
+            style={{
+              backgroundImage: `url(${birdOfTheDay.imageUrl})`,
+              filter: 'blur(120px) saturate(1.3) brightness(1.1)'
+            }}
+          />
 
-            {/* Primary bird color circles */}
-            <circle cx="49" cy="380" r="300" fill={adjustColorBrightness(birdOfTheDay.colors[0], 0.2)} filter="url(#blur1)" opacity="0.8"/>
-            <circle cx="320" cy="100" r="250" fill={adjustColorBrightness(birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.4)} filter="url(#blur2)" opacity="0.9"/>
-            <circle cx="85" cy="50" r="200" fill={adjustColorBrightness(birdOfTheDay.colors[2] || birdOfTheDay.colors[0], 0.6)} filter="url(#blur3)" opacity="0.7"/>
+          {/* Colorful Gradient Overlay */}
+          <div
+            className="fixed inset-0 z-0"
+            style={{
+              background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(34, 197, 94, 0.2) 100%)'
+            }}
+          />
+        </>
+      )}
 
-            {/* Additional dynamic circles for more depth */}
-            <circle cx="200" cy="600" r="180" fill={adjustColorBrightness(birdOfTheDay.colors[0], -0.1)} filter="url(#blur4)" opacity="0.5"/>
-            <circle cx="400" cy="300" r="120" fill={adjustColorBrightness(birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.8)} filter="url(#blur5)" opacity="0.6"/>
-
-            {/* Accent circles with color mixing */}
-            <ellipse cx="150" cy="200" rx="160" ry="120" fill={adjustColorBrightness(birdOfTheDay.colors[2] || birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.5)} filter="url(#blur3)" opacity="0.4"/>
-            <ellipse cx="350" cy="500" rx="140" ry="180" fill={adjustColorBrightness(birdOfTheDay.colors[0], 0.7)} filter="url(#blur2)" opacity="0.5"/>
-          </svg>
-        </div>
+      {/* Fallback background when no bird */}
+      {!birdOfTheDay && (
+        <div className="fixed inset-0 bg-[#ECE9DF] z-0" />
       )}
 
       {/* Content Container */}
