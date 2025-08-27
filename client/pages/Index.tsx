@@ -188,10 +188,10 @@ function LocationPackContent() {
 
         {/* Statistics Section */}
         <div className="mb-8 lg:mb-12 flex justify-center">
-          <div className="relative w-[345px] h-[76px] flex items-center justify-center">
+          <div className="relative w-[345px] lg:w-[450px] h-[76px] flex items-center justify-center">
             {/* Background overlay */}
             <div
-              className="absolute inset-0 rounded-xl bg-black/25 sm:bg-black/45"
+              className="absolute inset-0 rounded-xl bg-black/25"
               style={{ mixBlendMode: 'overlay' }}
             />
 
