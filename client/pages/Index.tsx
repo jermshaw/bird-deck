@@ -246,6 +246,13 @@ function LocationPackContent() {
             minHeight: '400px'
           }}
         />
+        {/* Gradient fade overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 70%, #2C6066 100%)'
+          }}
+        />
       </div>
 
       {/* Content Container */}
