@@ -230,7 +230,10 @@ function LocationPackContent() {
         }}
       >
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/caacd8627ebcc9512d90dd46451f79f83a02cc4d?width=3872"
+          src={isMobile
+            ? "https://api.builder.io/api/v1/image/assets/TEMP/ded9186ce5bbaf36dbc8ba60f229ceef2074f0f5?width=888"
+            : "https://api.builder.io/api/v1/image/assets/TEMP/caacd8627ebcc9512d90dd46451f79f83a02cc4d?width=3872"
+          }
           alt="San Francisco Golden Gate Bridge"
           className="w-full h-auto max-w-none object-cover"
           style={{
