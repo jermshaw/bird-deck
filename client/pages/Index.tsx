@@ -282,14 +282,44 @@ function LocationPackContent() {
       <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12 mt-[100px]">
-          <div className="w-full lg:w-1/3">
-            <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
-              {getDynamicGreeting(timeOfDay)}
-            </h1>
-            <p className="text-white/70 text-lg lg:text-xl font-medium">
-              {userLocation}
-            </p>
+        <div className="mb-8 lg:mb-12 mt-[100px] relative overflow-hidden rounded-2xl">
+          {/* Background Bird Image */}
+          {headerBird && (
+            <div className="absolute inset-0 lg:right-0 lg:left-1/2 lg:w-1/2">
+              <div className="relative w-full h-full">
+                <img
+                  src={headerBird.imageUrl}
+                  alt={headerBird.name}
+                  className="w-full h-full object-cover object-center"
+                  style={{
+                    maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)'
+                  }}
+                />
+                {/* Additional blur overlay */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background"
+                  style={{ backdropFilter: 'blur(8px)' }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Content */}
+          <div className="relative z-10 p-6 lg:p-8 min-h-[200px] lg:min-h-[250px] flex flex-col justify-center">
+            <div className="w-full lg:w-2/3 xl:w-1/2">
+              <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik leading-tight mb-4">
+                {headerBird ? headerBird.funFact : getDynamicGreeting(timeOfDay)}
+              </h1>
+              <p className="text-white/70 text-lg lg:text-xl font-medium mb-2">
+                {userLocation}
+              </p>
+              {headerBird && (
+                <p className="text-white/50 text-sm font-medium">
+                  Featured: {headerBird.name}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
