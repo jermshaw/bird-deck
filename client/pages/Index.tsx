@@ -221,74 +221,27 @@ function LocationPackContent() {
   const collectedLocationBirds = locationBirds.filter(bird => isInCollection(bird.id));
 
   return (
-    <div className="min-h-screen relative font-rubik">
-      {/* Dynamic Background with gradient */}
-      <div
-        className="fixed inset-0 transition-all duration-1000 ease-in-out"
-        style={{
-          background: getBackgroundGradient(timeOfDay)
-        }}
-      >
-      </div>
-
-      {/* Dynamic Background Circles */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <svg
-          className="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out"
-          viewBox="0 0 393 887"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="60" />
-            </filter>
-            <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="50" />
-            </filter>
-            <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="70" />
-            </filter>
-          </defs>
-
-          {/* Large pink/primary circle */}
-          <circle
-            cx="12%"
-            cy="46%"
-            r="35%"
-            fill={getCircleColors(timeOfDay).circle1}
-            filter="url(#blur1)"
-            opacity="0.85"
-            className="transition-all duration-1000 ease-in-out"
-          />
-
-          {/* Medium cyan/secondary circle */}
-          <circle
-            cx="78%"
-            cy="8%"
-            r="28%"
-            fill={getCircleColors(timeOfDay).circle2}
-            filter="url(#blur2)"
-            opacity="0.75"
-            className="transition-all duration-1000 ease-in-out"
-          />
-
-          {/* Small yellow/accent circle */}
-          <circle
-            cx="22%"
-            cy="3%"
-            r="22%"
-            fill={getCircleColors(timeOfDay).circle3}
-            filter="url(#blur3)"
-            opacity="0.9"
-            className="transition-all duration-1000 ease-in-out"
-          />
-        </svg>
+    <div className="min-h-screen relative font-rubik" style={{ background: '#2C6066' }}>
+      {/* San Francisco Background */}
+      <div className="fixed inset-0">
+        <img
+          src="https://api.builder.io/api/v1/image/assets/TEMP/ded9186ce5bbaf36dbc8ba60f229ceef2074f0f5?width=888"
+          alt="San Francisco Golden Gate Bridge"
+          className="w-full h-auto max-w-none object-cover"
+          style={{
+            position: 'absolute',
+            top: '0',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            minWidth: '100%',
+            height: 'auto',
+            minHeight: '400px'
+          }}
+        />
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
+      <div className="relative z-10 px-6 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12 mt-[100px]">
