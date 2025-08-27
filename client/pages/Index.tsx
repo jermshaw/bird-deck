@@ -283,25 +283,46 @@ function LocationPackContent() {
         
         {/* Header Section */}
         <div className="mb-8 lg:mb-12 mt-[100px] relative overflow-hidden rounded-2xl">
-          {/* Background Bird Image */}
+          {/* Background Bird Image with Figma-style blur effect */}
           {headerBird && (
-            <div className="absolute inset-0 lg:right-0 lg:left-1/2 lg:w-1/2">
-              <div className="relative w-full h-full">
+            <div className="absolute inset-0">
+              {/* Main background image - full size, positioned to right */}
+              <div className="absolute inset-0 lg:right-0 lg:left-1/3 lg:w-2/3">
                 <img
                   src={headerBird.imageUrl}
                   alt={headerBird.name}
                   className="w-full h-full object-cover object-center"
-                  style={{
-                    maskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0) 100%)'
-                  }}
-                />
-                {/* Additional blur overlay */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-background"
-                  style={{ backdropFilter: 'blur(8px)' }}
                 />
               </div>
+
+              {/* Blurred overlay layer */}
+              <div className="absolute inset-0 lg:right-0 lg:left-1/4 lg:w-3/4">
+                <div className="relative w-full h-full">
+                  {/* Gradient mask overlay */}
+                  <div
+                    className="absolute inset-0 z-10"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(217, 217, 217, 0.00) 20.64%, #000 56.75%)'
+                    }}
+                  />
+                  {/* Blurred bird image */}
+                  <img
+                    src={headerBird.imageUrl}
+                    alt={headerBird.name}
+                    className="absolute w-full h-full object-cover object-center"
+                    style={{
+                      filter: 'blur(40px)',
+                      transform: 'scale(1.2)', // Slightly scale up to avoid blur edge artifacts
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Additional fade to background on left side */}
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"
+                style={{ width: '60%' }}
+              />
             </div>
           )}
 
