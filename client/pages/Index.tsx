@@ -185,13 +185,8 @@ function LocationPackContent() {
       setTimeOfDay(getTimeOfDay());
     };
 
-    const updateRandomFact = () => {
-      setRandomBirdFact(getRandomBirdFact());
-    };
-
     // Set initial state
     updateTimeOfDay();
-    updateRandomFact();
     getUserLocation();
 
     // Update every minute (for time of day only)
