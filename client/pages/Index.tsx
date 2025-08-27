@@ -150,7 +150,7 @@ function LocationPackContent() {
 
   return (
     <div className="min-h-screen relative font-rubik" style={{ background: birdOfTheDay ? createBirdGradient(birdOfTheDay.colors) : '#ECE9DF' }}>
-      {/* Gradient Background Circles */}
+      {/* Dynamic Gradient Background Circles */}
       {birdOfTheDay && (
         <div className="fixed inset-0 overflow-hidden">
           <svg
@@ -161,18 +161,34 @@ function LocationPackContent() {
           >
             <defs>
               <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="100"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="80"/>
               </filter>
               <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="100"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="120"/>
               </filter>
               <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="100"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="90"/>
+              </filter>
+              <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="110"/>
+              </filter>
+              <filter id="blur5" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="60"/>
               </filter>
             </defs>
-            <circle cx="49" cy="410" r="277" fill={birdOfTheDay.colors[0]} filter="url(#blur1)" opacity="0.7"/>
-            <circle cx="307" cy="73" r="227" fill={birdOfTheDay.colors[1] || birdOfTheDay.colors[0]} filter="url(#blur2)" opacity="0.8"/>
-            <circle cx="85.5" cy="28.5" r="173.5" fill={birdOfTheDay.colors[2] || birdOfTheDay.colors[0]} filter="url(#blur3)" opacity="0.6"/>
+
+            {/* Primary bird color circles */}
+            <circle cx="49" cy="380" r="300" fill={adjustColorBrightness(birdOfTheDay.colors[0], 0.2)} filter="url(#blur1)" opacity="0.8"/>
+            <circle cx="320" cy="100" r="250" fill={adjustColorBrightness(birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.4)} filter="url(#blur2)" opacity="0.9"/>
+            <circle cx="85" cy="50" r="200" fill={adjustColorBrightness(birdOfTheDay.colors[2] || birdOfTheDay.colors[0], 0.6)} filter="url(#blur3)" opacity="0.7"/>
+
+            {/* Additional dynamic circles for more depth */}
+            <circle cx="200" cy="600" r="180" fill={adjustColorBrightness(birdOfTheDay.colors[0], -0.1)} filter="url(#blur4)" opacity="0.5"/>
+            <circle cx="400" cy="300" r="120" fill={adjustColorBrightness(birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.8)} filter="url(#blur5)" opacity="0.6"/>
+
+            {/* Accent circles with color mixing */}
+            <ellipse cx="150" cy="200" rx="160" ry="120" fill={adjustColorBrightness(birdOfTheDay.colors[2] || birdOfTheDay.colors[1] || birdOfTheDay.colors[0], 0.5)} filter="url(#blur3)" opacity="0.4"/>
+            <ellipse cx="350" cy="500" rx="140" ry="180" fill={adjustColorBrightness(birdOfTheDay.colors[0], 0.7)} filter="url(#blur2)" opacity="0.5"/>
           </svg>
         </div>
       )}
