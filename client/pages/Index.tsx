@@ -194,30 +194,39 @@ function LocationPackContent() {
         </div>
 
         {/* Statistics Section */}
-        <div className="mb-8 lg:mb-12">
-          <div className="flex items-center justify-center gap-8 lg:gap-16">
-            {/* Birds Collected */}
-            <div className="text-center">
-              <div className="text-white">
-                <span className="text-3xl lg:text-4xl font-bold font-rubik">{collectedLocationBirds.length}</span>
-                <span className="text-xl lg:text-2xl font-bold text-white/50 font-rubik">/{locationBirds.length}</span>
-              </div>
-              <div className="text-white text-xs font-bold uppercase tracking-wider mt-1 font-rubik">
-                Birds Collected
-              </div>
-            </div>
+        <div className="mb-8 lg:mb-12 flex justify-center">
+          <div className="relative w-[345px] h-[76px] flex items-center justify-center">
+            {/* Background overlay */}
+            <div
+              className="absolute inset-0 rounded-xl bg-black/45"
+              style={{ mixBlendMode: 'overlay' }}
+            />
 
-            {/* Divider */}
-            <div className="w-11 h-px bg-white/20"></div>
-
-            {/* Achievements */}
-            <div className="text-center">
-              <div className="text-white">
-                <span className="text-3xl lg:text-4xl font-bold font-rubik">0</span>
-                <span className="text-xl lg:text-2xl font-bold text-white/50 font-rubik">/10</span>
+            {/* Statistics content */}
+            <div className="relative flex items-center justify-between w-full px-8">
+              {/* Birds Collected */}
+              <div className="text-center">
+                <div className="mb-1">
+                  <span className="text-white font-bold font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
+                  <span className="text-white/50 font-bold font-rubik text-[20px]">/{locationBirds.length}</span>
+                </div>
+                <div className="text-white text-[12px] font-bold uppercase tracking-[0.96px] font-rubik">
+                  Birds Collected
+                </div>
               </div>
-              <div className="text-white text-xs font-bold uppercase tracking-wider mt-1 font-rubik">
-                Achievements
+
+              {/* Divider */}
+              <div className="w-[44px] h-0 bg-white/10 border-t border-white/10"></div>
+
+              {/* Achievements */}
+              <div className="text-center">
+                <div className="mb-1">
+                  <span className="text-white font-bold font-rubik text-[31px] leading-none">5</span>
+                  <span className="text-white/50 font-bold font-rubik text-[20px]">/30</span>
+                </div>
+                <div className="text-white text-[12px] font-bold uppercase tracking-[0.96px] font-rubik">
+                  Achievements
+                </div>
               </div>
             </div>
           </div>
