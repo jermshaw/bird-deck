@@ -271,7 +271,7 @@ function LocationPackContent() {
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-sm mx-auto mb-6">
+          <div className="max-w-sm lg:max-w-md xl:max-w-lg mx-auto mb-6">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                 <svg
