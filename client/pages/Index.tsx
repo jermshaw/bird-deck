@@ -11,7 +11,6 @@ function LocationPackContent() {
   const [modalOpen, setModalOpen] = useState(false);
   const [timeOfDay, setTimeOfDay] = useState('morning');
   const [userLocation, setUserLocation] = useState('San Francisco, The West');
-  const [randomBirdFact, setRandomBirdFact] = useState<string>('');
 
   // Function to determine current time period
   const getTimeOfDay = () => {
