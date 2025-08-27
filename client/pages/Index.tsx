@@ -284,31 +284,29 @@ function LocationPackContent() {
 
         {/* Statistics Section */}
         <div className="mb-8 lg:mb-12">
-          <div className="bg-black/30 rounded-xl p-4 backdrop-blur-2xl">
-            <div className="flex items-center">
-              {/* Birds Collected */}
-              <div className="flex-1 text-center">
-                <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">{collectedLocationBirds.length}</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/{locationBirds.length}</span>
-                </div>
-                <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
-                  Birds Collected
-                </div>
+          <div className="flex items-center justify-center gap-8 lg:gap-16">
+            {/* Birds Collected */}
+            <div className="text-center">
+              <div className="text-white">
+                <span className="text-3xl lg:text-4xl font-bold font-rubik">{collectedLocationBirds.length}</span>
+                <span className="text-xl lg:text-2xl font-bold text-white/50 font-rubik">/{locationBirds.length}</span>
               </div>
+              <div className="text-white text-xs font-bold uppercase tracking-wider mt-1 font-rubik">
+                Birds Collected
+              </div>
+            </div>
 
-              {/* Divider */}
-              <div className="w-px h-8 bg-white/20 mx-4"></div>
+            {/* Divider */}
+            <div className="w-11 h-px bg-white/20"></div>
 
-              {/* Achievements */}
-              <div className="flex-1 text-center">
-                <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">0</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/10</span>
-                </div>
-                <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
-                  Achievements
-                </div>
+            {/* Achievements */}
+            <div className="text-center">
+              <div className="text-white">
+                <span className="text-3xl lg:text-4xl font-bold font-rubik">0</span>
+                <span className="text-xl lg:text-2xl font-bold text-white/50 font-rubik">/10</span>
+              </div>
+              <div className="text-white text-xs font-bold uppercase tracking-wider mt-1 font-rubik">
+                Achievements
               </div>
             </div>
           </div>
