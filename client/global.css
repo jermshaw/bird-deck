@@ -111,17 +111,26 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     /* Prevent white overscroll on mobile */
     overscroll-behavior: none;
-    /* Ensure body background matches in case of overscroll */
-    background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    /* Prevent elastic scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y pinch-zoom;
   }
 
   html {
+    @apply bg-background;
     /* Prevent white overscroll on mobile */
     overscroll-behavior: none;
-    /* Ensure html background matches in case of overscroll */
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    /* Prevent elastic scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y pinch-zoom;
+    /* Background now on html tag instead of body */
     background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
   }
 }
@@ -335,17 +344,35 @@
   @media (max-width: 768px) {
     html, body {
       /* Prevent rubber band scrolling on iOS */
-      overscroll-behavior-y: none;
+      overscroll-behavior: none !important;
+      overscroll-behavior-y: none !important;
+      overscroll-behavior-x: none !important;
+      /* Enhanced iOS prevention */
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y pinch-zoom;
       /* Ensure full height coverage */
       min-height: 100vh;
-      /* Prevent horizontal overscroll */
-      overscroll-behavior-x: none;
+      max-height: 100vh;
+      /* Prevent any elastic bounce */
+      position: fixed;
+      width: 100%;
+      height: 100%;
     }
 
-    /* Ensure main container covers overscroll areas on mobile */
+    /* Main app container for mobile */
+    #root {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Ensure main container behaves properly on mobile */
     .min-h-screen {
-      min-height: 200vh;
+      min-height: 100vh;
       position: relative;
+      overflow-x: hidden;
     }
   }
 }
