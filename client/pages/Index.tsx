@@ -250,7 +250,9 @@ function LocationPackContent() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(to bottom, transparent 70%, #2C6066 100%)'
+            background: isMobile
+              ? 'linear-gradient(to bottom, transparent 60%, #2C6066 100%)'
+              : 'linear-gradient(to bottom, transparent 70%, #2C6066 100%)'
           }}
         />
       </div>
