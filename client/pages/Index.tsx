@@ -212,7 +212,8 @@ function LocationPackContent() {
     <div className="min-h-screen relative font-rubik" style={{ background: '#2C6066' }}>
       {/* San Francisco Background */}
       <div className="fixed inset-0" style={{
-        height: '360px',
+        height: '56.25vw',
+        maxHeight: '100vh',
         overflow: 'hidden'
       }}>
         <img
