@@ -256,7 +256,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                 
                 {/* Size Label */}
                 <div className="text-center">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-800">
+                  <span className="text-xs font-bold uppercase tracking-wider text-white">
                     {bird.size}
                   </span>
                 </div>
