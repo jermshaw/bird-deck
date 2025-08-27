@@ -211,11 +211,14 @@ function LocationPackContent() {
   return (
     <div className="min-h-screen relative font-rubik" style={{ background: '#2C6066' }}>
       {/* San Francisco Background */}
-      <div className="fixed inset-0" style={{
-        height: '56.25vw',
-        maxHeight: '100vh',
-        overflow: 'hidden'
-      }}>
+      <div
+        className="fixed inset-0"
+        style={{
+          height: window.innerWidth < 768 ? '125vw' : '56.25vw', // 4:5 on mobile, 16:9 on tablet+
+          maxHeight: '100vh',
+          overflow: 'hidden'
+        }}
+      >
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/caacd8627ebcc9512d90dd46451f79f83a02cc4d?width=3872"
           alt="San Francisco Golden Gate Bridge"
