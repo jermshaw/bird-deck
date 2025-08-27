@@ -211,7 +211,10 @@ function LocationPackContent() {
   return (
     <div className="min-h-screen relative font-rubik" style={{ background: '#2C6066' }}>
       {/* San Francisco Background */}
-      <div className="fixed inset-0">
+      <div className="fixed inset-0" style={{
+        height: '360px',
+        overflow: 'hidden'
+      }}>
         <img
           src="https://api.builder.io/api/v1/image/assets/TEMP/ded9186ce5bbaf36dbc8ba60f229ceef2074f0f5?width=888"
           alt="San Francisco Golden Gate Bridge"
