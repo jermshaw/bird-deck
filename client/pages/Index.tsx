@@ -276,10 +276,6 @@ function LocationPackContent() {
             </div>
           </div>
 
-          {/* Random Bird Fact - smaller text below search */}
-          <p className="text-white/80 text-sm lg:text-base font-rubik italic max-w-lg mx-auto">
-            {randomBirdFact || getDynamicGreeting(timeOfDay)}
-          </p>
         </div>
 
         {/* Statistics Section */}
