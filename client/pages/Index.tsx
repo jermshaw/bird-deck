@@ -185,10 +185,6 @@ function LocationPackContent() {
       setTimeOfDay(getTimeOfDay());
     };
 
-    // Select random bird for header
-    const randomBird = birds[Math.floor(Math.random() * birds.length)];
-    setHeaderBird(randomBird);
-
     // Set initial state
     updateTimeOfDay();
     getUserLocation();
