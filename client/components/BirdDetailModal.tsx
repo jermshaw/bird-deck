@@ -149,20 +149,20 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               
               {/* About Section */}
               <div className="space-y-3">
-                <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
+                <h3 className="text-base font-bold uppercase tracking-widest text-white">
                   About
                 </h3>
-                <p className="text-base leading-6 text-gray-500">
+                <p className="text-base leading-6 text-white/70">
                   {bird.description}
                 </p>
               </div>
 
               {/* Odd Facts Section */}
               <div className="space-y-3">
-                <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
+                <h3 className="text-base font-bold uppercase tracking-widest text-white">
                   Odd Facts
                 </h3>
-                <p className="text-base leading-6 text-gray-500">
+                <p className="text-base leading-6 text-white/70">
                   {bird.funFact}
                 </p>
               </div>
@@ -170,7 +170,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               {/* Photos Section */}
               {bird.additionalImages && bird.additionalImages.length > 0 && (
                 <div className="space-y-5">
-                  <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
+                  <h3 className="text-base font-bold uppercase tracking-widest text-white">
                     Photos
                   </h3>
                   <BirdPhotoCarousel
@@ -183,7 +183,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
 
               {/* Size Section */}
               <div className="space-y-7">
-                <h3 className="text-base font-bold uppercase tracking-widest text-gray-800">
+                <h3 className="text-base font-bold uppercase tracking-widest text-white">
                   Size
                 </h3>
                 
