@@ -196,9 +196,9 @@ function LocationPackContent() {
             />
 
             {/* Statistics content */}
-            <div className="relative flex items-center justify-between w-full px-8">
+            <div className="relative flex items-center justify-center w-full px-8">
               {/* Birds Collected */}
-              <div className="text-center">
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
                 <div className="mb-1">
                   <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
                   <span className="text-white/50 font-bold font-rubik text-[20px]">/</span>
@@ -210,10 +210,10 @@ function LocationPackContent() {
               </div>
 
               {/* Divider */}
-              <div className="w-0 h-[44px] bg-white/10 border-l border-white/10"></div>
+              <div className="w-0 h-[44px] bg-white/10 border-l border-white/10 mx-4"></div>
 
               {/* Achievements */}
-              <div className="text-center">
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
                 <div className="mb-1">
                   <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">5</span>
                   <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/30</span>
