@@ -9,130 +9,20 @@ function LocationPackContent() {
   const { collectionStats, isInCollection } = useCollection();
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [timeOfDay, setTimeOfDay] = useState('morning');
-  const [userLocation, setUserLocation] = useState('San Francisco, The West');
+  const [birdOfTheDay, setBirdOfTheDay] = useState<Bird | null>(null);
+  const [userLocation, setUserLocation] = useState('San Francisco');
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
 
-  // Function to determine current time period
-  const getTimeOfDay = () => {
-    const now = new Date();
-    const currentHour = now.getHours();
-
-    if (currentHour >= 5 && currentHour < 8) {
-      return 'early-morning'; // 5 AM – 8 AM
-    } else if (currentHour >= 8 && currentHour < 11) {
-      return 'morning'; // 8 AM – 11 AM
-    } else if (currentHour >= 11 && currentHour < 14) {
-      return 'noon'; // 11 AM – 2 PM
-    } else if (currentHour >= 14 && currentHour < 17) {
-      return 'afternoon'; // 2 PM – 5 PM
-    } else if (currentHour >= 17 && currentHour < 20) {
-      return 'evening'; // 5 PM – 8 PM
-    } else {
-      return 'night'; // 8 PM – 5 AM
-    }
+  // Function to select a random bird of the day
+  const selectBirdOfTheDay = () => {
+    // Use current date as seed for consistent "bird of the day" selection
+    const today = new Date().toDateString();
+    const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const randomIndex = seed % birds.length;
+    return birds[randomIndex];
   };
 
-  // Function to get dynamic greeting based on time period
-  const getDynamicGreeting = (period: string) => {
-    const greetings = {
-      'early-morning': [
-        "Good dawn! The Ruby-Crowned Kinglets are singing just for you.",
-        "Rise and shine! A new day of bird spotting awaits."
-      ],
-      'morning': [
-        "Chirp, chirp! Let's see what birds are up and about today.",
-        "Morning calls: time to fill your wings with adventure!"
-      ],
-      'noon': [
-        "The sun is high, and so are the Peregrine Falcons!",
-        "Time to stretch your wings and explore the skies."
-      ],
-      'afternoon': [
-        "Golden hour for golden finches.",
-        "The woods are whispering – hear the songbirds?"
-      ],
-      'evening': [
-        "Dusk is settling. The night herons are on patrol.",
-        "Evening calls: rest or spot a Steller's Jay before nightfall."
-      ],
-      'night': [
-        "Good night, little night owl. Sweet dreams of feathered friends.",
-        "The forest is quiet… perfect time to dream of tomorrow's sightings."
-      ]
-    };
-
-    const periodGreetings = greetings[period as keyof typeof greetings] || greetings.morning;
-    // Randomly select one of the two greetings for variety
-    return periodGreetings[Math.floor(Math.random() * periodGreetings.length)];
-  };
-
-  // Function to get dynamic circles colors based on time period
-  const getCircleColors = (period: string) => {
-    switch (period) {
-      case 'early-morning':
-        return {
-          circle1: '#FFB6C1', // Light pink
-          circle2: '#FFD700', // Gold
-          circle3: '#FFA07A'  // Light salmon
-        };
-      case 'morning':
-        return {
-          circle1: '#87CEEB', // Sky blue
-          circle2: '#F0E68C', // Khaki
-          circle3: '#98FB98'  // Pale green
-        };
-      case 'noon':
-        return {
-          circle1: '#00BFFF', // Deep sky blue
-          circle2: '#87CEFA', // Light sky blue
-          circle3: '#B0E0E6'  // Powder blue
-        };
-      case 'afternoon':
-        return {
-          circle1: '#FFD700', // Gold
-          circle2: '#FF8C00', // Dark orange
-          circle3: '#FFA500'  // Orange
-        };
-      case 'evening':
-        return {
-          circle1: '#FF6347', // Tomato
-          circle2: '#DA70D6', // Orchid
-          circle3: '#8A2BE2'  // Blue violet
-        };
-      case 'night':
-        return {
-          circle1: '#2F4F4F', // Dark slate gray
-          circle2: '#483D8B', // Dark slate blue
-          circle3: '#191970'  // Midnight blue
-        };
-      default:
-        return {
-          circle1: '#87CEEB',
-          circle2: '#F0E68C',
-          circle3: '#98FB98'
-        };
-    }
-  };
-
-  // Function to get background gradient for each time period
-  const getBackgroundGradient = (period: string) => {
-    switch (period) {
-      case 'early-morning':
-        return 'linear-gradient(180deg, #FDF2F8 0%, #FED7AA 100%)'; // pale pink → light orange
-      case 'morning':
-        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // bright yellow → soft sky blue
-      case 'noon':
-        return 'linear-gradient(180deg, #0EA5E9 0%, #38BDF8 100%)'; // vibrant sky blue
-      case 'afternoon':
-        return 'linear-gradient(180deg, #FBBF24 0%, #FB923C 100%)'; // golden yellow → soft orange
-      case 'evening':
-        return 'linear-gradient(180deg, #EA580C 0%, #7C3AED 100%)'; // deep orange → purple
-      case 'night':
-        return 'linear-gradient(180deg, #1E293B 0%, #000000 100%)'; // dark navy → black
-      default:
-        return 'linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%)'; // fallback to morning
-    }
-  };
 
   // Function to get user's location
   const getUserLocation = async () => {
@@ -164,11 +54,11 @@ function LocationPackContent() {
         const country = data.address?.country;
 
         if (city && state) {
-          setUserLocation(`${city}, ${state}`);
+          setUserLocation(`${city}`);
         } else if (city && country) {
-          setUserLocation(`${city}, ${country}`);
+          setUserLocation(`${city}`);
         } else if (state && country) {
-          setUserLocation(`${state}, ${country}`);
+          setUserLocation(`${state}`);
         } else {
           setUserLocation('Your Location');
         }
@@ -179,20 +69,24 @@ function LocationPackContent() {
     }
   };
 
-  // Update background based on time of day and get user location
+  // Initialize bird of the day and get user location
   useEffect(() => {
-    const updateTimeOfDay = () => {
-      setTimeOfDay(getTimeOfDay());
+    const updateMobileDetection = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
     };
 
     // Set initial state
-    updateTimeOfDay();
+    setBirdOfTheDay(selectBirdOfTheDay());
+    updateMobileDetection();
     getUserLocation();
 
-    // Update every minute
-    const interval = setInterval(updateTimeOfDay, 60000);
+    // Listen for window resize to update mobile detection
+    window.addEventListener('resize', updateMobileDetection);
 
-    return () => clearInterval(interval);
+    return () => {
+      window.removeEventListener('resize', updateMobileDetection);
+    };
   }, []);
 
   // Show all birds
@@ -208,111 +102,123 @@ function LocationPackContent() {
 
   return (
     <div className="min-h-screen relative font-rubik">
-      {/* Dynamic Background with gradient */}
-      <div
-        className="fixed inset-0 transition-all duration-1000 ease-in-out"
-        style={{
-          background: getBackgroundGradient(timeOfDay)
-        }}
-      >
-      </div>
-
-      {/* Dynamic Background Circles */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <svg
-          className="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out"
-          viewBox="0 0 393 887"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="60" />
-            </filter>
-            <filter id="blur2" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="50" />
-            </filter>
-            <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="70" />
-            </filter>
-          </defs>
-
-          {/* Large pink/primary circle */}
-          <circle
-            cx="12%"
-            cy="46%"
-            r="35%"
-            fill={getCircleColors(timeOfDay).circle1}
-            filter="url(#blur1)"
-            opacity="0.85"
-            className="transition-all duration-1000 ease-in-out"
+      {/* Blurred Bird Background - Same as Modal */}
+      {birdOfTheDay && (
+        <>
+          {/* Blurred Bird Image Background */}
+          <div
+            className="fixed inset-0 bg-cover bg-center z-0"
+            style={{
+              backgroundImage: `url(${birdOfTheDay.imageUrl})`,
+              filter: 'blur(120px) saturate(1.3) brightness(1.1)'
+            }}
           />
 
-          {/* Medium cyan/secondary circle */}
-          <circle
-            cx="78%"
-            cy="8%"
-            r="28%"
-            fill={getCircleColors(timeOfDay).circle2}
-            filter="url(#blur2)"
-            opacity="0.75"
-            className="transition-all duration-1000 ease-in-out"
+          {/* Colorful Gradient Overlay */}
+          <div
+            className="fixed inset-0 z-0"
+            style={{
+              background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(34, 197, 94, 0.2) 100%)'
+            }}
           />
+        </>
+      )}
 
-          {/* Small yellow/accent circle */}
-          <circle
-            cx="22%"
-            cy="3%"
-            r="22%"
-            fill={getCircleColors(timeOfDay).circle3}
-            filter="url(#blur3)"
-            opacity="0.9"
-            className="transition-all duration-1000 ease-in-out"
-          />
-        </svg>
-      </div>
+      {/* Fallback background when no bird */}
+      {!birdOfTheDay && (
+        <div className="fixed inset-0 bg-[#ECE9DF] z-0" />
+      )}
 
       {/* Content Container */}
-      <div className="relative z-10 px-4 py-8 max-w-md mx-auto lg:max-w-6xl lg:px-8">
-        
+      <div className="relative z-10 px-6 py-8 max-w-md mx-auto md:max-w-lg lg:max-w-6xl lg:px-8">
+
         {/* Header Section */}
-        <div className="mb-8 lg:mb-12 mt-[100px]">
-          <div className="w-full lg:w-1/3">
-            <h1 className="text-white text-2xl lg:text-3xl font-medium font-rubik uppercase leading-tight mb-2">
-              {getDynamicGreeting(timeOfDay)}
+        <div className="mb-8 lg:mb-12">
+          {/* Top Bar - App Name and Location */}
+          <div className="flex justify-between items-center mb-8 md:mb-12 lg:mb-16">
+            {/* App Name - Top Left */}
+            <h1 className="text-white text-[24px] md:text-[28px] lg:text-[30px] font-semibold font-rubik tracking-wide">
+              BirdDeck
             </h1>
-            <p className="text-white/70 text-lg lg:text-xl font-medium">
-              {userLocation}
-            </p>
+
+            {/* User Location - Top Right */}
+            <div className="flex items-center gap-2">
+              <svg
+                width="12"
+                height="16"
+                viewBox="0 0 13 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="fill-white/70"
+              >
+                <path d="M6.13184 0.842773C9.51837 0.842773 12.2636 3.58808 12.2637 6.97461C12.2637 9.83754 7.88153 15.2913 6.52637 16.9092C6.31917 17.1562 5.94448 17.1563 5.7373 16.9092C4.38215 15.2913 0 9.83754 0 6.97461C3.11318e-05 3.5881 2.74533 0.842808 6.13184 0.842773ZM6.13184 4.5752C4.80666 4.5752 3.73242 5.64944 3.73242 6.97461C3.73258 8.29965 4.80676 9.37402 6.13184 9.37402C7.45678 9.37387 8.53109 8.29956 8.53125 6.97461C8.53125 5.64953 7.45688 4.57535 6.13184 4.5752Z" fill="white" fillOpacity="0.7"/>
+              </svg>
+              <span className="text-white/70 text-[16px] md:text-[17px] font-medium font-rubik">
+                {userLocation}
+              </span>
+            </div>
           </div>
+
+          {/* Bird of the Day Section */}
+          {birdOfTheDay && (
+            <div className="flex flex-col items-center text-center mt-8 mb-8">
+              {/* Circular Bird Image */}
+              <div
+                className="w-[140px] h-[140px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px] rounded-full border-[1.5px] border-black/60 overflow-hidden mb-4 lg:mb-6"
+                style={{
+                  backgroundImage: `url(${birdOfTheDay.imageUrl})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              />
+
+              {/* Bird Name */}
+              <h2 className="text-white/70 text-[14px] md:text-[15px] lg:text-[16px] font-medium italic font-rubik mb-3 sm:mb-4 lg:mb-6">
+                {birdOfTheDay.name}
+              </h2>
+
+              {/* Fun Fact */}
+              <p className="text-white text-[20px] md:text-[18px] lg:text-[20px] font-normal font-rubik text-center max-w-[354px] sm:max-w-[320px] md:max-w-[320px] lg:max-w-[380px] leading-[28px] sm:leading-relaxed tracking-wide">
+                {birdOfTheDay.funFact}
+              </p>
+            </div>
+          )}
+
         </div>
 
         {/* Statistics Section */}
-        <div className="mb-8 lg:mb-12">
-          <div className="bg-black/30 rounded-xl p-4 backdrop-blur-2xl">
-            <div className="flex items-center">
+        <div className="mb-8 lg:mb-12 flex justify-center">
+          <div className="relative w-[345px] lg:w-[450px] h-[76px] flex items-center justify-center">
+            {/* Background overlay */}
+            <div
+              className="absolute inset-0 rounded-xl bg-black/25"
+              style={{ mixBlendMode: 'overlay' }}
+            />
+
+            {/* Statistics content */}
+            <div className="relative flex items-center justify-center w-full px-8">
               {/* Birds Collected */}
-              <div className="flex-1 text-center">
-                <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">{collectedLocationBirds.length}</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/{locationBirds.length}</span>
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="mb-1">
+                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">{collectedLocationBirds.length}</span>
+                  <span className="text-white/50 font-bold font-rubik text-[20px]">/</span>
+                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">{locationBirds.length}</span>
                 </div>
-                <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
+                <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
                   Birds Collected
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="w-px h-8 bg-white/20 mx-4"></div>
+              <div className="w-0 h-[44px] bg-white/10 border-l border-white/10 mx-4"></div>
 
               {/* Achievements */}
-              <div className="flex-1 text-center">
-                <div className="text-white">
-                  <span className="text-2xl lg:text-3xl font-bold">0</span>
-                  <span className="text-lg lg:text-xl font-bold text-white/50">/10</span>
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="mb-1">
+                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">0</span>
+                  <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/30</span>
                 </div>
-                <div className="text-white text-xs font-bold uppercase tracking-wider mt-1">
+                <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
                   Achievements
                 </div>
               </div>
