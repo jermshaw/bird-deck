@@ -189,6 +189,7 @@ function LocationPackContent() {
 
     const updateMobileDetection = () => {
       setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
     };
 
     // Set initial state
