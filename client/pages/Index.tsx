@@ -178,7 +178,7 @@ function LocationPackContent() {
               </h2>
 
               {/* Fun Fact */}
-              <p className="text-white text-[20px] md:text-[18px] lg:text-[20px] font-normal font-rubik text-center max-w-[320px] md:max-w-[320px] lg:max-w-[380px] leading-relaxed tracking-wide">
+              <p className="text-white text-[20px] md:text-[18px] lg:text-[20px] font-normal font-rubik text-center max-w-[354px] sm:max-w-[320px] md:max-w-[320px] lg:max-w-[380px] leading-[28px] sm:leading-relaxed tracking-wide">
                 {birdOfTheDay.funFact}
               </p>
             </div>
@@ -191,7 +191,7 @@ function LocationPackContent() {
           <div className="relative w-[345px] h-[76px] flex items-center justify-center">
             {/* Background overlay */}
             <div
-              className="absolute inset-0 rounded-xl bg-black/45"
+              className="absolute inset-0 rounded-xl bg-black/25 sm:bg-black/45"
               style={{ mixBlendMode: 'overlay' }}
             />
 
