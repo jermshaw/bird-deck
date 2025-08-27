@@ -215,7 +215,7 @@ function LocationPackContent() {
               {/* Achievements */}
               <div className="flex-1 flex flex-col items-center justify-center text-center">
                 <div className="mb-1">
-                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">5</span>
+                  <span className="text-white font-bold sm:font-medium font-rubik text-[31px] leading-none">0</span>
                   <span className="text-white/50 font-bold sm:font-medium font-rubik text-[20px]">/30</span>
                 </div>
                 <div className="text-white text-[11px] sm:text-[12px] font-semibold sm:font-bold uppercase tracking-[0.96px] font-rubik">
