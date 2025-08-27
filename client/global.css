@@ -114,6 +114,11 @@
     @apply bg-background text-foreground;
     /* Prevent white overscroll on mobile */
     overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    /* Prevent elastic scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y pinch-zoom;
     /* Ensure body background matches in case of overscroll */
     background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
   }
@@ -121,6 +126,11 @@
   html {
     /* Prevent white overscroll on mobile */
     overscroll-behavior: none;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    /* Prevent elastic scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y pinch-zoom;
     /* Ensure html background matches in case of overscroll */
     background: linear-gradient(180deg, #FEF08A 0%, #BAE6FD 100%);
   }
