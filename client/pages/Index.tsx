@@ -201,13 +201,11 @@ function LocationPackContent() {
     updateRandomFact();
     getUserLocation();
 
-    // Update every minute (for time of day) and every 30 seconds (for random fact)
+    // Update every minute (for time of day only)
     const timeInterval = setInterval(updateTimeOfDay, 60000);
-    const factInterval = setInterval(updateRandomFact, 30000);
 
     return () => {
       clearInterval(timeInterval);
-      clearInterval(factInterval);
     };
   }, []);
 
