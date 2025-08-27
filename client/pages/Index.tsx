@@ -192,14 +192,23 @@ function LocationPackContent() {
       setTimeOfDay(getTimeOfDay());
     };
 
+    const updateRandomFact = () => {
+      setRandomBirdFact(getRandomBirdFact());
+    };
+
     // Set initial state
     updateTimeOfDay();
+    updateRandomFact();
     getUserLocation();
 
-    // Update every minute
-    const interval = setInterval(updateTimeOfDay, 60000);
+    // Update every minute (for time of day) and every 30 seconds (for random fact)
+    const timeInterval = setInterval(updateTimeOfDay, 60000);
+    const factInterval = setInterval(updateRandomFact, 30000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(timeInterval);
+      clearInterval(factInterval);
+    };
   }, []);
 
   // Show all birds
