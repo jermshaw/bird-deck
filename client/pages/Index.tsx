@@ -10,9 +10,6 @@ function BirdDeckHome() {
   const [modalOpen, setModalOpen] = useState(false);
   const [birdOfTheDay, setBirdOfTheDay] = useState<Bird | null>(null);
   const [currentWeather, setCurrentWeather] = useState('65° and the skies are a bit cloudy');
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
-  const [sortOption, setSortOption] = useState<'name' | 'collected' | 'not-collected'>('name');
-  const filterButtonRef = useRef<HTMLDivElement>(null);
 
   // Function to select a random bird of the day based on current date
   const selectBirdOfTheDay = () => {
@@ -147,22 +144,6 @@ function BirdDeckHome() {
     }
   }, []);
 
-  // Handle clicking outside filter menu to close it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (filterButtonRef.current && !filterButtonRef.current.contains(event.target as Node)) {
-        setFilterMenuOpen(false);
-      }
-    };
-
-    if (filterMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [filterMenuOpen]);
 
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
