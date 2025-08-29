@@ -19,9 +19,16 @@ function BirdDeckHome() {
     return birds[randomIndex];
   };
 
-  // Get background color to match Figma design
-  const getBackgroundColor = () => {
-    return '#ECE9DF'; // Light cream background from Figma
+  // Get background with radial gradients
+  const getBackground = () => {
+    return {
+      backgroundColor: 'hsla(203,53%,25%,1)',
+      backgroundImage: `
+        radial-gradient(at 17% 63%, hsla(260,47%,32%,1) 0px, transparent 50%),
+        radial-gradient(at 29% 41%, hsla(180,2%,39%,1) 0px, transparent 50%),
+        radial-gradient(at 93% 43%, hsla(16,18%,30%,1) 0px, transparent 50%)
+      `
+    };
   };
 
   // Get collection stats by category
@@ -87,47 +94,8 @@ function BirdDeckHome() {
   return (
     <div
       className="min-h-screen relative font-rubik"
-      style={{ background: getBackgroundColor() }}
+      style={getBackground()}
     >
-      {/* Background gradient circles - exact Figma positioning */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* First ellipse - dark blue-gray */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            left: '-228px',
-            top: '500px',
-            width: '644px',
-            height: '555px',
-            background: 'radial-gradient(ellipse 322px 278px at center, #454564 0%, transparent 70%)',
-            filter: 'blur(100px)'
-          }}
-        />
-        {/* Second ellipse - blue-gray */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            left: '130px',
-            top: '-65px',
-            width: '528px',
-            height: '455px',
-            background: 'radial-gradient(ellipse 264px 228px at center, #495373 0%, transparent 70%)',
-            filter: 'blur(100px)'
-          }}
-        />
-        {/* Third ellipse - lighter blue-gray */}
-        <div
-          className="absolute rounded-full"
-          style={{
-            left: '-65px',
-            top: '-56px',
-            width: '403px',
-            height: '348px',
-            background: 'radial-gradient(ellipse 202px 174px at center, #657D91 0%, transparent 70%)',
-            filter: 'blur(100px)'
-          }}
-        />
-      </div>
 
       {/* Content Container */}
       <div className="relative z-10 px-6 py-8 max-w-md mx-auto md:max-w-4xl lg:max-w-6xl lg:px-8">
