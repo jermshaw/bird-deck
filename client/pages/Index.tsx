@@ -25,7 +25,7 @@ function BirdDeckHome() {
 
     const [color1, color2, color3] = bird.colors;
 
-    // Convert hex colors to HSLA and create variations for the animated background
+    // Convert hex colors to HSLA
     const hexToHsla = (hex: string, alpha = 1) => {
       const r = parseInt(hex.slice(1, 3), 16) / 255;
       const g = parseInt(hex.slice(3, 5), 16) / 255;
@@ -53,30 +53,34 @@ function BirdDeckHome() {
       return `hsla(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%, ${alpha})`;
     };
 
-    // Create darker base color from primary bird color
-    const baseHsla = hexToHsla(color1, 1);
-    const baseColor = baseHsla.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
-      (_, h, s, l) => `hsla(${h}, ${Math.min(42, parseInt(s))}%, ${Math.min(15, parseInt(l))}%, 1)`);
+    // Create variations of the bird colors for the background
+    const primaryColor = hexToHsla(color1, 1);
+    const secondaryColor = hexToHsla(color2, 1);
+    const tertiaryColor = hexToHsla(color3, 1);
 
-    // Update CSS custom properties for the animated background
+    // Create darker accent colors
+    const darkColor1 = primaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
+      (_, h, s, l) => `hsla(${h}, ${Math.max(50, parseInt(s))}%, ${Math.max(9, parseInt(l) * 0.2)}%, 1)`);
+    const darkColor2 = secondaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
+      (_, h, s, l) => `hsla(${h}, ${Math.max(50, parseInt(s))}%, ${Math.max(9, parseInt(l) * 0.2)}%, 1)`);
+
+    // Update the html element's background with new colors
     const root = document.documentElement;
+    const newBackgroundImage = `
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 1746 1746' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 0% 99%, ${primaryColor} 0%, transparent 67%),
+      radial-gradient(circle at 46% 94%, ${secondaryColor} 0%, transparent 81%),
+      radial-gradient(circle at 89% 8%, ${darkColor1} 0%, transparent 150%),
+      radial-gradient(circle at 89% 8%, ${darkColor2} 0%, transparent 150%),
+      radial-gradient(circle at 93% 95%, ${primaryColor.replace('1)', '0.6)')} 0%, transparent 66%),
+      radial-gradient(circle at 89% 8%, ${tertiaryColor} 0%, transparent 150%),
+      radial-gradient(circle at 89% 8%, ${secondaryColor.replace('1)', '0.8)')} 0%, transparent 150%)
+    `.replace(/\s+/g, ' ').trim();
 
-    // Create gradient colors with varying opacities based on bird colors
-    const gradientColors = {
-      'c-0': baseColor,
-      'c-1': baseColor,
-      'c-2': hexToHsla(color2, 0.15),
-      'c-3': hexToHsla(color3, 0.2),
-      'c-4': hexToHsla(color1, 0.2)
-    };
-
-    // Update background base color
-    root.style.backgroundColor = baseColor;
-
-    // Update gradient colors in CSS custom properties
-    Object.entries(gradientColors).forEach(([key, color]) => {
-      root.style.setProperty(`--${key}`, color);
-    });
+    // Update background color and image
+    root.style.backgroundColor = primaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
+      (_, h, s, l) => `hsla(${h}, ${Math.max(80, parseInt(s))}%, ${Math.max(30, parseInt(l) * 0.6)}%, 1)`);
+    root.style.backgroundImage = newBackgroundImage;
   };
 
 
