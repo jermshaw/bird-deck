@@ -274,7 +274,7 @@ function BirdDeckHome() {
                 </h3>
 
                 {/* Bird Image */}
-                <div className="flex justify-center mb-6 sm:mt-[15px] mt-[45px]">
+                <div className="flex justify-center mb-3 sm:mt-[15px] mt-[45px]">
                   <div
                     className="w-[160px] h-[160px] rounded-full border-4 border-white overflow-hidden"
                   >
@@ -287,7 +287,7 @@ function BirdDeckHome() {
                 </div>
 
                 {/* Bird Name */}
-                <h4 className="text-white/70 text-[16px] italic font-medium text-center mb-4 font-rubik mt-[15px]">
+                <h4 className="text-white/70 text-[16px] italic font-medium text-center mb-4 font-rubik">
                   {birdOfTheDay.name}
                 </h4>
 
