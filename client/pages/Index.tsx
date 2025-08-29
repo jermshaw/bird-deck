@@ -89,8 +89,33 @@ function LocationPackContent() {
     };
   }, []);
 
-  // Show all birds
-  const locationBirds = birds;
+  // Only show birds that have main images available
+  const birdsWithMainImages = [
+    "Western Sandpiper",
+    "Red-winged Blackbird",
+    "Varied Thrush",
+    "White-crowned sparrow",
+    "Pygmy Nuthatch",
+    "Ruby-crowned Kinglet",
+    "Golden-crowned Sparrow",
+    "Barn Swallow",
+    "Song Sparrow",
+    "Chestnut-backed Chickadee",
+    "Killdeer",
+    "Brewer's Blackbird",
+    "Nuttall's Woodpecker",
+    "Lesser Scaup",
+    "Oak Titmouse",
+    "Greater Scaup",
+    "Wood Duck",
+    "California Towhee",
+    "Cooper's Hawk",
+    "Black-crowned Night-Heron"
+  ];
+
+  const locationBirds = birds.filter(bird =>
+    birdsWithMainImages.includes(bird.name)
+  );
 
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
