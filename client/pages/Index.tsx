@@ -162,7 +162,7 @@ function BirdDeckHome() {
         </div>
 
         {/* Horizontal Carousel */}
-        <div className="flex gap-6 overflow-x-auto pb-4 mb-8 px-4 py-4 -mx-4">
+        <div className="flex gap-6 overflow-x-auto pb-20 mb-8 px-8 py-8 -mx-8">
           
           {/* Bird of the Day Card */}
           {birdOfTheDay && (
