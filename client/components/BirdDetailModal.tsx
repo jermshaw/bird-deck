@@ -42,7 +42,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
     { size: 'small', active: bird?.size === 'small' },
     { size: 'medium', active: bird?.size === 'medium' },
     { size: 'large', active: bird?.size === 'large' },
-    { size: 'enormous', active: bird?.size === 'enormous' }
+    { size: 'huge', active: bird?.size === 'huge' }
   ];
 
   return (
