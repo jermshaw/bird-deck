@@ -309,7 +309,7 @@ function BirdDeckHome() {
 
             {/* Map Image - Edge to Edge */}
             <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/a9af1b5559035184da90d06c929dce466c7c3492?width=718"
+              src="https://api.builder.io/api/v1/image/assets/TEMP/a9af1b5559035184da90d06c929dce466c7c3492?width=2154"
               alt="Map with Locations"
               className="absolute left-0 right-0 bottom-0 w-full h-[420px] object-cover"
               style={{ top: '59px' }}
