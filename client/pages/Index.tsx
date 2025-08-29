@@ -27,55 +27,59 @@ function BirdDeckHome() {
     }
 
     const [color1, color2, color3] = bird.colors;
-    console.log('Updating background with bird colors:', color1, color2, color3);
+    console.log('Bird colors from data:', { color1, color2, color3 });
 
-    // Convert hex to rgba with alpha
-    const hexToRgba = (hex: string, alpha = 1) => {
+    // Target the body element for background
+    const body = document.body;
+
+    // Create a darker base color from the primary bird color
+    const hexToRgb = (hex: string) => {
       const r = parseInt(hex.slice(1, 3), 16);
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      return { r, g, b };
     };
 
-    // Create darker variations for accent colors
-    const darkenColor = (hex: string, factor = 0.3) => {
-      const r = Math.max(0, parseInt(hex.slice(1, 3), 16) * factor);
-      const g = Math.max(0, parseInt(hex.slice(3, 5), 16) * factor);
-      const b = Math.max(0, parseInt(hex.slice(5, 7), 16) * factor);
-      return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
-    };
+    const { r: r1, g: g1, b: b1 } = hexToRgb(color1);
+    const { r: r2, g: g2, b: b2 } = hexToRgb(color2);
+    const { r: r3, g: g3, b: b3 } = hexToRgb(color3);
 
-    // Create the new background
-    const root = document.documentElement;
+    // Create a dark base color (20% of primary color brightness)
+    const baseColor = `rgb(${Math.round(r1 * 0.2)}, ${Math.round(g1 * 0.2)}, ${Math.round(b1 * 0.2)})`;
 
-    // Base background color (darkened primary color)
-    const baseColor = darkenColor(color1, 0.4);
-
-    // Noise texture URL
-    const noiseUrl = 'url("data:image/svg+xml,%3Csvg viewBox=\\\'0 0 1746 1746\\\' xmlns=\\\'http://www.w3.org/2000/svg\\\'%3E%3Cfilter id=\\\'noiseFilter\\\'%3E%3CfeTurbulence type=\\\'fractalNoise\\\' baseFrequency=\\\'0.65\\\' numOctaves=\\\'3\\\' stitchTiles=\\\'stitch\\\'/%3E%3C/filter%3E%3Crect width=\\\'100%25\\\' height=\\\'100%25\\\' filter=\\\'url(%23noiseFilter)\\\'/%3E%3C/svg%3E")';
-
-    // Create the gradient background image array
-    const gradients = [
-      noiseUrl,
-      `radial-gradient(circle at 0% 99%, ${hexToRgba(color1, 0.8)} 0%, transparent 67%)`,
-      `radial-gradient(circle at 46% 94%, ${hexToRgba(color2, 0.6)} 0%, transparent 81%)`,
-      `radial-gradient(circle at 89% 8%, ${darkenColor(color1, 0.2)} 0%, transparent 150%)`,
-      `radial-gradient(circle at 89% 8%, ${darkenColor(color2, 0.2)} 0%, transparent 150%)`,
-      `radial-gradient(circle at 93% 95%, ${hexToRgba(color1, 0.4)} 0%, transparent 66%)`,
-      `radial-gradient(circle at 89% 8%, ${hexToRgba(color3, 0.3)} 0%, transparent 150%)`,
-      `radial-gradient(circle at 89% 8%, ${hexToRgba(color2, 0.5)} 0%, transparent 150%)`
+    // Create gradient colors with bird colors
+    const gradientColors = [
+      `rgba(${r1}, ${g1}, ${b1}, 0.6)`, // Primary color at 60% opacity
+      `rgba(${r2}, ${g2}, ${b2}, 0.4)`, // Secondary color at 40% opacity
+      `rgba(${r3}, ${g3}, ${b3}, 0.3)`, // Tertiary color at 30% opacity
+      `rgba(${r1}, ${g1}, ${b1}, 0.2)`, // Primary again at 20% opacity
+      `rgba(${r2}, ${g2}, ${b2}, 0.1)`  // Secondary again at 10% opacity
     ];
 
-    const newBackgroundImage = gradients.join(', ');
+    // Build the multi-radial gradient background
+    const backgroundImage = [
+      'url("data:image/svg+xml,%3Csvg viewBox=\\\'0 0 1746 1746\\\' xmlns=\\\'http://www.w3.org/2000/svg\\\'%3E%3Cfilter id=\\\'noiseFilter\\\'%3E%3CfeTurbulence type=\\\'fractalNoise\\\' baseFrequency=\\\'0.65\\\' numOctaves=\\\'3\\\' stitchTiles=\\\'stitch\\\'/%3E%3C/filter%3E%3Crect width=\\\'100%25\\\' height=\\\'100%25\\\' filter=\\\'url(%23noiseFilter)\\\'/%3E%3C/svg%3E")',
+      `radial-gradient(circle at 0% 99%, ${gradientColors[0]} 0%, transparent 67%)`,
+      `radial-gradient(circle at 46% 94%, ${gradientColors[1]} 0%, transparent 81%)`,
+      `radial-gradient(circle at 89% 8%, ${gradientColors[2]} 0%, transparent 150%)`,
+      `radial-gradient(circle at 93% 95%, ${gradientColors[3]} 0%, transparent 66%)`,
+      `radial-gradient(circle at 89% 8%, ${gradientColors[4]} 0%, transparent 150%)`
+    ].join(', ');
 
-    console.log('Setting background color:', baseColor);
-    console.log('Setting background image:', newBackgroundImage);
+    console.log('Applying background:', { baseColor, backgroundImage });
 
-    // Apply the new background with !important to override CSS
-    root.style.setProperty('background-color', baseColor, 'important');
-    root.style.setProperty('background-image', newBackgroundImage, 'important');
+    // Clear any existing background styles and apply new ones
+    body.style.removeProperty('background');
+    body.style.removeProperty('background-color');
+    body.style.removeProperty('background-image');
 
-    console.log('Background updated successfully');
+    // Apply the new background
+    body.style.backgroundColor = baseColor;
+    body.style.backgroundImage = backgroundImage;
+    body.style.backgroundBlendMode = 'overlay, normal, normal, normal, normal, normal';
+    body.style.backgroundAttachment = 'fixed';
+
+    console.log('Background applied successfully for', bird.name);
   };
 
 
