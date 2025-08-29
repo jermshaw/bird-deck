@@ -207,10 +207,15 @@ function BirdDeckHome() {
                 
                 {/* Bird Image */}
                 <div className="flex justify-center mb-6">
-                  <div 
-                    className="w-[160px] h-[160px] rounded-full border-4 border-white bg-cover bg-center"
-                    style={{ backgroundImage: `url(${birdOfTheDay.imageUrl})` }}
-                  />
+                  <div
+                    className="w-[160px] h-[160px] rounded-full border-4 border-white overflow-hidden"
+                  >
+                    <img
+                      src={birdOfTheDay.imageUrl}
+                      alt={birdOfTheDay.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
 
                 {/* Bird Name */}
