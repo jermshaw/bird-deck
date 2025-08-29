@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
