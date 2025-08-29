@@ -150,6 +150,7 @@ export function useHolographicCard({
 
   const cardProps = {
     ref: cardRef,
+    className: 'card-tilt', // Add CSS class for proper media query handling
     // Only enable mouse interactions on non-mobile devices
     ...(isMobile ? {} : {
       onMouseMove: handleMouseMove,
@@ -169,12 +170,7 @@ export function useHolographicCard({
       touchAction: 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
-      perspective: isMobile ? 'none' : '1000px',
-      // Reduce animations for users who prefer reduced motion
-      '@media (prefers-reduced-motion: reduce)': {
-        transform: 'none',
-        transition: 'none'
-      }
+      perspective: isMobile ? 'none' : '1000px'
     }
   };
 
