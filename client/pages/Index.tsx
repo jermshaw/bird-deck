@@ -315,36 +315,6 @@ function BirdDeckHome() {
                   {birdOfTheDay.funFact}
                 </p>
               </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-6 h-full flex flex-col">
-                <h3 className="text-white text-[16px] font-medium mb-6 font-rubik">
-                  Bird of the day
-                </h3>
-                
-                {/* Bird Image */}
-                <div className="flex justify-center mb-6 sm:mt-0 mt-[30px]">
-                  <div
-                    className="w-[160px] h-[160px] rounded-full border-4 border-white overflow-hidden"
-                  >
-                    <img
-                      src={`/images/birds/${birdOfTheDay.name}/profile.png`}
-                      alt={birdOfTheDay.name}
-                      className="w-full h-full object-cover sm:mb-0 mb-5"
-                    />
-                  </div>
-                </div>
-
-                {/* Bird Name */}
-                <h4 className="text-white/70 text-[16px] italic font-medium text-center mb-4 font-rubik">
-                  {birdOfTheDay.name}
-                </h4>
-
-                {/* Fun Fact */}
-                <p className="text-white text-[20px] font-normal text-center leading-normal sm:leading-normal leading-[27px] letter-spacing-[0.2px] flex-1 flex items-center justify-center font-rubik px-2 sm:pb-0 pb-[35px]">
-                  {birdOfTheDay.funFact}
-                </p>
-              </div>
             </div>
           )}
 
