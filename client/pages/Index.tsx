@@ -432,7 +432,6 @@ function BirdCard({ bird, isCollected, onClick }: {
           src={bird.imageUrl}
           alt={bird.name}
           className={`w-full h-full object-cover ${!isCollected ? 'grayscale' : ''}`}
-          onLoad={() => setImageLoaded(true)}
           onError={() => setImageError(true)}
         />
         
