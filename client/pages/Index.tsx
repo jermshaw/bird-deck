@@ -384,7 +384,7 @@ function BirdDeckHome() {
         {/* Bird Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {birds
-            .filter(bird => bird.imageUrl && !bird.imageUrl.includes('placeholder') && !bird.imageUrl.includes('404'))
+            .filter(bird => bird.imageUrl && (bird.imageUrl.includes('main.jpg') || bird.imageUrl.includes('main.png')))
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((bird) => (
             <BirdCard
