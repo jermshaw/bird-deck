@@ -413,6 +413,14 @@ function BirdCard({ bird, isCollected, onClick }: {
   isCollected: boolean;
   onClick: () => void;
 }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Don't render the card if image failed to load
+  if (imageError || (!imageLoaded && imageError === false)) {
+    return null;
+  }
+
   return (
     <div
       className="bg-white rounded-[14.4px] p-1 cursor-pointer relative overflow-hidden"
