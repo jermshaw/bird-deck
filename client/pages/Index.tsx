@@ -387,7 +387,7 @@ function BirdDeckHome() {
               </div>
 
               {/* Filter Menu Dropdown */}
-              {filterMenuOpen && (
+              {(filterMenuOpen || true) && (
                 <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[140px] z-50">
                   <div className="px-3 py-1 text-xs font-medium text-gray-500 uppercase tracking-wide">
                     Sort by
