@@ -34,6 +34,36 @@ function BirdDeckHome() {
     return colors.map(enhanceColor);
   };
 
+  // Helper function to convert hex color to HSL
+  const hexToHsl = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16) / 255;
+    const g = parseInt(hex.slice(3, 5), 16) / 255;
+    const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h = 0;
+    let s = 0;
+    const l = (max + min) / 2;
+
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  };
+
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
     if (!bird || !bird.colors || bird.colors.length < 3) {
@@ -42,54 +72,38 @@ function BirdDeckHome() {
 
     // Use the same color enhancement as the bird card
     const enhancedColors = enhanceColorsForDisplay(bird.colors);
-    const [color1, color2, color3] = enhancedColors;
+    const [color1, color2, color3, color4] = enhancedColors.length >= 4 ? enhancedColors : [...enhancedColors, enhancedColors[0]];
+
+    // Convert hex colors to HSL
+    const hsl1 = hexToHsl(color1);
+    const hsl2 = hexToHsl(color2);
+    const hsl3 = hexToHsl(color3);
+    const hsl4 = hexToHsl(color4);
 
     // Target the body element for background
     const body = document.body;
 
-    // Create a darker base color from the primary bird color
-    const hexToRgb = (hex: string) => {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return { r, g, b };
-    };
+    // Create base color (muted version of primary color)
+    const baseHsl = hexToHsl(color1);
+    const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
 
-    const { r: r1, g: g1, b: b1 } = hexToRgb(color1);
-    const { r: r2, g: g2, b: b2 } = hexToRgb(color2);
-    const { r: r3, g: g3, b: b3 } = hexToRgb(color3);
-
-    // Create a dark base color (20% of primary color brightness)
-    const baseColor = `rgb(${Math.round(r1 * 0.2)}, ${Math.round(g1 * 0.2)}, ${Math.round(b1 * 0.2)})`;
-
-    // Create gradient colors with bird colors
-    const gradientColors = [
-      `rgba(${r1}, ${g1}, ${b1}, 0.6)`, // Primary color at 60% opacity
-      `rgba(${r2}, ${g2}, ${b2}, 0.4)`, // Secondary color at 40% opacity
-      `rgba(${r3}, ${g3}, ${b3}, 0.3)`, // Tertiary color at 30% opacity
-      `rgba(${r1}, ${g1}, ${b1}, 0.2)`, // Primary again at 20% opacity
-      `rgba(${r2}, ${g2}, ${b2}, 0.1)`  // Secondary again at 10% opacity
-    ];
-
-    // Build the multi-radial gradient background
+    // Create the radial gradient background using the user's pattern
     const backgroundImage = [
-      'url("data:image/svg+xml,%3Csvg viewBox=\\\'0 0 1746 1746\\\' xmlns=\\\'http://www.w3.org/2000/svg\\\'%3E%3Cfilter id=\\\'noiseFilter\\\'%3E%3CfeTurbulence type=\\\'fractalNoise\\\' baseFrequency=\\\'0.65\\\' numOctaves=\\\'3\\\' stitchTiles=\\\'stitch\\\'/%3E%3C/filter%3E%3Crect width=\\\'100%25\\\' height=\\\'100%25\\\' filter=\\\'url(%23noiseFilter)\\\'/%3E%3C/svg%3E")',
-      `radial-gradient(circle at 0% 99%, ${gradientColors[0]} 0%, transparent 67%)`,
-      `radial-gradient(circle at 46% 94%, ${gradientColors[1]} 0%, transparent 81%)`,
-      `radial-gradient(circle at 89% 8%, ${gradientColors[2]} 0%, transparent 150%)`,
-      `radial-gradient(circle at 93% 95%, ${gradientColors[3]} 0%, transparent 66%)`,
-      `radial-gradient(circle at 89% 8%, ${gradientColors[4]} 0%, transparent 150%)`
+      `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
+      `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
+      `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
+      `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
     ].join(', ');
 
     // Clear any existing background styles and apply new ones
     body.style.removeProperty('background');
     body.style.removeProperty('background-color');
     body.style.removeProperty('background-image');
+    body.style.removeProperty('background-blend-mode');
 
     // Apply the new background
-    body.style.backgroundColor = baseColor;
+    body.style.backgroundColor = backgroundColor;
     body.style.backgroundImage = backgroundImage;
-    body.style.backgroundBlendMode = 'overlay, normal, normal, normal, normal, normal';
     body.style.backgroundAttachment = 'fixed';
   };
 
@@ -167,43 +181,29 @@ function BirdDeckHome() {
   const getBirdCardGradientStyles = () => {
     if (!birdOfTheDay) return { backgroundColor: '#FBAF4D', backgroundImage: '' };
 
-    const hexToRgb = (hex: string) => {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return { r, g, b };
-    };
+    const [color1, color2, color3, color4] = enhancedBirdColors.length >= 4 ? enhancedBirdColors : [...enhancedBirdColors, enhancedBirdColors[0]];
 
-    const { r: r1, g: g1, b: b1 } = hexToRgb(enhancedBirdColors[0]);
-    const { r: r2, g: g2, b: b2 } = hexToRgb(enhancedBirdColors[1]);
-    const { r: r3, g: g3, b: b3 } = hexToRgb(enhancedBirdColors[2]);
+    // Convert hex colors to HSL
+    const hsl1 = hexToHsl(color1);
+    const hsl2 = hexToHsl(color2);
+    const hsl3 = hexToHsl(color3);
+    const hsl4 = hexToHsl(color4);
 
-    // Create a dark base color (20% of primary color brightness)
-    const baseColor = `rgb(${Math.round(r1 * 0.2)}, ${Math.round(g1 * 0.2)}, ${Math.round(b1 * 0.2)})`;
+    // Create base color (muted version of primary color)
+    const baseHsl = hexToHsl(color1);
+    const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
 
-    // Create gradient colors with bird colors
-    const gradientColors = [
-      `rgba(${r1}, ${g1}, ${b1}, 0.6)`, // Primary color at 60% opacity
-      `rgba(${r2}, ${g2}, ${b2}, 0.4)`, // Secondary color at 40% opacity
-      `rgba(${r3}, ${g3}, ${b3}, 0.3)`, // Tertiary color at 30% opacity
-      `rgba(${r1}, ${g1}, ${b1}, 0.2)`, // Primary again at 20% opacity
-      `rgba(${r2}, ${g2}, ${b2}, 0.1)`  // Secondary again at 10% opacity
-    ];
-
-    // Build the multi-radial gradient background (same as page background)
+    // Create the radial gradient background using the same pattern as the page
     const backgroundImage = [
-      'url("data:image/svg+xml,%3Csvg viewBox=\\\'0 0 1746 1746\\\' xmlns=\\\'http://www.w3.org/2000/svg\\\'%3E%3Cfilter id=\\\'noiseFilter\\\'%3E%3CfeTurbulence type=\\\'fractalNoise\\\' baseFrequency=\\\'0.65\\\' numOctaves=\\\'3\\\' stitchTiles=\\\'stitch\\\'/%3E%3C/filter%3E%3Crect width=\\\'100%25\\\' height=\\\'100%25\\\' filter=\\\'url(%23noiseFilter)\\\'/%3E%3C/svg%3E")',
-      `radial-gradient(circle at 0% 99%, ${gradientColors[0]} 0%, transparent 67%)`,
-      `radial-gradient(circle at 46% 94%, ${gradientColors[1]} 0%, transparent 81%)`,
-      `radial-gradient(circle at 89% 8%, ${gradientColors[2]} 0%, transparent 150%)`,
-      `radial-gradient(circle at 93% 95%, ${gradientColors[3]} 0%, transparent 66%)`,
-      `radial-gradient(circle at 89% 8%, ${gradientColors[4]} 0%, transparent 150%)`
+      `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
+      `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
+      `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
+      `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
     ].join(', ');
 
     return {
-      backgroundColor: baseColor,
-      backgroundImage: backgroundImage,
-      backgroundBlendMode: 'overlay, normal, normal, normal, normal, normal'
+      backgroundColor: backgroundColor,
+      backgroundImage: backgroundImage
     };
   };
 
@@ -261,8 +261,7 @@ function BirdDeckHome() {
               className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
                 backgroundColor: birdCardStyles.backgroundColor,
-                backgroundImage: birdCardStyles.backgroundImage,
-                backgroundBlendMode: birdCardStyles.backgroundBlendMode
+                backgroundImage: birdCardStyles.backgroundImage
               }}
               onClick={() => handleBirdClick(birdOfTheDay)}
             >
