@@ -169,12 +169,7 @@ export function useHolographicCard({
       touchAction: 'manipulation',
       // Performance optimizations
       backfaceVisibility: 'hidden' as const,
-      perspective: isMobile ? 'none' : '1000px',
-      // Reduce animations for users who prefer reduced motion
-      '@media (prefers-reduced-motion: reduce)': {
-        transform: 'none',
-        transition: 'none'
-      }
+      perspective: isMobile ? 'none' : '1000px'
     }
   };
 
