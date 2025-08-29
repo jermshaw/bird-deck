@@ -279,7 +279,7 @@ function BirdDeckHome() {
           )}
 
           {/* Collection Progress Card */}
-          <div className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative p-6">
+          <div className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] bg-white relative p-6">
             <h3 className="text-[#2C2C2C] text-[16px] font-medium mb-2 font-rubik">
               Birds collected
             </h3>
@@ -337,7 +337,7 @@ function BirdDeckHome() {
             href="https://www.google.com/maps/d/u/0/edit?mid=1mYRHgY8diPuzRDcbJTKF_rC3iKmk0nU&usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative overflow-hidden block cursor-pointer hover:shadow-xl transition-shadow duration-300"
+            className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] bg-white relative overflow-hidden block cursor-pointer hover:shadow-xl transition-shadow duration-300"
           >
             <h3 className="text-[#2C2C2C] text-[16px] font-medium font-rubik absolute left-6 top-6 z-10">
               Places to spot birds
