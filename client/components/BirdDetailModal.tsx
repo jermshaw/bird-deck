@@ -70,7 +70,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(34, 197, 94, 0.2) 100%)'
+                ? 'rgba(0, 0, 0, 0.15)' // Subtle dark overlay to ensure text readability while preserving bird colors
                 : 'rgba(156, 163, 175, 0.6)'
             }}
           />
