@@ -343,7 +343,7 @@ function BirdDeckHome() {
 
         {/* Bird Cards Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {birds.slice(0, 8).map((bird) => (
+          {birds.map((bird) => (
             <BirdCard
               key={bird.id}
               bird={bird}
