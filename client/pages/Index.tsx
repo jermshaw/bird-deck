@@ -59,9 +59,20 @@ function BirdDeckHome() {
     const enhanced2 = enhanceColor(color2);
     const enhanced3 = enhanceColor(color3);
 
-    const { r: r1, g: g1, b: b1 } = hexToRgb(enhanced1.startsWith('#') ? enhanced1 : color1);
-    const { r: r2, g: g2, b: b2 } = hexToRgb(enhanced2.startsWith('#') ? enhanced2 : color2);
-    const { r: r3, g: g3, b: b3 } = hexToRgb(enhanced3.startsWith('#') ? enhanced3 : color3);
+    // Extract RGB values from enhanced colors
+    const getRgbValues = (colorStr: string) => {
+      if (colorStr.startsWith('#')) {
+        return hexToRgb(colorStr);
+      } else if (colorStr.startsWith('rgb(')) {
+        const values = colorStr.match(/\d+/g);
+        return { r: parseInt(values[0]), g: parseInt(values[1]), b: parseInt(values[2]) };
+      }
+      return hexToRgb(colorStr);
+    };
+
+    const { r: r1, g: g1, b: b1 } = getRgbValues(enhanced1);
+    const { r: r2, g: g2, b: b2 } = getRgbValues(enhanced2);
+    const { r: r3, g: g3, b: b3 } = getRgbValues(enhanced3);
 
     // Create a dark base color (20% of primary color brightness)
     const baseColor = `rgb(${Math.round(r1 * 0.2)}, ${Math.round(g1 * 0.2)}, ${Math.round(b1 * 0.2)})`;
