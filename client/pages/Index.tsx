@@ -313,7 +313,7 @@ function BirdDeckHome() {
                 src="https://www.google.com/maps/d/embed?mid=1mYRHgY8diPuzRDcbJTKF_rC3iKmk0nU&iwloc=near&t=m&output=embed&ehbc=2E312F&noprof=1"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, pointerEvents: 'none' }}
                 allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
