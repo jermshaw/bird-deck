@@ -5,6 +5,30 @@ import { CollectionProvider, useCollection } from '@/hooks/use-collection';
 import { useHolographicCard } from '@/hooks/use-holographic-card';
 
 // Main page content component that uses collection context
+// Birds that have main images available
+const birdsWithMainImages = [
+  "Western Sandpiper",
+  "Red-winged Blackbird",
+  "Varied Thrush",
+  "White-crowned sparrow",
+  "Pygmy Nuthatch",
+  "Ruby-crowned Kinglet",
+  "Golden-crowned Sparrow",
+  "Barn Swallow",
+  "Song Sparrow",
+  "Chestnut-backed Chickadee",
+  "Killdeer",
+  "Brewer's Blackbird",
+  "Nuttall's Woodpecker",
+  "Lesser Scaup",
+  "Oak Titmouse",
+  "Greater Scaup",
+  "Wood Duck",
+  "California Towhee",
+  "Cooper's Hawk",
+  "Black-crowned Night-Heron"
+];
+
 function LocationPackContent() {
   const { collectionStats, isInCollection } = useCollection();
   const [selectedBird, setSelectedBird] = useState<Bird | null>(null);
@@ -16,11 +40,15 @@ function LocationPackContent() {
 
   // Function to select a random bird of the day
   const selectBirdOfTheDay = () => {
+    const availableBirds = birds.filter(bird =>
+      birdsWithMainImages.includes(bird.name)
+    );
+
     // Use current date as seed for consistent "bird of the day" selection
     const today = new Date().toDateString();
     const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const randomIndex = seed % birds.length;
-    return birds[randomIndex];
+    const randomIndex = seed % availableBirds.length;
+    return availableBirds[randomIndex];
   };
 
 
@@ -89,8 +117,10 @@ function LocationPackContent() {
     };
   }, []);
 
-  // Show all birds
-  const locationBirds = birds;
+  // Only show birds that have main images available
+  const locationBirds = birds.filter(bird =>
+    birdsWithMainImages.includes(bird.name)
+  );
 
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
