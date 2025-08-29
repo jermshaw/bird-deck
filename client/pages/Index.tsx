@@ -262,15 +262,14 @@ function BirdDeckHome() {
             {/* Collection Dots Grid */}
             <div className="mb-8">
               <div className="grid grid-cols-10 gap-1 mb-4">
-                {Array.from({ length: Math.min(75, totalBirds) }).map((_, index) => {
-                  const bird = birds[index];
-                  const isCollected = bird && isInCollection(bird.id);
-                  const rarityColor = bird?.rarity === 'legendary' ? '#FFD700' : 
-                                   bird?.rarity === 'rare' ? '#9C27B0' : '#4CAF50';
-                  
+                {filteredBirds.map((bird, index) => {
+                  const isCollected = isInCollection(bird.id);
+                  const rarityColor = bird.rarity === 'legendary' ? '#FFD700' :
+                                   bird.rarity === 'rare' ? '#9C27B0' : '#4CAF50';
+
                   return (
                     <div
-                      key={index}
+                      key={bird.id}
                       className="w-3 h-3 rounded-full"
                       style={{
                         backgroundColor: isCollected ? rarityColor : '#E5E5E5'
