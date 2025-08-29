@@ -56,7 +56,7 @@ function BirdDeckHome() {
       // Color based on habitat
       const colors = {
         'Perchers': '#22c55e',
-        'Ground dwellers': '#a3a3a3',
+        'Ground dwellers': '#8B4513',
         'Raptors': '#ef4444',
         'Hummingbirds': '#ec4899',
         'Water dwellers': '#3b82f6',
