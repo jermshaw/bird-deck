@@ -376,74 +376,9 @@ function BirdDeckHome() {
 
         {/* Birds of San Francisco Section */}
         <div className="mb-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-white text-[18px] font-normal font-rubik">
-              Birds of San Francisco
-            </h2>
-            <div className="relative">
-              <div
-                ref={filterButtonRef}
-                className="w-8 h-8 bg-white/30 backdrop-blur-sm rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors"
-                onClick={() => {
-                  setFilterMenuOpen(!filterMenuOpen);
-                }}
-              >
-                <svg
-                  width="12"
-                  height="10"
-                  viewBox="0 0 12 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="12" height="2" rx="1" fill="#D9D9D9"/>
-                  <rect y="4" width="12" height="2" rx="1" fill="#D9D9D9"/>
-                  <rect y="8" width="12" height="2" rx="1" fill="#D9D9D9"/>
-                </svg>
-              </div>
-
-              {/* Filter Menu Dropdown */}
-              {filterMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[140px] z-50">
-                  <div className="px-3 py-1 text-xs font-medium text-gray-500 uppercase tracking-wide">
-                    Sort by
-                  </div>
-                  <button
-                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                      sortOption === 'name' ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
-                    }`}
-                    onClick={() => {
-                      setSortOption('name');
-                      setFilterMenuOpen(false);
-                    }}
-                  >
-                    Name A-Z
-                  </button>
-                  <button
-                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                      sortOption === 'collected' ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
-                    }`}
-                    onClick={() => {
-                      setSortOption('collected');
-                      setFilterMenuOpen(false);
-                    }}
-                  >
-                    Collected
-                  </button>
-                  <button
-                    className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${
-                      sortOption === 'not-collected' ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
-                    }`}
-                    onClick={() => {
-                      setSortOption('not-collected');
-                      setFilterMenuOpen(false);
-                    }}
-                  >
-                    Not Collected
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+          <h2 className="text-white text-[18px] font-normal font-rubik">
+            Birds of San Francisco
+          </h2>
         </div>
 
         {/* Bird Cards Grid */}
