@@ -129,12 +129,26 @@
     /* Prevent elastic scrolling on iOS */
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y pinch-zoom;
-    /* Fixed background with radial gradients */
-    background-color: hsla(202,42%,21%,1);
-    background-image:
-      radial-gradient(at 93% 37%, hsla(212,62%,28%,0.8) 0px, transparent 50%),
-      radial-gradient(at 24% 12%, hsla(180,0%,100%,0.19) 0px, transparent 50%),
-      radial-gradient(at 18% 68%, hsla(277,29%,37%,0.72) 0px, transparent 50%);
+    /* Animated gradient background */
+    --y-0: 49%;
+    --c-0: hsla(219.99999999999997, 41%, 10%, 1);
+    --x-0: 92%;
+    --y-1: 63%;
+    --c-1: hsla(219.99999999999997, 41%, 10%, 1);
+    --x-1: 14%;
+    --x-2: 94%;
+    --c-2: hsla(258.87640449438203, 81%, 37%, 0.15);
+    --y-2: 13%;
+    --x-3: 72%;
+    --y-3: 93%;
+    --c-3: hsla(266.02941176470586, 85%, 38%, 0.2);
+    --y-4: 8%;
+    --c-4: hsla(258.87640449438203, 74%, 52%, 0.2);
+    --x-4: 39%;
+    background-color: hsla(219.99999999999997, 42%, 10%, 1);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 2785 2785' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"), radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0)), radial-gradient(circle at var(--x-1) var(--y-1), var(--c-1) var(--s-start-1), transparent var(--s-end-1)), radial-gradient(circle at var(--x-2) var(--y-2), var(--c-2) var(--s-start-2), transparent var(--s-end-2)), radial-gradient(circle at var(--x-3) var(--y-3), var(--c-3) var(--s-start-3), transparent var(--s-end-3)), radial-gradient(circle at var(--x-4) var(--y-4), var(--c-4) var(--s-start-4), transparent var(--s-end-4));
+    animation: hero-gradient-animation 10s linear infinite alternate;
+    background-blend-mode: overlay, normal, normal, normal, normal, normal;
     background-attachment: fixed;
   }
 }
