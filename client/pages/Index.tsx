@@ -344,7 +344,7 @@ function BirdDeckHome() {
             <h2 className="text-white text-[18px] font-normal font-rubik">
               Birds of San Francisco
             </h2>
-            <div className="w-8 h-8 bg-white/70 backdrop-blur-sm rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-white/30 backdrop-blur-sm rounded-lg flex items-center justify-center">
               <svg 
                 width="12" 
                 height="10" 
