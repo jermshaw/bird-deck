@@ -54,23 +54,37 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
         {bird && (
         <div className="min-h-screen w-full relative font-rubik overflow-y-auto">
           {/* Blurred Background - Fixed */}
-          <div
-            className="fixed inset-0 bg-cover bg-center z-0"
-            style={{
-              backgroundImage: `url(${bird.imageUrl})`,
-              filter: isCollected
-                ? 'blur(120px) saturate(1.3) brightness(1.1)'
-                : 'blur(150px) grayscale(100%) brightness(0.7)',
-              backgroundColor: isCollected ? '#4F46E5' : '#9CA3AF'
-            }}
-          />
+          {isCollected ? (
+            // Colorful gradient background using bird's colors when collected
+            <div
+              className="fixed inset-0 z-0"
+              style={{
+                background: bird.colors && bird.colors.length > 0
+                  ? `linear-gradient(135deg, ${bird.colors.map((color, index) =>
+                      `${color}${Math.floor(70 + (index * 5))}` // Add transparency
+                    ).join(', ')})`
+                  : 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(236, 72, 153, 0.8) 50%, rgba(34, 197, 94, 0.8) 100%)',
+                filter: 'blur(120px) saturate(1.4) brightness(1.2)'
+              }}
+            />
+          ) : (
+            // Grayscale blurred image for uncollected birds
+            <div
+              className="fixed inset-0 bg-cover bg-center z-0"
+              style={{
+                backgroundImage: `url(${bird.imageUrl})`,
+                filter: 'blur(150px) grayscale(100%) brightness(0.7)',
+                backgroundColor: '#9CA3AF'
+              }}
+            />
+          )}
 
           {/* Background Overlay for Text Legibility - Fixed */}
           <div
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'rgba(0, 0, 0, 0.15)' // Subtle dark overlay to ensure text readability while preserving bird colors
+                ? 'rgba(0, 0, 0, 0.2)' // Slightly stronger overlay for colorful backgrounds
                 : 'rgba(156, 163, 175, 0.6)'
             }}
           />
