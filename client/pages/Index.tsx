@@ -301,26 +301,19 @@ function BirdDeckHome() {
             </div>
           </div>
 
-          {/* Google Maps Placeholder Card */}
-          <div className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative p-6">
-            <h3 className="text-[#2C2C2C] text-[16px] font-medium mb-4 font-rubik">
-              Birding hotspots
+          {/* Map Card */}
+          <div className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative overflow-hidden">
+            <h3 className="text-[#2C2C2C] text-[16px] font-medium font-rubik absolute left-6 top-6 z-10">
+              Places to spot birds
             </h3>
-            
-            {/* Static Map Image */}
-            <div className="w-full h-[360px] rounded-[16px] overflow-hidden">
-              <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/159144ddd57e25fe8779f4d9f2b1dc4b9884af30?width=650"
-                alt="San Francisco Birding Hotspots Map"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            <div className="absolute bottom-6 left-6 right-6">
-              <p className="text-[12px] text-gray-400 font-rubik">
-                Best birding locations in and around San Francisco
-              </p>
-            </div>
+
+            {/* Map Image - Edge to Edge */}
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/a9af1b5559035184da90d06c929dce466c7c3492?width=718"
+              alt="Map with Locations"
+              className="absolute left-0 right-0 bottom-0 w-full h-[420px] object-cover"
+              style={{ top: '59px' }}
+            />
           </div>
         </div>
 
