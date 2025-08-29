@@ -94,7 +94,6 @@ function BirdDeckHome() {
   return (
     <div
       className="min-h-screen relative font-rubik"
-      style={getBackground()}
     >
 
       {/* Content Container */}
