@@ -211,7 +211,7 @@ function BirdDeckHome() {
                     className="w-[160px] h-[160px] rounded-full border-4 border-white overflow-hidden"
                   >
                     <img
-                      src={birdOfTheDay.imageUrl}
+                      src={`/images/birds/${birdOfTheDay.name}/profile.png`}
                       alt={birdOfTheDay.name}
                       className="w-full h-full object-cover"
                     />
