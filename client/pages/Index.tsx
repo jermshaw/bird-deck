@@ -19,19 +19,9 @@ function BirdDeckHome() {
     return birds[randomIndex];
   };
 
-  // Get background gradient based on time of day and weather
-  const getBackgroundGradient = () => {
-    const hour = new Date().getHours();
-    const isDay = hour >= 6 && hour < 18;
-    
-    // Time-based gradients with weather influence
-    if (isDay) {
-      // Cloudy day - muted blues and grays
-      return 'linear-gradient(180deg, #657D91 0%, #495373 50%, #454564 100%)';
-    } else {
-      // Night - darker blues and purples
-      return 'linear-gradient(180deg, #2D3748 0%, #1A202C 50%, #171923 100%)';
-    }
+  // Get background color to match Figma design
+  const getBackgroundColor = () => {
+    return '#ECE9DF'; // Light cream background from Figma
   };
 
   // Get collection stats by category
@@ -95,30 +85,45 @@ function BirdDeckHome() {
   const categoryStats = getCollectionStatsByCategory();
 
   return (
-    <div 
+    <div
       className="min-h-screen relative font-rubik"
-      style={{ background: getBackgroundGradient() }}
+      style={{ background: getBackgroundColor() }}
     >
-      {/* Background gradient circles - matching Figma design */}
+      {/* Background gradient circles - exact Figma positioning */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div 
-          className="absolute -left-48 top-16 w-[644px] h-[555px] rounded-full opacity-60"
+        {/* First ellipse - dark blue-gray */}
+        <div
+          className="absolute rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(69, 69, 100, 0.6) 0%, transparent 70%)',
+            left: '-228px',
+            top: '500px',
+            width: '644px',
+            height: '555px',
+            background: 'radial-gradient(ellipse 322px 278px at center, #454564 0%, transparent 70%)',
             filter: 'blur(100px)'
           }}
         />
-        <div 
-          className="absolute right-8 -top-32 w-[528px] h-[455px] rounded-full opacity-60"
+        {/* Second ellipse - blue-gray */}
+        <div
+          className="absolute rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(73, 83, 115, 0.6) 0%, transparent 70%)',
+            left: '130px',
+            top: '-65px',
+            width: '528px',
+            height: '455px',
+            background: 'radial-gradient(ellipse 264px 228px at center, #495373 0%, transparent 70%)',
             filter: 'blur(100px)'
           }}
         />
-        <div 
-          className="absolute left-16 -top-40 w-[403px] h-[348px] rounded-full opacity-60"
+        {/* Third ellipse - lighter blue-gray */}
+        <div
+          className="absolute rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(101, 125, 145, 0.6) 0%, transparent 70%)',
+            left: '-65px',
+            top: '-56px',
+            width: '403px',
+            height: '348px',
+            background: 'radial-gradient(ellipse 202px 174px at center, #657D91 0%, transparent 70%)',
             filter: 'blur(100px)'
           }}
         />
