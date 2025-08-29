@@ -409,7 +409,7 @@ function BirdDeckHome() {
                       setFilterMenuOpen(false);
                     }}
                   >
-                    Collected First
+                    Collected
                   </button>
                   <button
                     className={`w-full text-left px-3 py-2 text-sm hover:bg-gray-50 transition-colors ${
@@ -420,7 +420,7 @@ function BirdDeckHome() {
                       setFilterMenuOpen(false);
                     }}
                   >
-                    Not Collected First
+                    Not Collected
                   </button>
                 </div>
               )}
