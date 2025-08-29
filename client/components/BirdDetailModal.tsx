@@ -60,9 +60,15 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               className="fixed inset-0 z-0"
               style={{
                 background: bird.colors && bird.colors.length > 0
-                  ? `linear-gradient(135deg, ${bird.colors.map((color, index) =>
-                      `${color}${Math.floor(70 + (index * 5))}` // Add transparency
-                    ).join(', ')})`
+                  ? `linear-gradient(135deg, ${bird.colors.map((color, index) => {
+                      // Convert hex to rgba with transparency
+                      const hex = color.replace('#', '');
+                      const r = parseInt(hex.substr(0, 2), 16);
+                      const g = parseInt(hex.substr(2, 2), 16);
+                      const b = parseInt(hex.substr(4, 2), 16);
+                      const alpha = 0.7 + (index * 0.05); // Varying transparency
+                      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                    }).join(', ')})`
                   : 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(236, 72, 153, 0.8) 50%, rgba(34, 197, 94, 0.8) 100%)',
                 filter: 'blur(120px) saturate(1.4) brightness(1.2)'
               }}
