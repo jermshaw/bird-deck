@@ -25,12 +25,10 @@ function BirdDeckHome() {
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
     if (!bird || !bird.colors || bird.colors.length < 3) {
-      console.log('No bird or insufficient colors:', bird);
       return;
     }
 
     const [color1, color2, color3] = bird.colors;
-    console.log('Bird colors from data:', { color1, color2, color3 });
 
     // Target the body element for background
     const body = document.body;
@@ -69,8 +67,6 @@ function BirdDeckHome() {
       `radial-gradient(circle at 89% 8%, ${gradientColors[4]} 0%, transparent 150%)`
     ].join(', ');
 
-    console.log('Applying background:', { baseColor, backgroundImage });
-
     // Clear any existing background styles and apply new ones
     body.style.removeProperty('background');
     body.style.removeProperty('background-color');
@@ -81,8 +77,6 @@ function BirdDeckHome() {
     body.style.backgroundImage = backgroundImage;
     body.style.backgroundBlendMode = 'overlay, normal, normal, normal, normal, normal';
     body.style.backgroundAttachment = 'fixed';
-
-    console.log('Background applied successfully for', bird.name);
   };
 
 
@@ -129,11 +123,9 @@ function BirdDeckHome() {
 
   useEffect(() => {
     const selectedBird = selectBirdOfTheDay();
-    console.log('Selected bird of the day:', selectedBird?.name, selectedBird?.colors);
     setBirdOfTheDay(selectedBird);
     // Update background colors when bird of the day changes
     if (selectedBird) {
-      console.log('Calling updateBackgroundColors with:', selectedBird);
       updateBackgroundColors(selectedBird);
     }
   }, []);
