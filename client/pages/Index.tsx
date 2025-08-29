@@ -310,7 +310,7 @@ function BirdDeckHome() {
             {/* Google Maps Embed */}
             <div className="w-full h-[360px] rounded-[16px] overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/d/embed?mid=1mYRHgY8diPuzRDcbJTKF_rC3iKmk0nU&iwloc=near&t=m&output=embed&ehbc=2E312F&noprof=1&disableDefaultUI=1&zoomControl=0&mapTypeControl=0&scaleControl=0&streetViewControl=0&rotateControl=0&fullscreenControl=0"
+                src="https://www.google.com/maps/d/embed?mid=1mYRHgY8diPuzRDcbJTKF_rC3iKmk0nU&iwloc=near&t=m&output=embed&ehbc=2E312F&noprof=1&disableDefaultUI=1&zoomControl=0&mapTypeControl=0&scaleControl=0&streetViewControl=0&rotateControl=0&fullscreenControl=0&gestureHandling=none&scrollwheel=0&panControl=0&keyboardShortcuts=0&draggable=0&clickableIcons=0"
                 width="100%"
                 height="100%"
                 style={{ border: 0, pointerEvents: 'none' }}
