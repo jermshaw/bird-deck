@@ -262,8 +262,7 @@ function BirdDeckHome() {
               style={{
                 backgroundColor: birdCardStyles.backgroundColor,
                 backgroundImage: birdCardStyles.backgroundImage,
-                backgroundBlendMode: birdCardStyles.backgroundBlendMode,
-                boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
+                backgroundBlendMode: birdCardStyles.backgroundBlendMode
               }}
               onClick={() => handleBirdClick(birdOfTheDay)}
             >
