@@ -279,35 +279,13 @@ function BirdDeckHome() {
             <div
               className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
-                background: `linear-gradient(135deg, ${enhancedBirdColors[0]} 0%, ${enhancedBirdColors[1]} 50%, ${enhancedBirdColors[2]} 100%)`,
+                backgroundColor: birdCardStyles.backgroundColor,
+                backgroundImage: birdCardStyles.backgroundImage,
+                backgroundBlendMode: birdCardStyles.backgroundBlendMode,
                 boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
               }}
               onClick={() => handleBirdClick(birdOfTheDay)}
             >
-              {/* Background gradient circles matching Figma */}
-              <div className="absolute inset-0 overflow-hidden">
-                <div 
-                  className="absolute -right-5 top-20 w-[454px] h-[454px] rounded-full opacity-80"
-                  style={{
-                    background: `radial-gradient(circle, ${enhancedBirdColors[0]} 0%, transparent 70%)`,
-                    filter: 'blur(100px)'
-                  }}
-                />
-                <div 
-                  className="absolute -left-12 top-56 w-[554px] h-[554px] rounded-full opacity-70"
-                  style={{
-                    background: `radial-gradient(circle, ${enhancedBirdColors[1]} 0%, transparent 70%)`,
-                    filter: 'blur(100px)'
-                  }}
-                />
-                <div 
-                  className="absolute left-24 -top-20 w-[347px] h-[347px] rounded-full opacity-90"
-                  style={{
-                    background: `radial-gradient(circle, ${enhancedBirdColors[2]} 0%, transparent 70%)`,
-                    filter: 'blur(100px)'
-                  }}
-                />
-              </div>
 
               {/* Content */}
               <div className="relative z-10 p-6 h-full flex flex-col">
