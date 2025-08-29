@@ -187,7 +187,7 @@ function BirdDeckHome() {
 
         {/* Horizontal Carousel */}
         <div
-          className="flex gap-4 pb-8 mb-4 -mx-6 px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden sm:pb-8 pb-12"
+          className="flex gap-4 pb-8 mb-0 -mx-6 px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden sm:pb-8 pb-12"
           style={{
             overflowX: 'auto',
             overflowY: 'auto',
