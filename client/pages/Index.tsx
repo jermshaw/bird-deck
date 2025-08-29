@@ -368,7 +368,10 @@ function BirdDeckHome() {
               <div
                 ref={filterButtonRef}
                 className="w-8 h-8 bg-white/30 backdrop-blur-sm rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors"
-                onClick={() => setFilterMenuOpen(!filterMenuOpen)}
+                onClick={() => {
+                  console.log('Filter button clicked, current state:', filterMenuOpen);
+                  setFilterMenuOpen(!filterMenuOpen);
+                }}
               >
                 <svg
                   width="12"
