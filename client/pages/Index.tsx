@@ -19,6 +19,66 @@ function BirdDeckHome() {
     return birds[randomIndex];
   };
 
+  // Function to update background colors based on bird of the day
+  const updateBackgroundColors = (bird: Bird) => {
+    if (!bird || !bird.colors || bird.colors.length < 3) return;
+
+    const [color1, color2, color3] = bird.colors;
+
+    // Convert hex colors to HSLA and create variations for the animated background
+    const hexToHsla = (hex: string, alpha = 1) => {
+      const r = parseInt(hex.slice(1, 3), 16) / 255;
+      const g = parseInt(hex.slice(3, 5), 16) / 255;
+      const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const diff = max - min;
+      const sum = max + min;
+
+      const l = sum / 2;
+      let s = 0;
+      let h = 0;
+
+      if (diff !== 0) {
+        s = l > 0.5 ? diff / (2 - sum) : diff / sum;
+
+        switch (max) {
+          case r: h = ((g - b) / diff + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / diff + 2) / 6; break;
+          case b: h = ((r - g) / diff + 4) / 6; break;
+        }
+      }
+
+      return `hsla(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%, ${alpha})`;
+    };
+
+    // Create darker base color from primary bird color
+    const baseHsla = hexToHsla(color1, 1);
+    const baseColor = baseHsla.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
+      (_, h, s, l) => `hsla(${h}, ${Math.min(42, parseInt(s))}%, ${Math.min(15, parseInt(l))}%, 1)`);
+
+    // Update CSS custom properties for the animated background
+    const root = document.documentElement;
+
+    // Create gradient colors with varying opacities based on bird colors
+    const gradientColors = {
+      'c-0': baseColor,
+      'c-1': baseColor,
+      'c-2': hexToHsla(color2, 0.15),
+      'c-3': hexToHsla(color3, 0.2),
+      'c-4': hexToHsla(color1, 0.2)
+    };
+
+    // Update background base color
+    root.style.backgroundColor = baseColor;
+
+    // Update gradient colors in CSS custom properties
+    Object.entries(gradientColors).forEach(([key, color]) => {
+      root.style.setProperty(`--${key}`, color);
+    });
+  };
+
 
   // Get collection stats by category
   const getCollectionStatsByCategory = () => {
@@ -62,7 +122,12 @@ function BirdDeckHome() {
   };
 
   useEffect(() => {
-    setBirdOfTheDay(selectBirdOfTheDay());
+    const selectedBird = selectBirdOfTheDay();
+    setBirdOfTheDay(selectedBird);
+    // Update background colors when bird of the day changes
+    if (selectedBird) {
+      updateBackgroundColors(selectedBird);
+    }
   }, []);
 
   const handleBirdClick = (bird: Bird) => {
