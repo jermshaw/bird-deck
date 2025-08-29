@@ -227,7 +227,7 @@ function BirdDeckHome() {
           )}
 
           {/* Collection Progress Card */}
-          <div className="flex-shrink-0 w-[325px] h-[460px] rounded-[24px] bg-white relative p-6">
+          <div className="flex-1 min-w-[280px] h-[460px] rounded-[24px] bg-white relative p-6">
             <h3 className="text-[#2C2C2C] text-[16px] font-medium mb-2 font-rubik">
               Birds collected
             </h3>
