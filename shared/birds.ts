@@ -52,7 +52,7 @@ export const birds: Bird[] = [
     funFact: "Can eat almost 10% of its body weight in tiny invertebrates every day during migration.",
     habitat: "coast",
     size: "small",
-    imageUrl: "/images/birds/western-sandpiper/main.png",
+    imageUrl: "/images/birds/Western Sandpiper/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray")
   },
@@ -65,7 +65,7 @@ export const birds: Bird[] = [
     funFact: "Males can sing up to 100 different song variations to defend their territory.",
     habitat: "wetland",
     size: "small",
-    imageUrl: "/images/birds/red-winged-blackbird/main.png",
+    imageUrl: "/images/birds/Red-winged Blackbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Red, Yellow")
   },
@@ -78,7 +78,7 @@ export const birds: Bird[] = [
     funFact: "Their haunting song can mimic other birds, making them tricky to identify by sound alone.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/varied-thrush/main.png",
+    imageUrl: "/images/birds/Varied Thrush/main.jpg",
     additionalImages: [],
     colors: parseColors("Orange, Black, Blue")
   },
@@ -91,7 +91,7 @@ export const birds: Bird[] = [
     funFact: "Young birds \"practice\" singing for weeks before mastering the adult song.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/white-crowned-sparrow/main.png",
+    imageUrl: "/images/birds/White-crowned Sparrow/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, White, Black")
   },
@@ -104,7 +104,7 @@ export const birds: Bird[] = [
     funFact: "They often sleep huddled in tree cavities, sometimes with 20 or more birds together.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/pygmy-nuthatch/main.png",
+    imageUrl: "/images/birds/Pygmy Nuthatch/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray")
   },
@@ -117,7 +117,7 @@ export const birds: Bird[] = [
     funFact: "The ruby crown is usually hidden and only flashes when the bird is excited or alarmed.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/ruby-crowned-kinglet/main.png",
+    imageUrl: "/images/birds/Ruby-crowned Kinglet/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Gray, Yellow")
   },
@@ -130,7 +130,7 @@ export const birds: Bird[] = [
     funFact: "They sometimes hide their bright golden crown to avoid predators.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/golden-crowned-sparrow/main.png",
+    imageUrl: "/images/birds/Golden-crowned Sparrow/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Yellow, Gray")
   },
@@ -143,7 +143,7 @@ export const birds: Bird[] = [
     funFact: "Can drink while flying, scooping water mid-air with their beaks.",
     habitat: "urban",
     size: "small",
-    imageUrl: "/images/birds/barn-swallow/main.png",
+    imageUrl: "/images/birds/Barn Swallow/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Brown, White")
   },
@@ -156,7 +156,7 @@ export const birds: Bird[] = [
     funFact: "Their song can vary widely even within a small neighborhood.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/song-sparrow/main.png",
+    imageUrl: "/images/birds/Song Sparrow/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray, White")
   },
@@ -169,7 +169,7 @@ export const birds: Bird[] = [
     funFact: "Can remember thousands of locations where it caches food.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/chestnut-backed-chickadee/main.png",
+    imageUrl: "/images/birds/Chestnut-backed Chickadee/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Black")
   },
@@ -182,7 +182,7 @@ export const birds: Bird[] = [
     funFact: "Famous for pretending to have a broken wing to lure predators away from nests.",
     habitat: "coast",
     size: "medium",
-    imageUrl: "/images/birds/killdeer/main.png",
+    imageUrl: "/images/birds/Killdeer/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, White, Black")
   },
@@ -195,7 +195,7 @@ export const birds: Bird[] = [
     funFact: "Uses its bright yellow eyes to intimidate rivals.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/brewers-blackbird/main.png",
+    imageUrl: "/images/birds/Brewer's Blackbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Yellow")
   },
@@ -208,7 +208,7 @@ export const birds: Bird[] = [
     funFact: "Both sexes help excavate tree cavities, which can be used for decades.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/nuttalls-woodpecker/main.png",
+    imageUrl: "/images/birds/Nuttall's Woodpecker/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White, Brown")
   },
@@ -221,7 +221,7 @@ export const birds: Bird[] = [
     funFact: "Can dive up to 6 feet to catch mollusks and aquatic insects.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/lesser-scaup/main.png",
+    imageUrl: "/images/birds/Lesser Scaup/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Gray, White")
   },
@@ -234,7 +234,7 @@ export const birds: Bird[] = [
     funFact: "Sometimes joins mixed flocks with chickadees and nuthatches for safety.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/oak-titmouse/main.png",
+    imageUrl: "/images/birds/Oak Titmouse/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, Brown")
   },
@@ -247,7 +247,7 @@ export const birds: Bird[] = [
     funFact: "Males undergo a complete molt each summer, temporarily losing flight ability.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/greater-scaup/main.png",
+    imageUrl: "/images/birds/Greater Scaup/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Gray, White")
   },
@@ -260,7 +260,7 @@ export const birds: Bird[] = [
     funFact: "Nests in tree cavities and the ducklings leap to the ground shortly after hatching.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/wood-duck/main.png",
+    imageUrl: "/images/birds/Wood Duck/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Blue, White, Brown")
   },
@@ -273,7 +273,7 @@ export const birds: Bird[] = [
     funFact: "Can use its long clawed toes to scratch and sift through leaf litter efficiently.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/california-towhee/main.png",
+    imageUrl: "/images/birds/California Towhee/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray")
   },
@@ -286,7 +286,7 @@ export const birds: Bird[] = [
     funFact: "Uses incredible speed and agility to chase down small birds in forests.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/coopers-hawk/main.png",
+    imageUrl: "/images/birds/Cooper's Hawk/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray, White")
   },
@@ -299,7 +299,7 @@ export const birds: Bird[] = [
     funFact: "Feeds mostly at night, relying on stealth to catch fish.",
     habitat: "wetland",
     size: "large",
-    imageUrl: "/images/birds/black-crowned-night-heron/main.png",
+    imageUrl: "/images/birds/Black-crowned Night-heron/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Gray, White")
   },
