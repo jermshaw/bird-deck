@@ -151,7 +151,7 @@ function BirdDeckHome() {
   };
 
   // Filter birds to match what's shown on home page
-  const filteredBirds = birds.filter(bird => bird.imageUrl && !bird.imageUrl.includes('placeholder') && !bird.imageUrl.includes('404'));
+  const filteredBirds = birds.filter(bird => bird.imageUrl && (bird.imageUrl.includes('main.jpg') || bird.imageUrl.includes('main.png')));
 
   // Count collected birds from filtered list
   const totalCollected = filteredBirds.filter(bird => isInCollection(bird.id)).length;
