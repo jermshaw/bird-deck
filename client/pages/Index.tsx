@@ -183,7 +183,7 @@ function BirdDeckHome() {
           {/* Bird of the Day Card */}
           {birdOfTheDay && (
             <div
-              className="flex-1 basis-0 min-w-[300px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
+              className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
                 background: `linear-gradient(135deg, ${birdOfTheDay.colors[0] || '#FBAF4D'} 0%, ${birdOfTheDay.colors[1] || '#64455B'} 50%, ${birdOfTheDay.colors[2] || '#F4791D'} 100%)`,
                 boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
@@ -248,7 +248,7 @@ function BirdDeckHome() {
           )}
 
           {/* Collection Progress Card */}
-          <div className="flex-1 basis-0 min-w-[300px] h-[460px] rounded-[24px] bg-white relative p-6">
+          <div className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative p-6">
             <h3 className="text-[#2C2C2C] text-[16px] font-medium mb-2 font-rubik">
               Birds collected
             </h3>
