@@ -253,7 +253,7 @@ function BirdDeckHome() {
               Birds collected
             </h3>
             
-            <div className="mb-8">
+            <div className="mb-4">
               <span className="text-[#2A2A2A] text-[61px] font-medium font-rubik leading-none">
                 {totalCollected}
               </span>
