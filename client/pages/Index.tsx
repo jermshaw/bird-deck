@@ -302,7 +302,7 @@ function BirdDeckHome() {
           </div>
 
           {/* Google Maps Placeholder Card */}
-          <div className="flex-1 basis-0 min-w-[300px] h-[460px] rounded-[24px] bg-white relative p-6">
+          <div className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] bg-white relative p-6">
             <h3 className="text-[#2C2C2C] text-[16px] font-medium mb-4 font-rubik">
               Birding hotspots
             </h3>
