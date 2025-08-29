@@ -133,6 +133,10 @@ export function BirdSearchAndFilter({ onFiltersChange, filteredCount, totalCount
                       <SelectItem value="arctic">❄️ Arctic</SelectItem>
                       <SelectItem value="ocean">🌊 Ocean</SelectItem>
                       <SelectItem value="urban">🏙️ Urban</SelectItem>
+                      <SelectItem value="oak woodland">🌳 Oak Woodland</SelectItem>
+                      <SelectItem value="gardens">🌺 Gardens</SelectItem>
+                      <SelectItem value="coast">🏖️ Coast</SelectItem>
+                      <SelectItem value="shrubland">🌿 Shrubland</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
