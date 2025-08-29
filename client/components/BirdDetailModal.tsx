@@ -60,8 +60,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               backgroundImage: `url(${bird.imageUrl})`,
               filter: isCollected
                 ? 'blur(120px) saturate(1.3) brightness(1.1)'
-                : 'blur(150px)',
-              backgroundColor: isCollected ? '#4F46E5' : '#EEE'
+                : 'blur(150px) grayscale(100%) brightness(0.7)',
+              backgroundColor: isCollected ? '#4F46E5' : '#9CA3AF'
             }}
           />
 
@@ -71,7 +71,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             style={{
               background: isCollected
                 ? 'linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(236, 72, 153, 0.2) 50%, rgba(34, 197, 94, 0.2) 100%)'
-                : 'rgba(238, 238, 238, 0.5)'
+                : 'rgba(156, 163, 175, 0.6)'
             }}
           />
 
