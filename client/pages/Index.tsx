@@ -10,6 +10,9 @@ function BirdDeckHome() {
   const [modalOpen, setModalOpen] = useState(false);
   const [birdOfTheDay, setBirdOfTheDay] = useState<Bird | null>(null);
   const [currentWeather, setCurrentWeather] = useState('65° and the skies are a bit cloudy');
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
+  const [sortOption, setSortOption] = useState<'name' | 'collected' | 'not-collected'>('name');
+  const filterButtonRef = useRef<HTMLDivElement>(null);
 
   // Function to select a random bird of the day based on current date
   const selectBirdOfTheDay = () => {
