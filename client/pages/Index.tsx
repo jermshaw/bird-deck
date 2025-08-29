@@ -270,21 +270,21 @@ function BirdDeckHome() {
                 <div 
                   className="absolute -right-5 top-20 w-[454px] h-[454px] rounded-full opacity-80"
                   style={{
-                    background: `radial-gradient(circle, ${birdOfTheDay.colors[0] || '#FBAF4D'} 0%, transparent 70%)`,
+                    background: `radial-gradient(circle, ${enhancedBirdColors[0]} 0%, transparent 70%)`,
                     filter: 'blur(100px)'
                   }}
                 />
                 <div 
                   className="absolute -left-12 top-56 w-[554px] h-[554px] rounded-full opacity-70"
                   style={{
-                    background: `radial-gradient(circle, ${birdOfTheDay.colors[1] || '#64455B'} 0%, transparent 70%)`,
+                    background: `radial-gradient(circle, ${enhancedBirdColors[1]} 0%, transparent 70%)`,
                     filter: 'blur(100px)'
                   }}
                 />
                 <div 
                   className="absolute left-24 -top-20 w-[347px] h-[347px] rounded-full opacity-90"
                   style={{
-                    background: `radial-gradient(circle, ${birdOfTheDay.colors[2] || '#F4791D'} 0%, transparent 70%)`,
+                    background: `radial-gradient(circle, ${enhancedBirdColors[2]} 0%, transparent 70%)`,
                     filter: 'blur(100px)'
                   }}
                 />
