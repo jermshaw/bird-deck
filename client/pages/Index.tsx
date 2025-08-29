@@ -436,9 +436,9 @@ function BirdCard({ bird, isCollected, onClick }: {
 
         {/* Name Box */}
         <div className="absolute bottom-0 left-0 right-0">
-          <div 
-            className="bg-white/70 mx-[-1px] mb-[-1px] border-t border-[#2C2C2C]"
-            style={{ 
+          <div
+            className="bg-white/70 mx-[-1px] mb-[-1px]"
+            style={{
               backdropFilter: 'blur(17px)',
               borderBottomLeftRadius: '11.6px',
               borderBottomRightRadius: '11.6px'
