@@ -84,7 +84,7 @@ export const birds: Bird[] = [
   },
   {
     id: "4",
-    name: "White-crowned sparrow",
+    name: "White-crowned Sparrow",
     ability: "Stripe Strike",
     rarity: "common",
     description: "Recognizable by bold black-and-white head stripes. They forage on the ground for seeds and insects. Their clear, whistled songs are a favorite among birders.",
