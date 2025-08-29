@@ -16,11 +16,39 @@ function LocationPackContent() {
 
   // Function to select a random bird of the day
   const selectBirdOfTheDay = () => {
+    // Only show birds that have main images available
+    const birdsWithMainImages = [
+      "Western Sandpiper",
+      "Red-winged Blackbird",
+      "Varied Thrush",
+      "White-crowned sparrow",
+      "Pygmy Nuthatch",
+      "Ruby-crowned Kinglet",
+      "Golden-crowned Sparrow",
+      "Barn Swallow",
+      "Song Sparrow",
+      "Chestnut-backed Chickadee",
+      "Killdeer",
+      "Brewer's Blackbird",
+      "Nuttall's Woodpecker",
+      "Lesser Scaup",
+      "Oak Titmouse",
+      "Greater Scaup",
+      "Wood Duck",
+      "California Towhee",
+      "Cooper's Hawk",
+      "Black-crowned Night-Heron"
+    ];
+
+    const availableBirds = birds.filter(bird =>
+      birdsWithMainImages.includes(bird.name)
+    );
+
     // Use current date as seed for consistent "bird of the day" selection
     const today = new Date().toDateString();
     const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const randomIndex = seed % birds.length;
-    return birds[randomIndex];
+    const randomIndex = seed % availableBirds.length;
+    return availableBirds[randomIndex];
   };
 
 
