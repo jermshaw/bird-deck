@@ -140,8 +140,10 @@ function BirdDeckHome() {
           {/* Location and Weather */}
           <div className="mb-4">
             <h1 className="text-white font-bold text-[28px] leading-[30px] mb-1 font-rubik">
-              San Francisco{' '}
-              <span className="text-white/40 font-normal">California</span>
+              <span className="block sm:inline">San Francisco</span>
+              <span className="sm:ml-2">
+                <span className="block sm:inline text-white/40 font-normal">California</span>
+              </span>
             </h1>
             <div className="flex items-center gap-2">
               <svg 
