@@ -166,8 +166,8 @@ function BirdDeckHome() {
           
           {/* Bird of the Day Card */}
           {birdOfTheDay && (
-            <div 
-              className="flex-shrink-0 w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
+            <div
+              className="flex-1 min-w-[300px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
                 background: `linear-gradient(135deg, ${birdOfTheDay.colors[0] || '#FBAF4D'} 0%, ${birdOfTheDay.colors[1] || '#64455B'} 50%, ${birdOfTheDay.colors[2] || '#F4791D'} 100%)`,
                 boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
