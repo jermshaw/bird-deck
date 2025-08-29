@@ -376,7 +376,7 @@ function BirdDeckHome() {
 
         {/* Birds of San Francisco Section */}
         <div className="mb-6">
-          <h2 className="text-white text-[18px] font-normal font-rubik">
+          <h2 className="text-white text-[24px] font-bold font-rubik">
             Birds of San Francisco
           </h2>
         </div>
