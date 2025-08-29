@@ -182,21 +182,6 @@ function BirdDeckHome() {
                 <span className="block sm:inline text-white/40 font-normal">California</span>
               </span>
             </h1>
-            <div className="flex items-center gap-2">
-              <svg 
-                width="16" 
-                height="11" 
-                viewBox="0 0 16 11" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="fill-white/40"
-              >
-                <path d="M9 0C11.7614 0 14 2.23858 14 5C14 5.05755 13.997 5.1148 13.9951 5.17188C15.1624 5.58259 16 6.6923 16 8C16 9.65685 14.6569 11 13 11C11.9962 11 11.11 10.5052 10.5654 9.74805C10.0728 9.91037 9.54697 10 9 10C8.30349 10 7.64054 9.85691 7.03809 9.59961C6.30446 10.4562 5.21622 11 4 11C1.79086 11 0 9.20914 0 7C0 4.79086 1.79086 3 4 3C4.13744 3 4.27336 3.006 4.40723 3.01953C5.17426 1.24314 6.94208 0 9 0Z" fill="white" fillOpacity="0.4"/>
-              </svg>
-              <span className="text-white/40 text-[14px] italic font-rubik">
-                {currentWeather}
-              </span>
-            </div>
           </div>
         </div>
 
