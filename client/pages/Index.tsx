@@ -206,6 +206,9 @@ function BirdDeckHome() {
   // Get category stats for legend (using all birds for category display)
   const categoryStats = getCollectionStatsByCategory();
 
+  // Get enhanced colors for bird of the day card
+  const enhancedBirdColors = birdOfTheDay ? enhanceColorsForDisplay(birdOfTheDay.colors) : ['#FBAF4D', '#64455B', '#F4791D'];
+
   return (
     <div
       className="min-h-screen relative font-rubik"
@@ -257,7 +260,7 @@ function BirdDeckHome() {
             <div
               className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
-                background: `linear-gradient(135deg, ${birdOfTheDay.colors[0] || '#FBAF4D'} 0%, ${birdOfTheDay.colors[1] || '#64455B'} 50%, ${birdOfTheDay.colors[2] || '#F4791D'} 100%)`,
+                background: `linear-gradient(135deg, ${enhancedBirdColors[0]} 0%, ${enhancedBirdColors[1]} 50%, ${enhancedBirdColors[2]} 100%)`,
                 boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
               }}
               onClick={() => handleBirdClick(birdOfTheDay)}
