@@ -120,9 +120,11 @@ function BirdDeckHome() {
 
   useEffect(() => {
     const selectedBird = selectBirdOfTheDay();
+    console.log('Selected bird of the day:', selectedBird?.name, selectedBird?.colors);
     setBirdOfTheDay(selectedBird);
     // Update background colors when bird of the day changes
     if (selectedBird) {
+      console.log('Calling updateBackgroundColors with:', selectedBird);
       updateBackgroundColors(selectedBird);
     }
   }, []);
