@@ -202,7 +202,7 @@ function BirdDeckHome() {
 
         {/* Horizontal Carousel */}
         <div
-          className="flex gap-6 pb-4 mb-8 -mx-6 px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden"
+          className="flex gap-4 pb-4 mb-8 -mx-6 px-6 lg:-mx-8 lg:px-8 [&::-webkit-scrollbar]:hidden"
           style={{
             overflowX: 'auto',
             overflowY: 'visible',
@@ -214,7 +214,7 @@ function BirdDeckHome() {
           {/* Bird of the Day Card */}
           {birdOfTheDay && (
             <div
-              className="flex-1 basis-0 min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
+              className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] border-8 border-white relative overflow-hidden cursor-pointer"
               style={{
                 background: `linear-gradient(135deg, ${birdOfTheDay.colors[0] || '#FBAF4D'} 0%, ${birdOfTheDay.colors[1] || '#64455B'} 50%, ${birdOfTheDay.colors[2] || '#F4791D'} 100%)`,
                 boxShadow: '0 16px 100px 0 rgba(107, 75, 94, 0.4)'
