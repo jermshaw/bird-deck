@@ -307,17 +307,12 @@ function BirdDeckHome() {
               Birding hotspots
             </h3>
             
-            {/* Google Maps Embed */}
+            {/* Static Map Image */}
             <div className="w-full h-[360px] rounded-[16px] overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/d/embed?mid=1mYRHgY8diPuzRDcbJTKF_rC3iKmk0nU&iwloc=near&t=m&output=embed&ehbc=2E312F&noprof=1&disableDefaultUI=1&zoomControl=0&mapTypeControl=0&scaleControl=0&streetViewControl=0&rotateControl=0&fullscreenControl=0&gestureHandling=none&scrollwheel=0&panControl=0&keyboardShortcuts=0&draggable=0&clickableIcons=0"
-                width="100%"
-                height="100%"
-                style={{ border: 0, pointerEvents: 'none' }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="San Francisco Birding Hotspots"
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/159144ddd57e25fe8779f4d9f2b1dc4b9884af30?width=650"
+                alt="San Francisco Birding Hotspots Map"
+                className="w-full h-full object-cover"
               />
             </div>
             
