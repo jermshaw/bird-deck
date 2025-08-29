@@ -22,6 +22,21 @@ function BirdDeckHome() {
     return birds[randomIndex];
   };
 
+  // Helper function to enhance colors for better visibility
+  const enhanceColorsForDisplay = (colors: string[]) => {
+    const enhanceColor = (hex: string) => {
+      // If color is too muted (gray-ish), enhance it
+      if (hex === '#808080') return '#4A90E2'; // Gray -> Blue
+      if (hex === '#FFFFFF') return '#E8F4FD'; // White -> Light Blue
+      if (hex === '#000000') return '#2C3E50'; // Black -> Dark Blue
+
+      // For other colors, return as-is (they're already vibrant)
+      return hex;
+    };
+
+    return colors.map(enhanceColor);
+  };
+
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
     if (!bird || !bird.colors || bird.colors.length < 3) {
