@@ -138,6 +138,23 @@ function BirdDeckHome() {
     }
   }, []);
 
+  // Handle clicking outside filter menu to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (filterButtonRef.current && !filterButtonRef.current.contains(event.target as Node)) {
+        setFilterMenuOpen(false);
+      }
+    };
+
+    if (filterMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [filterMenuOpen]);
+
   const handleBirdClick = (bird: Bird) => {
     setSelectedBird(bird);
     setModalOpen(true);
