@@ -417,8 +417,19 @@ function BirdCard({ bird, isCollected, onClick }: {
   const [imageError, setImageError] = useState(false);
 
   // Don't render the card if image failed to load
-  if (imageError || (!imageLoaded && imageError === false)) {
+  if (imageError) {
     return null;
+  }
+
+  // Show placeholder or loading state until image loads
+  if (!imageLoaded) {
+    return (
+      <div className="bg-white rounded-[14.4px] p-1 relative overflow-hidden opacity-50">
+        <div className="relative aspect-[154/253] rounded-[12.6px] border border-white overflow-hidden bg-gray-200 flex items-center justify-center">
+          <div className="text-gray-400 text-sm">Loading...</div>
+        </div>
+      </div>
+    );
   }
 
   return (
