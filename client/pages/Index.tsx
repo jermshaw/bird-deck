@@ -369,7 +369,6 @@ function BirdDeckHome() {
                 ref={filterButtonRef}
                 className="w-8 h-8 bg-white/30 backdrop-blur-sm rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/40 transition-colors"
                 onClick={() => {
-                  console.log('Filter button clicked, current state:', filterMenuOpen);
                   setFilterMenuOpen(!filterMenuOpen);
                 }}
               >
@@ -387,7 +386,7 @@ function BirdDeckHome() {
               </div>
 
               {/* Filter Menu Dropdown */}
-              {(filterMenuOpen || true) && (
+              {filterMenuOpen && (
                 <div className="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[140px] z-50">
                   <div className="px-3 py-1 text-xs font-medium text-gray-500 uppercase tracking-wide">
                     Sort by
