@@ -385,27 +385,7 @@ function BirdDeckHome() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {birds
             .filter(bird => bird.imageUrl && !bird.imageUrl.includes('placeholder') && !bird.imageUrl.includes('404'))
-            .sort((a, b) => {
-              const aCollected = isInCollection(a.id);
-              const bCollected = isInCollection(b.id);
-
-              switch (sortOption) {
-                case 'name':
-                  return a.name.localeCompare(b.name);
-                case 'collected':
-                  if (aCollected === bCollected) {
-                    return a.name.localeCompare(b.name); // Secondary sort by name
-                  }
-                  return aCollected ? -1 : 1; // Collected first
-                case 'not-collected':
-                  if (aCollected === bCollected) {
-                    return a.name.localeCompare(b.name); // Secondary sort by name
-                  }
-                  return aCollected ? 1 : -1; // Not collected first
-                default:
-                  return a.name.localeCompare(b.name);
-              }
-            })
+            .sort((a, b) => a.name.localeCompare(b.name))
             .map((bird) => (
             <BirdCard
               key={bird.id}
