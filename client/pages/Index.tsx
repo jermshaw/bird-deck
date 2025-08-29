@@ -71,9 +71,11 @@ function BirdDeckHome() {
     console.log('Setting background color:', baseColor);
     console.log('Setting background image:', newBackgroundImage);
 
-    // Apply the new background
-    root.style.backgroundColor = baseColor;
-    root.style.backgroundImage = newBackgroundImage;
+    // Apply the new background with !important to override CSS
+    root.style.setProperty('background-color', baseColor, 'important');
+    root.style.setProperty('background-image', newBackgroundImage, 'important');
+
+    console.log('Background updated successfully');
   };
 
 
