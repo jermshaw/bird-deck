@@ -41,9 +41,27 @@ function BirdDeckHome() {
       return { r, g, b };
     };
 
-    const { r: r1, g: g1, b: b1 } = hexToRgb(color1);
-    const { r: r2, g: g2, b: b2 } = hexToRgb(color2);
-    const { r: r3, g: g3, b: b3 } = hexToRgb(color3);
+    // Enhance colors for better visibility - saturate muted colors
+    const enhanceColor = (hex: string) => {
+      const { r, g, b } = hexToRgb(hex);
+
+      // If color is too muted (gray-ish), enhance it
+      if (hex === '#808080') return '#4A90E2'; // Gray -> Blue
+      if (hex === '#FFFFFF') return '#E8F4FD'; // White -> Light Blue
+      if (hex === '#000000') return '#2C3E50'; // Black -> Dark Blue
+
+      // For other colors, slightly enhance saturation
+      const enhanceFactor = 1.2;
+      return `rgb(${Math.min(255, Math.round(r * enhanceFactor))}, ${Math.min(255, Math.round(g * enhanceFactor))}, ${Math.min(255, Math.round(b * enhanceFactor))})`;
+    };
+
+    const enhanced1 = enhanceColor(color1);
+    const enhanced2 = enhanceColor(color2);
+    const enhanced3 = enhanceColor(color3);
+
+    const { r: r1, g: g1, b: b1 } = hexToRgb(enhanced1.startsWith('#') ? enhanced1 : color1);
+    const { r: r2, g: g2, b: b2 } = hexToRgb(enhanced2.startsWith('#') ? enhanced2 : color2);
+    const { r: r3, g: g3, b: b3 } = hexToRgb(enhanced3.startsWith('#') ? enhanced3 : color3);
 
     // Create a dark base color (20% of primary color brightness)
     const baseColor = `rgb(${Math.round(r1 * 0.2)}, ${Math.round(g1 * 0.2)}, ${Math.round(b1 * 0.2)})`;
