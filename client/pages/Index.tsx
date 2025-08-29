@@ -91,6 +91,9 @@ function BirdDeckHome() {
   const totalCollected = filteredBirds.filter(bird => isInCollection(bird.id)).length;
   const totalBirds = filteredBirds.length;
 
+  // Get category stats for legend (using all birds for category display)
+  const categoryStats = getCollectionStatsByCategory();
+
   return (
     <div 
       className="min-h-screen relative font-rubik"
