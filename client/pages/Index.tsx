@@ -19,17 +19,6 @@ function BirdDeckHome() {
     return birds[randomIndex];
   };
 
-  // Get background with radial gradients
-  const getBackground = () => {
-    return {
-      backgroundColor: 'hsla(203,53%,25%,1)',
-      backgroundImage: `
-        radial-gradient(at 17% 63%, hsla(260,47%,32%,1) 0px, transparent 50%),
-        radial-gradient(at 29% 41%, hsla(180,2%,39%,1) 0px, transparent 50%),
-        radial-gradient(at 93% 43%, hsla(16,18%,30%,1) 0px, transparent 50%)
-      `
-    };
-  };
 
   // Get collection stats by category
   const getCollectionStatsByCategory = () => {
