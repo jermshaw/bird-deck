@@ -21,65 +21,58 @@ function BirdDeckHome() {
 
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
-    if (!bird || !bird.colors || bird.colors.length < 3) return;
+    if (!bird || !bird.colors || bird.colors.length < 3) {
+      console.log('No bird or insufficient colors:', bird);
+      return;
+    }
 
     const [color1, color2, color3] = bird.colors;
+    console.log('Updating background with bird colors:', color1, color2, color3);
 
-    // Convert hex colors to HSLA
-    const hexToHsla = (hex: string, alpha = 1) => {
-      const r = parseInt(hex.slice(1, 3), 16) / 255;
-      const g = parseInt(hex.slice(3, 5), 16) / 255;
-      const b = parseInt(hex.slice(5, 7), 16) / 255;
-
-      const max = Math.max(r, g, b);
-      const min = Math.min(r, g, b);
-      const diff = max - min;
-      const sum = max + min;
-
-      const l = sum / 2;
-      let s = 0;
-      let h = 0;
-
-      if (diff !== 0) {
-        s = l > 0.5 ? diff / (2 - sum) : diff / sum;
-
-        switch (max) {
-          case r: h = ((g - b) / diff + (g < b ? 6 : 0)) / 6; break;
-          case g: h = ((b - r) / diff + 2) / 6; break;
-          case b: h = ((r - g) / diff + 4) / 6; break;
-        }
-      }
-
-      return `hsla(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%, ${alpha})`;
+    // Convert hex to rgba with alpha
+    const hexToRgba = (hex: string, alpha = 1) => {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     };
 
-    // Create variations of the bird colors for the background
-    const primaryColor = hexToHsla(color1, 1);
-    const secondaryColor = hexToHsla(color2, 1);
-    const tertiaryColor = hexToHsla(color3, 1);
+    // Create darker variations for accent colors
+    const darkenColor = (hex: string, factor = 0.3) => {
+      const r = Math.max(0, parseInt(hex.slice(1, 3), 16) * factor);
+      const g = Math.max(0, parseInt(hex.slice(3, 5), 16) * factor);
+      const b = Math.max(0, parseInt(hex.slice(5, 7), 16) * factor);
+      return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+    };
 
-    // Create darker accent colors
-    const darkColor1 = primaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
-      (_, h, s, l) => `hsla(${h}, ${Math.max(50, parseInt(s))}%, ${Math.max(9, parseInt(l) * 0.2)}%, 1)`);
-    const darkColor2 = secondaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
-      (_, h, s, l) => `hsla(${h}, ${Math.max(50, parseInt(s))}%, ${Math.max(9, parseInt(l) * 0.2)}%, 1)`);
-
-    // Update the html element's background with new colors
+    // Create the new background
     const root = document.documentElement;
-    const newBackgroundImage = `
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 1746 1746' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
-      radial-gradient(circle at 0% 99%, ${primaryColor} 0%, transparent 67%),
-      radial-gradient(circle at 46% 94%, ${secondaryColor} 0%, transparent 81%),
-      radial-gradient(circle at 89% 8%, ${darkColor1} 0%, transparent 150%),
-      radial-gradient(circle at 89% 8%, ${darkColor2} 0%, transparent 150%),
-      radial-gradient(circle at 93% 95%, ${primaryColor.replace('1)', '0.6)')} 0%, transparent 66%),
-      radial-gradient(circle at 89% 8%, ${tertiaryColor} 0%, transparent 150%),
-      radial-gradient(circle at 89% 8%, ${secondaryColor.replace('1)', '0.8)')} 0%, transparent 150%)
-    `.replace(/\s+/g, ' ').trim();
 
-    // Update background color and image
-    root.style.backgroundColor = primaryColor.replace(/hsla\((\d+),\s*(\d+)%,\s*(\d+)%,\s*[\d.]+\)/,
-      (_, h, s, l) => `hsla(${h}, ${Math.max(80, parseInt(s))}%, ${Math.max(30, parseInt(l) * 0.6)}%, 1)`);
+    // Base background color (darkened primary color)
+    const baseColor = darkenColor(color1, 0.4);
+
+    // Noise texture URL
+    const noiseUrl = 'url("data:image/svg+xml,%3Csvg viewBox=\\\'0 0 1746 1746\\\' xmlns=\\\'http://www.w3.org/2000/svg\\\'%3E%3Cfilter id=\\\'noiseFilter\\\'%3E%3CfeTurbulence type=\\\'fractalNoise\\\' baseFrequency=\\\'0.65\\\' numOctaves=\\\'3\\\' stitchTiles=\\\'stitch\\\'/%3E%3C/filter%3E%3Crect width=\\\'100%25\\\' height=\\\'100%25\\\' filter=\\\'url(%23noiseFilter)\\\'/%3E%3C/svg%3E")';
+
+    // Create the gradient background image array
+    const gradients = [
+      noiseUrl,
+      `radial-gradient(circle at 0% 99%, ${hexToRgba(color1, 0.8)} 0%, transparent 67%)`,
+      `radial-gradient(circle at 46% 94%, ${hexToRgba(color2, 0.6)} 0%, transparent 81%)`,
+      `radial-gradient(circle at 89% 8%, ${darkenColor(color1, 0.2)} 0%, transparent 150%)`,
+      `radial-gradient(circle at 89% 8%, ${darkenColor(color2, 0.2)} 0%, transparent 150%)`,
+      `radial-gradient(circle at 93% 95%, ${hexToRgba(color1, 0.4)} 0%, transparent 66%)`,
+      `radial-gradient(circle at 89% 8%, ${hexToRgba(color3, 0.3)} 0%, transparent 150%)`,
+      `radial-gradient(circle at 89% 8%, ${hexToRgba(color2, 0.5)} 0%, transparent 150%)`
+    ];
+
+    const newBackgroundImage = gradients.join(', ');
+
+    console.log('Setting background color:', baseColor);
+    console.log('Setting background image:', newBackgroundImage);
+
+    // Apply the new background
+    root.style.backgroundColor = baseColor;
     root.style.backgroundImage = newBackgroundImage;
   };
 
