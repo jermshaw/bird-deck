@@ -212,7 +212,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   {/* S - Tiny */}
                   <div className="flex flex-col items-center">
                     <svg 
-                      className={`w-8 h-8 transition-colors duration-200 ${bird.size === 'tiny' ? 'fill-white' : 'fill-white/40'}`} 
+                      className={`transition-colors duration-200 ${bird.size === 'tiny' ? 'fill-white' : 'fill-white/40'}`}
+                      style={{ width: '45px', height: '45px' }} 
                       viewBox="0 0 64 64" 
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -223,7 +224,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   {/* M - Small */}
                   <div className="flex flex-col items-center">
                     <svg 
-                      className={`w-8 h-8 transition-colors duration-200 ${bird.size === 'small' ? 'fill-white' : 'fill-white/40'}`} 
+                      className={`transition-colors duration-200 ${bird.size === 'small' ? 'fill-white' : 'fill-white/40'}`}
+                      style={{ width: '45px', height: '45px' }} 
                       viewBox="0 0 64 64" 
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -236,7 +238,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   {/* L - Medium */}
                   <div className="flex flex-col items-center">
                     <svg 
-                      className={`w-8 h-8 transition-colors duration-200 ${bird.size === 'medium' ? 'fill-white' : 'fill-white/40'}`} 
+                      className={`transition-colors duration-200 ${bird.size === 'medium' ? 'fill-white' : 'fill-white/40'}`}
+                      style={{ width: '45px', height: '45px' }} 
                       viewBox="0 0 64 64" 
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -247,7 +250,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   {/* XL - Large */}
                   <div className="flex flex-col items-center">
                     <svg 
-                      className={`w-8 h-8 transition-colors duration-200 ${bird.size === 'large' ? 'fill-white' : 'fill-white/40'}`} 
+                      className={`transition-colors duration-200 ${bird.size === 'large' ? 'fill-white' : 'fill-white/40'}`}
+                      style={{ width: '45px', height: '45px' }} 
                       viewBox="0 0 64 64" 
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -265,7 +269,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   {/* XXL - Huge */}
                   <div className="flex flex-col items-center">
                     <svg 
-                      className={`w-8 h-8 transition-colors duration-200 ${bird.size === 'huge' ? 'fill-white' : 'fill-white/40'}`} 
+                      className={`transition-colors duration-200 ${bird.size === 'huge' ? 'fill-white' : 'fill-white/40'}`}
+                      style={{ width: '45px', height: '45px' }} 
                       viewBox="0 0 64 64" 
                       xmlns="http://www.w3.org/2000/svg"
                     >
