@@ -52,7 +52,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
           {bird?.name || 'Bird'} - Bird Details
         </DialogTitle>
         {bird && (
-        <div className="min-h-screen w-full relative font-rubik overflow-y-auto">
+        <div className="w-full relative font-rubik overflow-y-auto" style={{ height: '100dvh' }}>
           {/* Blurred Background - Fixed */}
           {isCollected ? (
             // Colorful gradient background using bird's colors when collected
