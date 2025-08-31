@@ -90,8 +90,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'rgba(0, 0, 0, 0.2)' // Slightly stronger overlay for colorful backgrounds
-                : 'rgba(156, 163, 175, 0.6)'
+                ? 'rgba(0, 0, 0, 0.25)' // Slightly stronger overlay for colorful backgrounds
+                : 'rgba(156, 163, 175, 0.75)'
             }}
           />
 
