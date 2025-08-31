@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
+import { BirdCard } from '@/components/BirdCard';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
 
 // Main page content component that uses collection context
@@ -13,15 +14,31 @@ function BirdDeckHome() {
 
   // Function to select a random bird of the day based on current date
   const selectBirdOfTheDay = () => {
-    const today = new Date().toDateString();
-    const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const randomIndex = seed % birds.length;
-    return birds[randomIndex];
+    try {
+      if (!birds || birds.length === 0) {
+        console.warn('No birds available for bird of the day');
+        return null;
+      }
+
+      const today = new Date().toDateString();
+      const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const randomIndex = seed % birds.length;
+      return birds[randomIndex];
+    } catch (error) {
+      console.error('Error selecting bird of the day:', error);
+      return birds.length > 0 ? birds[0] : null;
+    }
   };
 
   // Helper function to enhance colors for better visibility
   const enhanceColorsForDisplay = (colors: string[]) => {
+    if (!colors || !Array.isArray(colors) || colors.length === 0) {
+      return ['#4A90E2', '#E8F4FD', '#2C3E50']; // Default colors
+    }
+
     const enhanceColor = (hex: string) => {
+      if (!hex || typeof hex !== 'string') return '#4A90E2';
+
       // If color is too muted (gray-ish), enhance it
       if (hex === '#808080') return '#4A90E2'; // Gray -> Blue
       if (hex === '#FFFFFF') return '#E8F4FD'; // White -> Light Blue
@@ -36,75 +53,95 @@ function BirdDeckHome() {
 
   // Helper function to convert hex color to HSL
   const hexToHsl = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16) / 255;
-    const g = parseInt(hex.slice(3, 5), 16) / 255;
-    const b = parseInt(hex.slice(5, 7), 16) / 255;
+    // Ensure hex is valid and has # prefix
+    if (!hex || typeof hex !== 'string') return { h: 0, s: 0, l: 50 };
 
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    let h = 0;
-    let s = 0;
-    const l = (max + min) / 2;
+    let cleanHex = hex.startsWith('#') ? hex : '#' + hex;
+    if (cleanHex.length !== 7) return { h: 0, s: 0, l: 50 };
 
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
+    try {
+      const r = parseInt(cleanHex.slice(1, 3), 16) / 255;
+      const g = parseInt(cleanHex.slice(3, 5), 16) / 255;
+      const b = parseInt(cleanHex.slice(5, 7), 16) / 255;
+
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h = 0;
+      let s = 0;
+      const l = (max + min) / 2;
+
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
       }
-      h /= 6;
-    }
 
-    return {
-      h: Math.round(h * 360),
-      s: Math.round(s * 100),
-      l: Math.round(l * 100)
-    };
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    } catch (error) {
+      console.warn('Error parsing hex color:', hex, error);
+      return { h: 0, s: 0, l: 50 };
+    }
   };
 
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
-    if (!bird || !bird.colors || bird.colors.length < 3) {
-      return;
+    try {
+      if (!bird || !bird.colors || bird.colors.length === 0) {
+        // Set a default background if no colors available
+        document.body.style.backgroundColor = '#2c3e50';
+        return;
+      }
+
+      // Use the same color enhancement as the bird card
+      const enhancedColors = enhanceColorsForDisplay(bird.colors);
+      const [color1, color2, color3, color4] = enhancedColors.length >= 4 ? enhancedColors : [...enhancedColors, enhancedColors[0]];
+
+      // Convert hex colors to HSL
+      const hsl1 = hexToHsl(color1);
+      const hsl2 = hexToHsl(color2);
+      const hsl3 = hexToHsl(color3);
+      const hsl4 = hexToHsl(color4);
+
+      // Target the body element for background
+      const body = document.body;
+      if (!body) return;
+
+      // Create base color (muted version of primary color)
+      const baseHsl = hexToHsl(color1);
+      const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
+
+      // Create the radial gradient background using the user's pattern
+      const backgroundImage = [
+        `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
+        `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
+        `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
+        `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
+      ].join(', ');
+
+      // Clear any existing background styles and apply new ones
+      body.style.removeProperty('background');
+      body.style.removeProperty('background-color');
+      body.style.removeProperty('background-image');
+      body.style.removeProperty('background-blend-mode');
+
+      // Apply the new background
+      body.style.backgroundColor = backgroundColor;
+      body.style.backgroundImage = backgroundImage;
+      body.style.backgroundAttachment = 'fixed';
+    } catch (error) {
+      console.warn('Error updating background colors:', error);
+      // Fallback to default background
+      document.body.style.backgroundColor = '#2c3e50';
     }
-
-    // Use the same color enhancement as the bird card
-    const enhancedColors = enhanceColorsForDisplay(bird.colors);
-    const [color1, color2, color3, color4] = enhancedColors.length >= 4 ? enhancedColors : [...enhancedColors, enhancedColors[0]];
-
-    // Convert hex colors to HSL
-    const hsl1 = hexToHsl(color1);
-    const hsl2 = hexToHsl(color2);
-    const hsl3 = hexToHsl(color3);
-    const hsl4 = hexToHsl(color4);
-
-    // Target the body element for background
-    const body = document.body;
-
-    // Create base color (muted version of primary color)
-    const baseHsl = hexToHsl(color1);
-    const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
-
-    // Create the radial gradient background using the user's pattern
-    const backgroundImage = [
-      `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
-      `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
-      `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
-      `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
-    ].join(', ');
-
-    // Clear any existing background styles and apply new ones
-    body.style.removeProperty('background');
-    body.style.removeProperty('background-color');
-    body.style.removeProperty('background-image');
-    body.style.removeProperty('background-blend-mode');
-
-    // Apply the new background
-    body.style.backgroundColor = backgroundColor;
-    body.style.backgroundImage = backgroundImage;
-    body.style.backgroundAttachment = 'fixed';
   };
 
 
@@ -150,11 +187,20 @@ function BirdDeckHome() {
   };
 
   useEffect(() => {
-    const selectedBird = selectBirdOfTheDay();
-    setBirdOfTheDay(selectedBird);
-    // Update background colors when bird of the day changes
-    if (selectedBird) {
-      updateBackgroundColors(selectedBird);
+    try {
+      const selectedBird = selectBirdOfTheDay();
+      setBirdOfTheDay(selectedBird);
+      // Update background colors when bird of the day changes
+      if (selectedBird) {
+        updateBackgroundColors(selectedBird);
+      } else {
+        // Set default background if no bird selected
+        document.body.style.backgroundColor = '#2c3e50';
+      }
+    } catch (error) {
+      console.error('Error in bird of the day useEffect:', error);
+      // Set default background on error
+      document.body.style.backgroundColor = '#2c3e50';
     }
   }, []);
 
@@ -401,59 +447,6 @@ function BirdDeckHome() {
         open={modalOpen}
         onOpenChange={setModalOpen}
       />
-    </div>
-  );
-}
-
-// Bird card component matching Figma design
-function BirdCard({ bird, isCollected, onClick }: {
-  bird: Bird;
-  isCollected: boolean;
-  onClick: () => void;
-}) {
-  const [imageError, setImageError] = useState(false);
-
-  // Don't render the card if image failed to load
-  if (imageError) {
-    return null;
-  }
-
-  return (
-    <div
-      className="bg-white rounded-[14.4px] p-1 cursor-pointer relative overflow-hidden"
-      style={{ boxShadow: '0 10.8px 10.8px -6.3px rgba(0, 0, 0, 0.05)' }}
-      onClick={onClick}
-    >
-      {/* Image Container */}
-      <div className="relative aspect-[154/253] rounded-[12.6px] border border-white overflow-hidden">
-        <img
-          src={bird.imageUrl}
-          alt={bird.name}
-          className={`w-full h-full object-cover ${!isCollected ? 'grayscale' : ''}`}
-          onError={() => setImageError(true)}
-        />
-
-        {/* Name Box */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <div
-            className="bg-white/70 mx-[-1px] mb-[-1px]"
-            style={{
-              backdropFilter: 'blur(17px)',
-              borderBottomLeftRadius: '11.6px',
-              borderBottomRightRadius: '11.6px'
-            }}
-          >
-            <div className="px-4 py-2 text-center">
-              <h3 className="text-[#2C2C2C] font-rubik font-bold text-[14px] uppercase leading-tight">
-                {bird.name}
-              </h3>
-              <p className="text-[#2C2C2C]/50 font-rubik text-[11px] italic mt-1">
-                {bird.ability}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

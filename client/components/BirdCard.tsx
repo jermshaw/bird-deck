@@ -1,83 +1,56 @@
+import { useState } from 'react';
 import { Bird } from '@shared/birds';
-import { useCollection } from '@/hooks/use-collection';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-import { Check } from 'lucide-react';
 
 interface BirdCardProps {
   bird: Bird;
-  className?: string;
-  onClick?: () => void;
+  isCollected: boolean;
+  onClick: () => void;
 }
 
-const rarityStyles = {
-  common: 'border-common bg-common/5 hover:bg-common/15',
-  rare: 'border-rare bg-rare/5 hover:bg-rare/15', 
-  legendary: 'border-legendary bg-legendary/5 hover:bg-legendary/15'
-};
+export function BirdCard({ bird, isCollected, onClick }: BirdCardProps) {
+  const [imageError, setImageError] = useState(false);
 
-const rarityBadgeStyles = {
-  common: 'bg-common text-white',
-  rare: 'bg-rare text-white',
-  legendary: 'bg-legendary text-white'
-};
-
-export function BirdCard({ bird, className, onClick }: BirdCardProps) {
-  const { isInCollection } = useCollection();
-  const isCollected = isInCollection(bird.id);
-  
-  const rarityStyle = rarityStyles[bird.rarity];
-  const rarityBadgeStyle = rarityBadgeStyles[bird.rarity];
+  // Don't render the card if image failed to load
+  if (imageError) {
+    return null;
+  }
 
   return (
-    <Card 
-      className={cn(
-        'group cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-xl border-2 overflow-hidden',
-        rarityStyle,
-        isCollected && 'ring-2 ring-green-500 ring-offset-2',
-        className
-      )}
+    <div
+      className="bg-white rounded-[14.4px] p-1 cursor-pointer relative overflow-hidden"
+      style={{ boxShadow: '0 10.8px 10.8px -6.3px rgba(0, 0, 0, 0.05)' }}
       onClick={onClick}
     >
-      {/* Collection Status Badge */}
-      {isCollected && (
-        <div className="absolute top-2 right-2 z-10">
-          <Badge className="bg-green-500 text-white border-green-600 shadow-lg">
-            <Check className="h-3 w-3 mr-1" />
-            Collected
-          </Badge>
-        </div>
-      )}
-
-      {/* Bird Image */}
-      <div className="relative h-48 overflow-hidden">
-        <img 
-          src={bird.imageUrl} 
+      {/* Image Container */}
+      <div className="relative aspect-[154/253] rounded-[12.6px] border border-white overflow-hidden">
+        <img
+          src={bird.imageUrl}
           alt={bird.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-          loading="lazy"
+          className={`w-full h-full object-cover ${!isCollected ? 'grayscale' : ''}`}
+          onError={() => setImageError(true)}
         />
-        
-        {/* Rarity Badge Overlay */}
-        <div className="absolute bottom-2 right-2">
-          <Badge className={cn('uppercase text-xs font-bold', rarityBadgeStyle)}>
-            {bird.rarity}
-          </Badge>
+
+        {/* Name Box */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <div
+            className="bg-white/70 mx-[-1px] mb-[-1px]"
+            style={{
+              backdropFilter: 'blur(17px)',
+              borderBottomLeftRadius: '11.6px',
+              borderBottomRightRadius: '11.6px'
+            }}
+          >
+            <div className="px-4 py-2 text-center">
+              <h3 className="text-[#2C2C2C] font-rubik font-bold text-[14px] uppercase leading-tight">
+                {bird.name}
+              </h3>
+              <p className="text-[#2C2C2C]/50 font-rubik text-[11px] italic mt-1">
+                {bird.ability}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Bird Info */}
-      <CardContent className="p-4">
-        <div className="space-y-2">
-          <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-1">
-            {bird.name}
-          </h3>
-          <p className="text-sm font-medium text-muted-foreground italic line-clamp-1">
-            {bird.ability}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
