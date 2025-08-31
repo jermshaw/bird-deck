@@ -77,45 +77,54 @@ function BirdDeckHome() {
 
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
-    if (!bird || !bird.colors || bird.colors.length < 3) {
-      return;
+    try {
+      if (!bird || !bird.colors || bird.colors.length === 0) {
+        // Set a default background if no colors available
+        document.body.style.backgroundColor = '#2c3e50';
+        return;
+      }
+
+      // Use the same color enhancement as the bird card
+      const enhancedColors = enhanceColorsForDisplay(bird.colors);
+      const [color1, color2, color3, color4] = enhancedColors.length >= 4 ? enhancedColors : [...enhancedColors, enhancedColors[0]];
+
+      // Convert hex colors to HSL
+      const hsl1 = hexToHsl(color1);
+      const hsl2 = hexToHsl(color2);
+      const hsl3 = hexToHsl(color3);
+      const hsl4 = hexToHsl(color4);
+
+      // Target the body element for background
+      const body = document.body;
+      if (!body) return;
+
+      // Create base color (muted version of primary color)
+      const baseHsl = hexToHsl(color1);
+      const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
+
+      // Create the radial gradient background using the user's pattern
+      const backgroundImage = [
+        `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
+        `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
+        `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
+        `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
+      ].join(', ');
+
+      // Clear any existing background styles and apply new ones
+      body.style.removeProperty('background');
+      body.style.removeProperty('background-color');
+      body.style.removeProperty('background-image');
+      body.style.removeProperty('background-blend-mode');
+
+      // Apply the new background
+      body.style.backgroundColor = backgroundColor;
+      body.style.backgroundImage = backgroundImage;
+      body.style.backgroundAttachment = 'fixed';
+    } catch (error) {
+      console.warn('Error updating background colors:', error);
+      // Fallback to default background
+      document.body.style.backgroundColor = '#2c3e50';
     }
-
-    // Use the same color enhancement as the bird card
-    const enhancedColors = enhanceColorsForDisplay(bird.colors);
-    const [color1, color2, color3, color4] = enhancedColors.length >= 4 ? enhancedColors : [...enhancedColors, enhancedColors[0]];
-
-    // Convert hex colors to HSL
-    const hsl1 = hexToHsl(color1);
-    const hsl2 = hexToHsl(color2);
-    const hsl3 = hexToHsl(color3);
-    const hsl4 = hexToHsl(color4);
-
-    // Target the body element for background
-    const body = document.body;
-
-    // Create base color (muted version of primary color)
-    const baseHsl = hexToHsl(color1);
-    const backgroundColor = `hsla(${baseHsl.h}, ${Math.max(baseHsl.s - 30, 0)}%, ${Math.max(baseHsl.l - 40, 5)}%, 1)`;
-
-    // Create the radial gradient background using the user's pattern
-    const backgroundImage = [
-      `radial-gradient(at 10% 9%, hsla(${hsl1.h}, ${hsl1.s}%, ${hsl1.l}%, 0.8) 0px, transparent 50%)`,
-      `radial-gradient(at 81% 18%, hsla(${hsl2.h}, ${hsl2.s}%, ${hsl2.l}%, 0.6) 0px, transparent 50%)`,
-      `radial-gradient(at 41% 60%, hsla(${hsl3.h}, ${hsl3.s}%, ${hsl3.l}%, 0.4) 0px, transparent 50%)`,
-      `radial-gradient(at 68% 52%, hsla(${hsl4.h}, ${hsl4.s}%, ${hsl4.l}%, 0.7) 0px, transparent 50%)`
-    ].join(', ');
-
-    // Clear any existing background styles and apply new ones
-    body.style.removeProperty('background');
-    body.style.removeProperty('background-color');
-    body.style.removeProperty('background-image');
-    body.style.removeProperty('background-blend-mode');
-
-    // Apply the new background
-    body.style.backgroundColor = backgroundColor;
-    body.style.backgroundImage = backgroundImage;
-    body.style.backgroundAttachment = 'fixed';
   };
 
 
