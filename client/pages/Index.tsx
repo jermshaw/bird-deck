@@ -405,7 +405,7 @@ function BirdDeckHome() {
             className="flex-1 basis-0 min-w-[322px] lg:min-w-[342px] h-[460px] rounded-[24px] bg-white relative overflow-hidden block cursor-pointer hover:shadow-xl transition-shadow duration-300"
           >
             <h3 className="text-[#2C2C2C] text-[16px] font-medium font-rubik absolute left-6 top-6 z-10">
-              Places to spot birds
+              Where to spot birds in the bay
             </h3>
 
             {/* Map Image - Edge to Edge */}
