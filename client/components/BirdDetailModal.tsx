@@ -66,10 +66,10 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                       const r = parseInt(hex.substr(0, 2), 16);
                       const g = parseInt(hex.substr(2, 2), 16);
                       const b = parseInt(hex.substr(4, 2), 16);
-                      const alpha = 0.7 + (index * 0.05); // Varying transparency
+                      const alpha = Math.min(1.0, (0.7 + (index * 0.05)) * 1.25); // Varying transparency, increased by 25%
                       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
                     }).join(', ')})`
-                  : 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(236, 72, 153, 0.8) 50%, rgba(34, 197, 94, 0.8) 100%)',
+                  : 'linear-gradient(135deg, rgba(79, 70, 229, 1.0) 0%, rgba(236, 72, 153, 1.0) 50%, rgba(34, 197, 94, 1.0) 100%)',
                 filter: 'blur(120px) saturate(1.4) brightness(1.2)'
               }}
             />
@@ -80,7 +80,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
               style={{
                 backgroundImage: `url(${bird.imageUrl})`,
                 filter: 'blur(150px) grayscale(100%) brightness(0.7)',
-                backgroundColor: '#9CA3AF'
+                backgroundColor: 'rgba(156, 163, 175, 0.875)' // Converted to rgba with 25% increased opacity
               }}
             />
           )}
@@ -90,8 +90,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'rgba(0, 0, 0, 0.2)' // Slightly stronger overlay for colorful backgrounds
-                : 'rgba(156, 163, 175, 0.6)'
+                ? 'rgba(0, 0, 0, 0.25)' // Slightly stronger overlay for colorful backgrounds, increased by 25%
+                : 'rgba(156, 163, 175, 0.75)' // Increased by 25%
             }}
           />
 
