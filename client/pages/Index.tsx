@@ -336,7 +336,7 @@ function BirdDeckHome() {
                 </h4>
 
                 {/* Fun Fact */}
-                <p className="text-white text-[20px] font-normal text-center leading-normal sm:leading-normal leading-[27px] letter-spacing-[0.2px] flex-1 flex items-center justify-center font-rubik px-2 sm:pb-0 pb-[35px]">
+                <p className="text-white text-[18px] sm:text-[20px] font-normal text-center leading-[26px] sm:leading-[27px] letter-spacing-[0.2px] flex-1 flex items-center justify-center font-rubik px-2 sm:pb-0 pb-[35px]">
                   {birdOfTheDay.funFact}
                 </p>
               </div>
