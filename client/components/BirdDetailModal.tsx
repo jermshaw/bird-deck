@@ -90,7 +90,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'rgba(0, 0, 0, 0.25)' // Same opacity for both states
+                ? 'rgba(0, 0, 0, 0.15)' // Reduced opacity for collected birds
                 : 'rgba(156, 163, 175, 0.25)'
             }}
           />
