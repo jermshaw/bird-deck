@@ -21,7 +21,13 @@ function BirdDeckHome() {
 
   // Helper function to enhance colors for better visibility
   const enhanceColorsForDisplay = (colors: string[]) => {
+    if (!colors || !Array.isArray(colors) || colors.length === 0) {
+      return ['#4A90E2', '#E8F4FD', '#2C3E50']; // Default colors
+    }
+
     const enhanceColor = (hex: string) => {
+      if (!hex || typeof hex !== 'string') return '#4A90E2';
+
       // If color is too muted (gray-ish), enhance it
       if (hex === '#808080') return '#4A90E2'; // Gray -> Blue
       if (hex === '#FFFFFF') return '#E8F4FD'; // White -> Light Blue
