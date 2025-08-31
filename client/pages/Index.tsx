@@ -36,32 +36,43 @@ function BirdDeckHome() {
 
   // Helper function to convert hex color to HSL
   const hexToHsl = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16) / 255;
-    const g = parseInt(hex.slice(3, 5), 16) / 255;
-    const b = parseInt(hex.slice(5, 7), 16) / 255;
+    // Ensure hex is valid and has # prefix
+    if (!hex || typeof hex !== 'string') return { h: 0, s: 0, l: 50 };
 
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    let h = 0;
-    let s = 0;
-    const l = (max + min) / 2;
+    let cleanHex = hex.startsWith('#') ? hex : '#' + hex;
+    if (cleanHex.length !== 7) return { h: 0, s: 0, l: 50 };
 
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
+    try {
+      const r = parseInt(cleanHex.slice(1, 3), 16) / 255;
+      const g = parseInt(cleanHex.slice(3, 5), 16) / 255;
+      const b = parseInt(cleanHex.slice(5, 7), 16) / 255;
+
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      let h = 0;
+      let s = 0;
+      const l = (max + min) / 2;
+
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
       }
-      h /= 6;
-    }
 
-    return {
-      h: Math.round(h * 360),
-      s: Math.round(s * 100),
-      l: Math.round(l * 100)
-    };
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    } catch (error) {
+      console.warn('Error parsing hex color:', hex, error);
+      return { h: 0, s: 0, l: 50 };
+    }
   };
 
   // Function to update background colors based on bird of the day
