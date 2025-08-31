@@ -90,8 +90,8 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             className="fixed inset-0 z-0"
             style={{
               background: isCollected
-                ? 'rgba(0, 0, 0, 0.25)' // Slightly stronger overlay for colorful backgrounds
-                : 'rgba(156, 163, 175, 0.75)'
+                ? 'rgba(0, 0, 0, 0.25)' // Same opacity for both states
+                : 'rgba(156, 163, 175, 0.25)'
             }}
           />
 
@@ -103,7 +103,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
             {/* Main Bird Card */}
             <div
               {...cardProps}
-              className={`bg-white rounded-2xl overflow-hidden mb-20 gpu-accelerated transition-shadow duration-150 relative ${
+              className={`bg-white rounded-2xl overflow-hidden mb-8 gpu-accelerated transition-shadow duration-150 relative ${
                 isHovered
                   ? 'shadow-[0_25px_60px_rgba(0,0,0,0.4),0_0_30px_rgba(255,255,255,0.15),inset_0_2px_0_rgba(255,255,255,0.7)]'
                   : 'shadow-lg'
@@ -293,14 +293,14 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <Button
                     variant="outline"
                     onClick={handleCollectionToggle}
-                    className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80"
+                    className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80 h-[60px] text-lg"
                   >
                     Remove from Collection
                   </Button>
                 ) : (
                   <Button
                     onClick={handleCollectionToggle}
-                    className="w-full bg-white hover:bg-gray-100 text-black shadow-lg"
+                    className="w-full bg-white hover:bg-gray-100 text-black shadow-lg h-[60px] text-lg"
                     size="lg"
                   >
                     <Plus className="h-5 w-5 mr-2" />
