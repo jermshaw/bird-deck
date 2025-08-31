@@ -13,10 +13,20 @@ function BirdDeckHome() {
 
   // Function to select a random bird of the day based on current date
   const selectBirdOfTheDay = () => {
-    const today = new Date().toDateString();
-    const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const randomIndex = seed % birds.length;
-    return birds[randomIndex];
+    try {
+      if (!birds || birds.length === 0) {
+        console.warn('No birds available for bird of the day');
+        return null;
+      }
+
+      const today = new Date().toDateString();
+      const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      const randomIndex = seed % birds.length;
+      return birds[randomIndex];
+    } catch (error) {
+      console.error('Error selecting bird of the day:', error);
+      return birds.length > 0 ? birds[0] : null;
+    }
   };
 
   // Helper function to enhance colors for better visibility
