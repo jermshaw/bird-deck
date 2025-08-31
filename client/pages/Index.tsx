@@ -186,11 +186,20 @@ function BirdDeckHome() {
   };
 
   useEffect(() => {
-    const selectedBird = selectBirdOfTheDay();
-    setBirdOfTheDay(selectedBird);
-    // Update background colors when bird of the day changes
-    if (selectedBird) {
-      updateBackgroundColors(selectedBird);
+    try {
+      const selectedBird = selectBirdOfTheDay();
+      setBirdOfTheDay(selectedBird);
+      // Update background colors when bird of the day changes
+      if (selectedBird) {
+        updateBackgroundColors(selectedBird);
+      } else {
+        // Set default background if no bird selected
+        document.body.style.backgroundColor = '#2c3e50';
+      }
+    } catch (error) {
+      console.error('Error in bird of the day useEffect:', error);
+      // Set default background on error
+      document.body.style.backgroundColor = '#2c3e50';
     }
   }, []);
 
