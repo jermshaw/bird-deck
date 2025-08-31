@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { birds, Bird } from '@shared/birds';
 import { BirdDetailModal } from '@/components/BirdDetailModal';
+import { BirdCard } from '@/components/BirdCard';
 import { CollectionProvider, useCollection } from '@/hooks/use-collection';
 
 // Main page content component that uses collection context
