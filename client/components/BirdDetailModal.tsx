@@ -66,7 +66,7 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                       const r = parseInt(hex.substr(0, 2), 16);
                       const g = parseInt(hex.substr(2, 2), 16);
                       const b = parseInt(hex.substr(4, 2), 16);
-                      const alpha = 0.7 + (index * 0.05); // Varying transparency
+                      const alpha = 0.9 + (index * 0.02); // Varying transparency
                       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
                     }).join(', ')})`
                   : 'linear-gradient(135deg, rgba(79, 70, 229, 0.8) 0%, rgba(236, 72, 153, 0.8) 50%, rgba(34, 197, 94, 0.8) 100%)',
