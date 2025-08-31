@@ -293,15 +293,16 @@ export function BirdDetailModal({ bird, open, onOpenChange }: BirdDetailModalPro
                   <Button
                     variant="outline"
                     onClick={handleCollectionToggle}
-                    className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80"
+                    className="w-full bg-white/90 backdrop-blur-sm hover:bg-white/80 text-lg"
+                    style={{ height: '60px' }}
                   >
                     Remove from Collection
                   </Button>
                 ) : (
                   <Button
                     onClick={handleCollectionToggle}
-                    className="w-full bg-white hover:bg-gray-100 text-black shadow-lg"
-                    size="lg"
+                    className="w-full bg-white hover:bg-gray-100 text-black shadow-lg text-lg"
+                    style={{ height: '60px' }}
                   >
                     <Plus className="h-5 w-5 mr-2" />
                     Add to Collection
