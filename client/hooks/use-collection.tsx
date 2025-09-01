@@ -49,11 +49,14 @@ export function CollectionProvider({ children }: CollectionProviderProps) {
     }
   }, [collectedBirdIds]);
 
-  const addToCollection = (birdId: string) => {
+  const addToCollection = async (birdId: string) => {
     // Check if bird is already collected to avoid duplicate confetti
     const wasAlreadyCollected = collectedBirdIds.has(birdId);
 
     if (!wasAlreadyCollected) {
+      // Lazy load confetti library only when needed
+      const { default: confetti } = await import('canvas-confetti');
+
       // Get the bird data to customize confetti based on bird colors
       const bird = birds.find(b => b.id === birdId);
       const rarity = bird?.rarity || 'common';
