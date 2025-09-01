@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Bird } from '@shared/birds';
 
 interface BirdCardProps {
@@ -10,6 +10,27 @@ interface BirdCardProps {
 export function BirdCard({ bird, isCollected, onClick }: BirdCardProps) {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const imgRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for lazy loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '50px' } // Start loading 50px before entering viewport
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Show placeholder card if image failed to load
   if (imageError) {
@@ -59,21 +80,24 @@ export function BirdCard({ bird, isCollected, onClick }: BirdCardProps) {
       onClick={onClick}
     >
       {/* Image Container */}
-      <div className="relative aspect-[154/253] rounded-[12.6px] border border-white overflow-hidden">
+      <div ref={imgRef} className="relative aspect-[154/253] rounded-[12.6px] border border-white overflow-hidden">
         {/* Loading State */}
-        {imageLoading && (
+        {(imageLoading || !shouldLoad) && (
           <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-            <div className="text-gray-400 text-2xl">🔄</div>
+            <div className="text-gray-400 text-2xl">{shouldLoad ? '🔄' : '🐦'}</div>
           </div>
         )}
-        
-        <img
-          src={bird.imageUrl}
-          alt={bird.name}
-          className={`w-full h-full object-cover ${!isCollected ? 'grayscale' : ''} ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
-          onError={() => setImageError(true)}
-          onLoad={() => setImageLoading(false)}
-        />
+
+        {shouldLoad && (
+          <img
+            src={bird.imageUrl}
+            alt={bird.name}
+            className={`w-full h-full object-cover ${!isCollected ? 'grayscale' : ''} ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            onError={() => setImageError(true)}
+            onLoad={() => setImageLoading(false)}
+            loading="lazy"
+          />
+        )}
 
         {/* Name Box */}
         <div className="absolute bottom-0 left-0 right-0">
