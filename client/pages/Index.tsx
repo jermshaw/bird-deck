@@ -92,6 +92,40 @@ function BirdDeckHome() {
     }
   };
 
+  // Function to update Open Graph meta tags based on bird of the day
+  const updateOpenGraphImage = (bird: Bird) => {
+    try {
+      // Update og:image meta tag
+      const ogImageMeta = document.getElementById('og-image') as HTMLMetaElement;
+      if (ogImageMeta) {
+        ogImageMeta.content = `/images/birds/${bird.name}/main.jpg`;
+      }
+
+      // Update twitter:image meta tag
+      const twitterImageMeta = document.getElementById('twitter-image') as HTMLMetaElement;
+      if (twitterImageMeta) {
+        twitterImageMeta.content = `/images/birds/${bird.name}/main.jpg`;
+      }
+
+      // Also update the title to include the bird name
+      document.title = `Bird Deck - Today's Bird: ${bird.name}`;
+
+      // Update og:title
+      const ogTitleMeta = document.querySelector('meta[property="og:title"]') as HTMLMetaElement;
+      if (ogTitleMeta) {
+        ogTitleMeta.content = `Bird Deck - Today's Bird: ${bird.name}`;
+      }
+
+      // Update twitter:title
+      const twitterTitleMeta = document.querySelector('meta[property="twitter:title"]') as HTMLMetaElement;
+      if (twitterTitleMeta) {
+        twitterTitleMeta.content = `Bird Deck - Today's Bird: ${bird.name}`;
+      }
+    } catch (error) {
+      console.warn('Error updating Open Graph meta tags:', error);
+    }
+  };
+
   // Function to update background colors based on bird of the day
   const updateBackgroundColors = (bird: Bird) => {
     try {
