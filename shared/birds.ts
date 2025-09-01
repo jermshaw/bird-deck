@@ -299,7 +299,7 @@ export const birds: Bird[] = [
     funFact: "Feeds mostly at night, relying on stealth to catch fish.",
     habitat: "wetland",
     size: "large",
-    imageUrl: "/images/birds/Black-crowned Night-heron/main.jpg",
+    imageUrl: "/images/birds/Black-crowned Night-Heron/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Gray, White")
   },
@@ -312,7 +312,7 @@ export const birds: Bird[] = [
     funFact: "Known to take prey much larger than itself, including skunks!",
     habitat: "forest",
     size: "large",
-    imageUrl: "/images/birds/great-horned-owl/main.png",
+    imageUrl: "/images/birds/Great Horned Owl/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray, White")
   },
@@ -325,7 +325,7 @@ export const birds: Bird[] = [
     funFact: "Can stand still for long periods, sometimes hours, waiting for fish.",
     habitat: "wetland",
     size: "huge",
-    imageUrl: "/images/birds/great-blue-heron/main.png",
+    imageUrl: "/images/birds/Great Blue Heron/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Gray, White")
   },
@@ -338,7 +338,7 @@ export const birds: Bird[] = [
     funFact: "Prefers forested areas and is rarely seen soaring like other hawks.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/red-shouldered-hawk/main.png",
+    imageUrl: "/images/birds/Red-shouldered Hawk/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, White, Red")
   },
@@ -351,7 +351,7 @@ export const birds: Bird[] = [
     funFact: "Once nearly hunted to extinction for its beautiful plumes.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/snowy-egret/main.png",
+    imageUrl: "/images/birds/Snowy Egret/main.jpg",
     additionalImages: [],
     colors: parseColors("White, Yellow, Black")
   },
@@ -364,7 +364,7 @@ export const birds: Bird[] = [
     funFact: "Migrates hundreds of miles each year between breeding and wintering grounds.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/townsends-warbler/main.png",
+    imageUrl: "/images/birds/Townsend's Warbler/main.jpg",
     additionalImages: [],
     colors: parseColors("Yellow, Black, White")
   },
@@ -377,7 +377,7 @@ export const birds: Bird[] = [
     funFact: "Very social; may roost with dozens of birds snuggled together.",
     habitat: "shrubland",
     size: "tiny",
-    imageUrl: "/images/birds/bushtit/main.png",
+    imageUrl: "/images/birds/Bushtit/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, Brown")
   },
@@ -390,7 +390,7 @@ export const birds: Bird[] = [
     funFact: "Males perform elaborate hovering displays to attract females.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/allens-hummingbird/main.png",
+    imageUrl: "/images/birds/Allen's Hummingbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Brown, White")
   },
@@ -403,7 +403,7 @@ export const birds: Bird[] = [
     funFact: "Can adapt its song to urban noise, changing pitch and tempo.",
     habitat: "urban",
     size: "small",
-    imageUrl: "/images/birds/house-finch/main.png",
+    imageUrl: "/images/birds/House Finch/main.jpg",
     additionalImages: [],
     colors: parseColors("Red, Brown, Gray")
   },
@@ -416,7 +416,7 @@ export const birds: Bird[] = [
     funFact: "Can survive cold nights by going into a hibernation-like torpor.",
     habitat: "urban",
     size: "tiny",
-    imageUrl: "/images/birds/annas-hummingbird/main.png",
+    imageUrl: "/images/birds/Anna's Hummingbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Gray, Pink")
   },
@@ -429,7 +429,7 @@ export const birds: Bird[] = [
     funFact: "Extremely adaptable and can thrive almost anywhere humans live.",
     habitat: "urban",
     size: "small",
-    imageUrl: "/images/birds/house-sparrow/main.png",
+    imageUrl: "/images/birds/House Sparrow/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray, Black")
   },
@@ -442,7 +442,7 @@ export const birds: Bird[] = [
     funFact: "Uses its long tail to flush insects out of leaf litter.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/spotted-towhee/main.png",
+    imageUrl: "/images/birds/Spotted Towhee/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White, Brown")
   },
@@ -455,7 +455,7 @@ export const birds: Bird[] = [
     funFact: "Often eats worms by tugging them from the ground using clever techniques.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/american-robin/main.png",
+    imageUrl: "/images/birds/American Robin/main.jpg",
     additionalImages: [],
     colors: parseColors("Red, Gray, White")
   },
@@ -468,7 +468,7 @@ export const birds: Bird[] = [
     funFact: "Exotic parakeets have established small wild populations in urban Bay Area areas.",
     habitat: "urban",
     size: "small",
-    imageUrl: "/images/birds/red-masked-parakeet/main.png",
+    imageUrl: "/images/birds/Red-masked Parakeet/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Red")
   },
@@ -481,7 +481,7 @@ export const birds: Bird[] = [
     funFact: "Known to hide acorns and even remember some of the locations later.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/western-scrub-jay/main.png",
+    imageUrl: "/images/birds/Western Scrub-jay/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Gray, White")
   },
@@ -494,7 +494,7 @@ export const birds: Bird[] = [
     funFact: "Can mimic hawk calls to scare other birds away from food.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/stellers-jay/main.png",
+    imageUrl: "/images/birds/Steller's Jay/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Black")
   },
@@ -507,7 +507,7 @@ export const birds: Bird[] = [
     funFact: "Males may \"vamoose\" from mating territories once the female starts nesting.",
     habitat: "wetland",
     size: "large",
-    imageUrl: "/images/birds/mallard/main.png",
+    imageUrl: "/images/birds/Mallard/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Brown, Blue, White")
   },
@@ -520,12 +520,12 @@ export const birds: Bird[] = [
     funFact: "Can recognize individual human faces and remember them for years.",
     habitat: "urban",
     size: "medium",
-    imageUrl: "/images/birds/rock-pigeon/main.png",
+    imageUrl: "/images/birds/Rock Pigeon/main.jpg",
     additionalImages: [
-      "/images/birds/rock-pigeon/male.png",
-      "/images/birds/rock-pigeon/female.png",
-      "/images/birds/rock-pigeon/juvenile.png",
-      "/images/birds/rock-pigeon/extra.png"
+      "/images/birds/Rock Pigeon/male.jpg",
+      "/images/birds/Rock Pigeon/female.jpg",
+      "/images/birds/Rock Pigeon/juvenile.jpg",
+      "/images/birds/Rock Pigeon/extra.jpg"
     ],
     colors: parseColors("Gray, White, Black")
   },
@@ -538,7 +538,7 @@ export const birds: Bird[] = [
     funFact: "Can drop shellfish from heights to crack them open.",
     habitat: "coast",
     size: "large",
-    imageUrl: "/images/birds/california-gull/main.png",
+    imageUrl: "/images/birds/California Gull/main.jpg",
     additionalImages: [],
     colors: parseColors("White, Gray, Black")
   },
@@ -551,7 +551,7 @@ export const birds: Bird[] = [
     funFact: "Aggressive scavenger that sometimes steals food from other birds.",
     habitat: "coast",
     size: "large",
-    imageUrl: "/images/birds/western-gull/main.png",
+    imageUrl: "/images/birds/Western Gull/main.jpg",
     additionalImages: [],
     colors: parseColors("White, Gray, Black")
   },
@@ -564,7 +564,7 @@ export const birds: Bird[] = [
     funFact: "Uses its bright orange bill to pry open mollusks and limpets on rocky shores.",
     habitat: "coast",
     size: "large",
-    imageUrl: "/images/birds/black-oystercatcher/main.png",
+    imageUrl: "/images/birds/Black Oystercatcher/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Red")
   },
@@ -577,7 +577,7 @@ export const birds: Bird[] = [
     funFact: "Changes from mostly gray juvenile plumage to adult gray-and-white with red bill.",
     habitat: "coast",
     size: "large",
-    imageUrl: "/images/birds/heermanns-gull/main.png",
+    imageUrl: "/images/birds/Heermann's Gull/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, White, Red")
   },
@@ -590,7 +590,7 @@ export const birds: Bird[] = [
     funFact: "Can hold its breath up to 20 seconds while diving for fish.",
     habitat: "coast",
     size: "huge",
-    imageUrl: "/images/birds/brown-pelican/main.png",
+    imageUrl: "/images/birds/Brown Pelican/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, White, Gray")
   },
@@ -603,7 +603,7 @@ export const birds: Bird[] = [
     funFact: "Can soar for hours without flapping, riding thermal currents.",
     habitat: "forest",
     size: "large",
-    imageUrl: "/images/birds/red-tailed-hawk/main.png",
+    imageUrl: "/images/birds/Red-tailed Hawk/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, White, Red")
   },
@@ -616,7 +616,7 @@ export const birds: Bird[] = [
     funFact: "Can detect carrion from over a mile away using its excellent sense of smell.",
     habitat: "mountain",
     size: "large",
-    imageUrl: "/images/birds/turkey-vulture/main.png",
+    imageUrl: "/images/birds/Turkey Vulture/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Black, Red")
   },
@@ -629,7 +629,7 @@ export const birds: Bird[] = [
     funFact: "Extremely intelligent; can solve complex puzzles and use tools.",
     habitat: "forest",
     size: "large",
-    imageUrl: "/images/birds/american-crow/main.png",
+    imageUrl: "/images/birds/American Crow/main.jpg",
     additionalImages: [],
     colors: ["#000000"]
   },
@@ -642,7 +642,7 @@ export const birds: Bird[] = [
     funFact: "Known for playful behavior and complex problem-solving skills.",
     habitat: "mountain",
     size: "large",
-    imageUrl: "/images/birds/common-raven/main.png",
+    imageUrl: "/images/birds/Common Raven/main.jpg",
     additionalImages: [],
     colors: ["#000000"]
   },
@@ -655,7 +655,7 @@ export const birds: Bird[] = [
     funFact: "Can produce two broods of chicks in a single summer.",
     habitat: "urban",
     size: "medium",
-    imageUrl: "/images/birds/mourning-dove/main.png",
+    imageUrl: "/images/birds/Mourning Dove/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray")
   },
@@ -668,7 +668,7 @@ export const birds: Bird[] = [
     funFact: "Can mimic over 200 sounds, including other birds and mechanical noises.",
     habitat: "urban",
     size: "medium",
-    imageUrl: "/images/birds/northern-mockingbird/main.png",
+    imageUrl: "/images/birds/Northern Mockingbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, White")
   },
@@ -681,7 +681,7 @@ export const birds: Bird[] = [
     funFact: "Frequently wags its tail while perched, a distinctive behavior.",
     habitat: "wetland",
     size: "small",
-    imageUrl: "/images/birds/black-phoebe/main.png",
+    imageUrl: "/images/birds/Black Phoebe/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White")
   },
@@ -694,7 +694,7 @@ export const birds: Bird[] = [
     funFact: "Lobed toes allow them to swim efficiently and walk on soft mud.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/american-coot/main.png",
+    imageUrl: "/images/birds/American Coot/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White, Red")
   },
@@ -707,7 +707,7 @@ export const birds: Bird[] = [
     funFact: "Can survive cold winters by fluffing feathers and hopping in snow.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/dark-eyed-junco/main.png",
+    imageUrl: "/images/birds/Dark-eyed Junco/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, White, Black")
   },
@@ -720,7 +720,7 @@ export const birds: Bird[] = [
     funFact: "Sometimes eats fermented berries, which can make them tipsy!",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/cedar-waxwing/main.png",
+    imageUrl: "/images/birds/Cedar Waxwing/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Yellow, Black")
   },
@@ -733,7 +733,7 @@ export const birds: Bird[] = [
     funFact: "Can eat seeds while hanging upside-down from a branch.",
     habitat: "shrubland",
     size: "tiny",
-    imageUrl: "/images/birds/lesser-goldfinch/main.png",
+    imageUrl: "/images/birds/Lesser Goldfinch/main.jpg",
     additionalImages: [],
     colors: parseColors("Yellow, Black")
   },
@@ -746,7 +746,7 @@ export const birds: Bird[] = [
     funFact: "Must spread wings to dry after diving since their feathers aren't waterproof.",
     habitat: "coast",
     size: "large",
-    imageUrl: "/images/birds/double-crested-cormorant/main.png",
+    imageUrl: "/images/birds/Double-crested Cormorant/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, Gray")
   },
@@ -759,7 +759,7 @@ export const birds: Bird[] = [
     funFact: "Can stand in shallow water on very thin, stick-like legs for long periods.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/black-necked-stilt/main.png",
+    imageUrl: "/images/birds/Black-necked Stilt/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White, Pink")
   },
@@ -772,7 +772,7 @@ export const birds: Bird[] = [
     funFact: "Dives at fish with incredible speed and precision from perches.",
     habitat: "wetland",
     size: "medium",
-    imageUrl: "/images/birds/belted-kingfisher/main.png",
+    imageUrl: "/images/birds/Belted Kingfisher/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, White, Brown")
   },
@@ -785,7 +785,7 @@ export const birds: Bird[] = [
     funFact: "Builds intricate mud nests on cliffs, bridges, and buildings.",
     habitat: "urban",
     size: "tiny",
-    imageUrl: "/images/birds/cliff-swallow/main.png",
+    imageUrl: "/images/birds/Cliff Swallow/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Brown, White")
   },
@@ -798,7 +798,7 @@ export const birds: Bird[] = [
     funFact: "Stores thousands of acorns in granary trees for winter use.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/acorn-woodpecker/main.png",
+    imageUrl: "/images/birds/Acorn Woodpecker/main.jpg",
     additionalImages: [],
     colors: parseColors("Black, White, Red")
   },
@@ -811,7 +811,7 @@ export const birds: Bird[] = [
     funFact: "Nests in scrapes on sandy beaches, camouflaged to avoid predators.",
     habitat: "coast",
     size: "tiny",
-    imageUrl: "/images/birds/snowy-plover/main.png",
+    imageUrl: "/images/birds/Snowy Plover/main.jpg",
     additionalImages: [],
     colors: parseColors("White, Brown, Black")
   },
@@ -824,7 +824,7 @@ export const birds: Bird[] = [
     funFact: "Flits constantly and can eat more than half its body weight in insects daily.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/golden-crowned-kinglet/main.png",
+    imageUrl: "/images/birds/Golden-crowned Kinglet/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Yellow, Black")
   },
@@ -837,7 +837,7 @@ export const birds: Bird[] = [
     funFact: "Male shows off bright colors during courtship to attract females.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/lazuli-bunting/main.png",
+    imageUrl: "/images/birds/Lazuli Bunting/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, White, Black")
   },
@@ -850,7 +850,7 @@ export const birds: Bird[] = [
     funFact: "Has one of the loudest songs relative to its tiny size.",
     habitat: "forest",
     size: "tiny",
-    imageUrl: "/images/birds/pacific-wren/main.png",
+    imageUrl: "/images/birds/Pacific Wren/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Gray, Black")
   },
@@ -863,7 +863,7 @@ export const birds: Bird[] = [
     funFact: "Eats large seeds by cracking them with a strong beak.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/black-headed-grosbeak/main.png",
+    imageUrl: "/images/birds/Black-headed Grosbeak/main.jpg",
     additionalImages: [],
     colors: parseColors("Orange, Black, White")
   },
@@ -876,7 +876,7 @@ export const birds: Bird[] = [
     funFact: "Males defend nesting cavities aggressively from competitors.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/western-bluebird/main.png",
+    imageUrl: "/images/birds/Western Bluebird/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Orange, White")
   },
@@ -889,7 +889,7 @@ export const birds: Bird[] = [
     funFact: "Catches insects mid-air with acrobatic skill, often in large flocks.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/violet-green-swallow/main.png",
+    imageUrl: "/images/birds/Violet-green Swallow/main.jpg",
     additionalImages: [],
     colors: parseColors("Blue, Green, White")
   },
@@ -902,7 +902,7 @@ export const birds: Bird[] = [
     funFact: "Can digest waxy berries that other birds cannot, allowing winter survival.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/yellow-rumped-warbler/main.png",
+    imageUrl: "/images/birds/Yellow-rumped Warbler/main.jpg",
     additionalImages: [],
     colors: parseColors("Yellow, Gray, Black, White")
   },
@@ -915,7 +915,7 @@ export const birds: Bird[] = [
     funFact: "Bright colors make males easy to spot during courtship in forests.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/western-tanager/main.png",
+    imageUrl: "/images/birds/Western Tanager/main.jpg",
     additionalImages: [],
     colors: parseColors("Red, Yellow, Black")
   },
@@ -928,7 +928,7 @@ export const birds: Bird[] = [
     funFact: "Can raid feeders and berries with bold confidence.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/purple-finch/main.png",
+    imageUrl: "/images/birds/Purple Finch/main.jpg",
     additionalImages: [],
     colors: parseColors("Red, Brown, White")
   },
@@ -941,7 +941,7 @@ export const birds: Bird[] = [
     funFact: "Lays eggs in other birds' nests, leaving them to raise their chicks.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/brown-headed-cowbird/main.png",
+    imageUrl: "/images/birds/Brown-headed Cowbird/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Black")
   },
@@ -954,7 +954,7 @@ export const birds: Bird[] = [
     funFact: "Can spot and catch flying insects with remarkable accuracy.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/pacific-slope-flycatcher/main.png",
+    imageUrl: "/images/birds/Pacific-slope Flycatcher/main.jpg",
     additionalImages: [],
     colors: parseColors("Green, Gray, White")
   },
@@ -967,7 +967,7 @@ export const birds: Bird[] = [
     funFact: "Uses its long curved bill to dig through leaf litter for insects.",
     habitat: "shrubland",
     size: "medium",
-    imageUrl: "/images/birds/california-thrasher/main.png",
+    imageUrl: "/images/birds/California Thrasher/main.jpg",
     additionalImages: [],
     colors: ["#8B4513"]
   },
@@ -980,7 +980,7 @@ export const birds: Bird[] = [
     funFact: "Can hover midair while scanning for prey below.",
     habitat: "shrubland",
     size: "small",
-    imageUrl: "/images/birds/american-kestrel/main.png",
+    imageUrl: "/images/birds/American Kestrel/main.jpg",
     additionalImages: [],
     colors: parseColors("Orange, Blue, Gray")
   },
@@ -993,7 +993,7 @@ export const birds: Bird[] = [
     funFact: "Often forages on the ground for ants, unlike other woodpeckers.",
     habitat: "forest",
     size: "medium",
-    imageUrl: "/images/birds/northern-flicker/main.png",
+    imageUrl: "/images/birds/Northern Flicker/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, Black, Yellow, Red")
   },
@@ -1006,7 +1006,7 @@ export const birds: Bird[] = [
     funFact: "Can sing complex, flute-like songs that echo through forests.",
     habitat: "forest",
     size: "small",
-    imageUrl: "/images/birds/hermit-thrush/main.png",
+    imageUrl: "/images/birds/Hermit Thrush/main.jpg",
     additionalImages: [],
     colors: parseColors("Brown, White")
   },
@@ -1019,7 +1019,7 @@ export const birds: Bird[] = [
     funFact: "Fastest animal on Earth, diving at speeds over 200 mph to catch prey.",
     habitat: "urban",
     size: "medium",
-    imageUrl: "/images/birds/peregrine-falcon/main.png",
+    imageUrl: "/images/birds/Peregrine Falcon/main.jpg",
     additionalImages: [],
     colors: parseColors("Gray, Black, White")
   }
