@@ -384,11 +384,7 @@ function BirdDeckHome() {
   );
 }
 
-// Main component with provider - keeping existing CollectionProvider for now
+// Main component - CollectionProvider is now in App.tsx
 export default function Index() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-900 flex items-center justify-center"><div className="text-white">Loading app...</div></div>}>
-      <BirdDeckHome />
-    </Suspense>
-  );
+  return <BirdDeckHome />;
 }
