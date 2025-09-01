@@ -224,9 +224,10 @@ function BirdDeckHome() {
     try {
       const selectedBird = selectBirdOfTheDay();
       setBirdOfTheDay(selectedBird);
-      // Update background colors when bird of the day changes
+      // Update background colors and Open Graph meta tags when bird of the day changes
       if (selectedBird) {
         updateBackgroundColors(selectedBird);
+        updateOpenGraphImage(selectedBird);
       } else {
         // Set default background if no bird selected
         document.body.style.backgroundColor = '#2c3e50';
