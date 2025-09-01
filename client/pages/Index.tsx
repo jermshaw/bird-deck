@@ -301,6 +301,16 @@ function BirdDeckHome() {
     <div
       className="min-h-screen relative font-rubik"
     >
+      {/* PWA Status Bar Background */}
+      {isPWA && (
+        <div
+          className="fixed top-0 left-0 right-0 bg-black z-50"
+          style={{
+            height: 'env(safe-area-inset-top, 44px)',
+            paddingTop: 'env(safe-area-inset-top, 0px)'
+          }}
+        />
+      )}
 
       {/* Content Container */}
       <div className="relative z-10 px-6 py-8 max-w-md mx-auto md:max-w-4xl lg:max-w-6xl lg:px-8">
