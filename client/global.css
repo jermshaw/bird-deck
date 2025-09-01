@@ -120,6 +120,16 @@
     background-color: #2c3e50;
     background-attachment: fixed;
     min-height: 100vh;
+    /* PWA status bar support */
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* PWA specific styles */
+  @media (display-mode: standalone) {
+    body {
+      /* Ensure proper spacing for PWA mode */
+      padding-top: env(safe-area-inset-top);
+    }
   }
 
   html {
