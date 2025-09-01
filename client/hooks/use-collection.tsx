@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Bird, birds } from '@shared/birds';
-import confetti from 'canvas-confetti';
 
 interface CollectionContextType {
   collectedBirdIds: Set<string>;
