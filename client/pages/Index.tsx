@@ -313,7 +313,13 @@ function BirdDeckHome() {
       )}
 
       {/* Content Container */}
-      <div className="relative z-10 px-6 py-8 max-w-md mx-auto md:max-w-4xl lg:max-w-6xl lg:px-8">
+      <div
+        className="relative z-10 px-6 max-w-md mx-auto md:max-w-4xl lg:max-w-6xl lg:px-8"
+        style={{
+          paddingTop: isPWA ? 'calc(env(safe-area-inset-top, 44px) + 2rem)' : '2rem',
+          paddingBottom: '2rem'
+        }}
+      >
         
         {/* Header Section */}
         <div className="mb-6">
