@@ -233,6 +233,12 @@ function BirdDeckHome() {
         // Set default background if no bird selected
         document.body.style.backgroundColor = '#2c3e50';
       }
+
+      // Detect if running as PWA
+      const isPWAMode = window.matchMedia('(display-mode: standalone)').matches ||
+                       (window.navigator as any).standalone === true ||
+                       document.referrer.includes('android-app://');
+      setIsPWA(isPWAMode);
     } catch (error) {
       console.error('Error in bird of the day useEffect:', error);
       // Set default background on error
