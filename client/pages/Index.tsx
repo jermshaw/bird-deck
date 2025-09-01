@@ -429,7 +429,7 @@ function BirdDeckHome() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           {birds
             .filter(bird => bird.imageUrl && (bird.imageUrl.includes('main.jpg') || bird.imageUrl.includes('main.png')))
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => parseInt(a.id) - parseInt(b.id))
             .map((bird) => (
             <BirdCard
               key={bird.id}
